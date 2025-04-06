@@ -5,6 +5,34 @@
     {
       "AbsoluteMoniker": "D:0:0:{F968B74E-0884-43DC-9298-B3B1C5396790}|HankoSpa.csproj|c:\\users\\noahzp\\desktop\\hal\\nueva carpeta\\proyecto\\hankospa\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{F968B74E-0884-43DC-9298-B3B1C5396790}|HankoSpa.csproj|solutionrelative:views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F968B74E-0884-43DC-9298-B3B1C5396790}|HankoSpa.csproj|c:\\users\\noahzp\\desktop\\hal\\nueva carpeta\\proyecto\\hankospa\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{F968B74E-0884-43DC-9298-B3B1C5396790}|HankoSpa.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F968B74E-0884-43DC-9298-B3B1C5396790}|HankoSpa.csproj|c:\\users\\noahzp\\desktop\\hal\\nueva carpeta\\proyecto\\hankospa\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F968B74E-0884-43DC-9298-B3B1C5396790}|HankoSpa.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F968B74E-0884-43DC-9298-B3B1C5396790}|HankoSpa.csproj|c:\\users\\noahzp\\desktop\\hal\\nueva carpeta\\proyecto\\hankospa\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{F968B74E-0884-43DC-9298-B3B1C5396790}|HankoSpa.csproj|solutionrelative:appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F968B74E-0884-43DC-9298-B3B1C5396790}|HankoSpa.csproj|c:\\users\\noahzp\\desktop\\hal\\nueva carpeta\\proyecto\\hankospa\\models\\citasservicios.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F968B74E-0884-43DC-9298-B3B1C5396790}|HankoSpa.csproj|solutionrelative:models\\citasservicios.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F968B74E-0884-43DC-9298-B3B1C5396790}|HankoSpa.csproj|c:\\users\\noahzp\\desktop\\hal\\nueva carpeta\\proyecto\\hankospa\\models\\cita.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F968B74E-0884-43DC-9298-B3B1C5396790}|HankoSpa.csproj|solutionrelative:models\\cita.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F968B74E-0884-43DC-9298-B3B1C5396790}|HankoSpa.csproj|c:\\users\\noahzp\\desktop\\hal\\nueva carpeta\\proyecto\\hankospa\\models\\servicio.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F968B74E-0884-43DC-9298-B3B1C5396790}|HankoSpa.csproj|solutionrelative:models\\servicio.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F968B74E-0884-43DC-9298-B3B1C5396790}|HankoSpa.csproj|c:\\users\\noahzp\\desktop\\hal\\nueva carpeta\\proyecto\\hankospa\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F968B74E-0884-43DC-9298-B3B1C5396790}|HankoSpa.csproj|solutionrelative:data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -14,11 +42,98 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 7,
           "Children": [
             {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "AppDbContext.cs",
+              "DocumentMoniker": "C:\\Users\\NoahZP\\Desktop\\Hal\\Nueva carpeta\\Proyecto\\HankoSpa\\Data\\AppDbContext.cs",
+              "RelativeDocumentMoniker": "Data\\AppDbContext.cs",
+              "ToolTip": "C:\\Users\\NoahZP\\Desktop\\Hal\\Nueva carpeta\\Proyecto\\HankoSpa\\Data\\AppDbContext.cs",
+              "RelativeToolTip": "Data\\AppDbContext.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-06T19:18:15.176Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Servicio.cs",
+              "DocumentMoniker": "C:\\Users\\NoahZP\\Desktop\\Hal\\Nueva carpeta\\Proyecto\\HankoSpa\\Models\\Servicio.cs",
+              "RelativeDocumentMoniker": "Models\\Servicio.cs",
+              "ToolTip": "C:\\Users\\NoahZP\\Desktop\\Hal\\Nueva carpeta\\Proyecto\\HankoSpa\\Models\\Servicio.cs",
+              "RelativeToolTip": "Models\\Servicio.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-06T18:51:19.201Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Cita.cs",
+              "DocumentMoniker": "C:\\Users\\NoahZP\\Desktop\\Hal\\Nueva carpeta\\Proyecto\\HankoSpa\\Models\\Cita.cs",
+              "RelativeDocumentMoniker": "Models\\Cita.cs",
+              "ToolTip": "C:\\Users\\NoahZP\\Desktop\\Hal\\Nueva carpeta\\Proyecto\\HankoSpa\\Models\\Cita.cs",
+              "RelativeToolTip": "Models\\Cita.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-06T18:50:58.082Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "CitasServicios.cs",
+              "DocumentMoniker": "C:\\Users\\NoahZP\\Desktop\\Hal\\Nueva carpeta\\Proyecto\\HankoSpa\\Models\\CitasServicios.cs",
+              "RelativeDocumentMoniker": "Models\\CitasServicios.cs",
+              "ToolTip": "C:\\Users\\NoahZP\\Desktop\\Hal\\Nueva carpeta\\Proyecto\\HankoSpa\\Models\\CitasServicios.cs",
+              "RelativeToolTip": "Models\\CitasServicios.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-06T18:49:24.935Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "appsettings.Development.json",
+              "DocumentMoniker": "C:\\Users\\NoahZP\\Desktop\\Hal\\Nueva carpeta\\Proyecto\\HankoSpa\\appsettings.Development.json",
+              "RelativeDocumentMoniker": "appsettings.Development.json",
+              "ToolTip": "C:\\Users\\NoahZP\\Desktop\\Hal\\Nueva carpeta\\Proyecto\\HankoSpa\\appsettings.Development.json",
+              "RelativeToolTip": "appsettings.Development.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-04-06T18:35:04.551Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\NoahZP\\Desktop\\Hal\\Nueva carpeta\\Proyecto\\HankoSpa\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "C:\\Users\\NoahZP\\Desktop\\Hal\\Nueva carpeta\\Proyecto\\HankoSpa\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-06T18:34:13.544Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\NoahZP\\Desktop\\Hal\\Nueva carpeta\\Proyecto\\HankoSpa\\appsettings.json",
+              "RelativeDocumentMoniker": "appsettings.json",
+              "ToolTip": "C:\\Users\\NoahZP\\Desktop\\Hal\\Nueva carpeta\\Proyecto\\HankoSpa\\appsettings.json",
+              "RelativeToolTip": "appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-04-06T18:30:13.198Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -28,7 +143,7 @@
               "RelativeDocumentMoniker": "Views\\Home\\Index.cshtml",
               "ToolTip": "C:\\Users\\NoahZP\\Desktop\\Hal\\Nueva carpeta\\Proyecto\\HankoSpa\\Views\\Home\\Index.cshtml",
               "RelativeToolTip": "Views\\Home\\Index.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAmAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2025-04-06T15:57:25.29Z",
               "EditorCaption": ""

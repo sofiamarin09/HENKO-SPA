@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("HankoSpa")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3d2a28869b0d942029b4ab3055156eff99c3d67a")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+cfc006a94a434a357cf8da980de6d86fc35280a9")]
 [assembly: System.Reflection.AssemblyProductAttribute("HankoSpa")]
 [assembly: System.Reflection.AssemblyTitleAttribute("HankoSpa")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

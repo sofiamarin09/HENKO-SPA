@@ -15,6 +15,7 @@ namespace HankoSpa.Models
         [StringLength(500)]
         public string DescripcionServicio { get; set; }
 
-        public virtual ICollection<CitaServicio> CitasServicios { get; set; }
+        public virtual ICollection<CitasServicios> CitasServicios { get; set; }
+
     }
 }

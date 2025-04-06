@@ -32,7 +32,7 @@
               "RelativeDocumentMoniker": "HankoSpa\\Data\\Cita.cs",
               "ToolTip": "C:\\Users\\NoahZP\\Desktop\\Hal\\Nueva carpeta\\Proyecto\\HankoSpa\\Data\\Cita.cs",
               "RelativeToolTip": "HankoSpa\\Data\\Cita.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-06T16:22:48.611Z",
               "EditorCaption": ""
@@ -47,8 +47,7 @@
               "RelativeToolTip": "HankoSpa\\Data\\Servicio.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAA5AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-06T16:21:21.657Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-06T16:21:21.657Z"
             },
             {
               "$type": "Document",
@@ -60,8 +59,7 @@
               "RelativeToolTip": "HankoSpa\\Program.cs",
               "ViewState": "AgIAABIAAAAAAAAAAAAAABgAAAA3AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-06T16:07:46.181Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-06T16:07:46.181Z"
             }
           ]
         }

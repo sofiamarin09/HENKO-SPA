@@ -6,7 +6,7 @@ namespace HankoSpa.Models
 {
     public class Cita
     {
-        [key]
+        [Key]
         public int CitaId { get; set; }
 
         [Required]
