@@ -12,6 +12,5 @@ namespace HankoSpa.DTOs
 
         [StringLength(500, ErrorMessage = "Máximo 500 caracteres")]
         public string DescripcionServicio { get; set; }
-
     }
 }
