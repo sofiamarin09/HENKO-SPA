@@ -1,0 +1,28 @@
+﻿@model HankoSpa.Models.Servicio
+
+@{
+    ViewData["Title"] = "Eliminar Servicio";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="mt-4 mb-3 text-danger">🗑️ Eliminar Tratamiento</h2>
+
+<h5>¿Estás seguro de que deseas eliminar el siguiente servicio?</h5>
+
+<div class="card mt-3">
+    <div class="card-body">
+        <dl class="row">
+            <dt class="col-sm-4">Nombre del Servicio:</dt>
+            <dd class="col-sm-8">@Model.NombreServicio</dd>
+
+            <dt class="col-sm-4">Descripción:</dt>
+            <dd class="col-sm-8">@Model.DescripcionServicio</dd>
+        </dl>
+    </div>
+</div>
+
+<form asp-action="DeleteConfirmed" method="post" class="mt-4">
+    <input type="hidden" asp-for="ServicioId" />
+    <button type="submit" class="btn btn-danger">Sí, eliminar</button>
+    <a asp-action="Index" class="btn btn-secondary ms-2">Cancelar</a>
+</form>
