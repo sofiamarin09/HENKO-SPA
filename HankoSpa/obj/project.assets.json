@@ -4763,23 +4763,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\MANUELA\\.nuget\\packages\\": {},
+    "C:\\Users\\Harold\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\MANUELA\\Desktop\\hanko\\Proyecto\\HankoSpa\\HankoSpa.csproj",
+      "projectUniqueName": "C:\\Users\\Harold\\OneDrive\\Escritorio\\Nueva carpeta\\Proyecto\\HankoSpa\\HankoSpa.csproj",
       "projectName": "HankoSpa",
-      "projectPath": "C:\\Users\\MANUELA\\Desktop\\hanko\\Proyecto\\HankoSpa\\HankoSpa.csproj",
-      "packagesPath": "C:\\Users\\MANUELA\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\MANUELA\\Desktop\\hanko\\Proyecto\\HankoSpa\\obj\\",
+      "projectPath": "C:\\Users\\Harold\\OneDrive\\Escritorio\\Nueva carpeta\\Proyecto\\HankoSpa\\HankoSpa.csproj",
+      "packagesPath": "C:\\Users\\Harold\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Harold\\OneDrive\\Escritorio\\Nueva carpeta\\Proyecto\\HankoSpa\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\MANUELA\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Harold\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],

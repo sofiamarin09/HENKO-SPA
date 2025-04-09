@@ -14,12 +14,19 @@ namespace HankoSpa.Controllers
             _context = context;
         }
 
+        public async Task<IActionResult> Index()
+        {
+            return View(await _context.Servicios.ToListAsync());
+        }
+
+
         // GET: Servicio
+        /*
         public async Task<IActionResult> Index()
         {
             var servicios = await _context.Servicios.ToListAsync();
             return View(servicios);
-        }
+        }*/
 
         // GET: Servicio/Details/5
         public async Task<IActionResult> Details(int? id)
