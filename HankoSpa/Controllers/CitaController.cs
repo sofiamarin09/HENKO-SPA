@@ -17,7 +17,11 @@ namespace HankoSpa.Controllers
         // GET: Citas
         public async Task<IActionResult> Index()
         {
-            var citas = await _context.Citas.ToListAsync();
+            var citas = await _context.Citas
+                .OrderBy(c => c.FechaCita)
+                .ThenBy(c => c.HoraCita)
+                .ToListAsync();
+
             return View(citas);
         }
 
@@ -27,7 +31,8 @@ namespace HankoSpa.Controllers
             if (id == null) return NotFound();
 
             var cita = await _context.Citas
-                .FirstOrDefaultAsync(c => c.CitaId == id); // corregido
+                .FirstOrDefaultAsync(c => c.CitaId == id);
+
             if (cita == null) return NotFound();
 
             return View(cita);
@@ -46,8 +51,12 @@ namespace HankoSpa.Controllers
         {
             if (ModelState.IsValid)
             {
+                // Simulación de usuario (reemplazar con ID real de usuario autenticado en el futuro)
+                cita.UsuarioID = 1;
+
                 _context.Add(cita);
                 await _context.SaveChangesAsync();
+                TempData["MensajeExito"] = "✅ La cita fue agendada correctamente.";
                 return RedirectToAction(nameof(Index));
             }
             return View(cita);
@@ -69,18 +78,26 @@ namespace HankoSpa.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, Cita cita)
         {
-            if (id != cita.CitaId) return NotFound(); // corregido
+            if (id != cita.CitaId) return NotFound();
 
             if (ModelState.IsValid)
             {
                 try
                 {
+                    // Mantener el valor de UsuarioID si no se muestra en la vista
+                    var citaExistente = await _context.Citas.AsNoTracking().FirstOrDefaultAsync(c => c.CitaId == id);
+                    if (citaExistente != null)
+                    {
+                        cita.UsuarioID = citaExistente.UsuarioID;
+                    }
+
                     _context.Update(cita);
                     await _context.SaveChangesAsync();
+                    TempData["MensajeExito"] = "✅ La cita fue actualizada correctamente.";
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!_context.Citas.Any(e => e.CitaId == id)) // corregido
+                    if (!_context.Citas.Any(e => e.CitaId == id))
                         return NotFound();
                     else
                         throw;
@@ -100,9 +117,23 @@ namespace HankoSpa.Controllers
 
             if (cita == null) return NotFound();
 
-            return View(cita); // ✅ Este return cierra correctamente el método
+            return View(cita);
+        }
+
+        // POST: Citas/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            var cita = await _context.Citas.FindAsync(id);
+            if (cita != null)
+            {
+                _context.Citas.Remove(cita);
+                await _context.SaveChangesAsync();
+                TempData["MensajeExito"] = "✅ La cita fue eliminada con éxito.";
+            }
+
+            return RedirectToAction(nameof(Index));
         }
     }
 }
-
-

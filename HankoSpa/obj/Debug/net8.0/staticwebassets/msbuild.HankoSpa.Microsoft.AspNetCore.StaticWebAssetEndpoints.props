@@ -36,6 +36,30 @@
       <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"v1xg6d83x4"},{"Name":"integrity","Value":"sha256-rZoLiJj39Ay8crUtV5A4FmFg4trfIFJPUbYh80T2jZ4="},{"Name":"label","Value":"_content/HankoSpa/HankoSpa.bundle.scp.css"}]]]></EndpointProperties>
       <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"1126"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022rZoLiJj39Ay8crUtV5A4FmFg4trfIFJPUbYh80T2jZ4=\u0022"},{"Name":"Last-Modified","Value":"Wed, 09 Apr 2025 03:32:18 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
+    <StaticWebAssetEndpoint Include="_content/HankoSpa/img/fondo1.efkywy6k75.jpg">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\img\fondo1.jpg'))</AssetFile>
+      <Selectors><![CDATA[[]]]></Selectors>
+      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"efkywy6k75"},{"Name":"integrity","Value":"sha256-FhwX286WzZnEj4vYSO0v2\u002BeTvsNyweHNfrkSws9glQQ="},{"Name":"label","Value":"_content/HankoSpa/img/fondo1.jpg"}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"145790"},{"Name":"Content-Type","Value":"image/jpeg"},{"Name":"ETag","Value":"\u0022FhwX286WzZnEj4vYSO0v2\u002BeTvsNyweHNfrkSws9glQQ=\u0022"},{"Name":"Last-Modified","Value":"Wed, 09 Apr 2025 16:31:05 GMT"}]]]></ResponseHeaders>
+    </StaticWebAssetEndpoint>
+    <StaticWebAssetEndpoint Include="_content/HankoSpa/img/fondo1.jpg">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\img\fondo1.jpg'))</AssetFile>
+      <Selectors><![CDATA[[]]]></Selectors>
+      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-FhwX286WzZnEj4vYSO0v2\u002BeTvsNyweHNfrkSws9glQQ="}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=3600, must-revalidate"},{"Name":"Content-Length","Value":"145790"},{"Name":"Content-Type","Value":"image/jpeg"},{"Name":"ETag","Value":"\u0022FhwX286WzZnEj4vYSO0v2\u002BeTvsNyweHNfrkSws9glQQ=\u0022"},{"Name":"Last-Modified","Value":"Wed, 09 Apr 2025 16:31:05 GMT"}]]]></ResponseHeaders>
+    </StaticWebAssetEndpoint>
+    <StaticWebAssetEndpoint Include="_content/HankoSpa/img/fondo2.bupz1dm6zq.jpg">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\img\fondo2.jpg'))</AssetFile>
+      <Selectors><![CDATA[[]]]></Selectors>
+      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"bupz1dm6zq"},{"Name":"integrity","Value":"sha256-k0JJDqOzbW1aEeCvUBA/8MGqkzBM6tJf1oD\u002B5fRW49o="},{"Name":"label","Value":"_content/HankoSpa/img/fondo2.jpg"}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"81134"},{"Name":"Content-Type","Value":"image/jpeg"},{"Name":"ETag","Value":"\u0022k0JJDqOzbW1aEeCvUBA/8MGqkzBM6tJf1oD\u002B5fRW49o=\u0022"},{"Name":"Last-Modified","Value":"Wed, 09 Apr 2025 16:30:39 GMT"}]]]></ResponseHeaders>
+    </StaticWebAssetEndpoint>
+    <StaticWebAssetEndpoint Include="_content/HankoSpa/img/fondo2.jpg">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\img\fondo2.jpg'))</AssetFile>
+      <Selectors><![CDATA[[]]]></Selectors>
+      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-k0JJDqOzbW1aEeCvUBA/8MGqkzBM6tJf1oD\u002B5fRW49o="}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=3600, must-revalidate"},{"Name":"Content-Length","Value":"81134"},{"Name":"Content-Type","Value":"image/jpeg"},{"Name":"ETag","Value":"\u0022k0JJDqOzbW1aEeCvUBA/8MGqkzBM6tJf1oD\u002B5fRW49o=\u0022"},{"Name":"Last-Modified","Value":"Wed, 09 Apr 2025 16:30:39 GMT"}]]]></ResponseHeaders>
+    </StaticWebAssetEndpoint>
     <StaticWebAssetEndpoint Include="_content/HankoSpa/js/site.js">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\site.js'))</AssetFile>
       <Selectors><![CDATA[[]]]></Selectors>

@@ -13,6 +13,14 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
+      "Id": "C:\\Users\\MANUELA\\Desktop\\Proyecto\\HankoSpa\\wwwroot\\img\\fondo1.jpg",
+      "PackagePath": "staticwebassets\\img\\fondo1.jpg"
+    },
+    {
+      "Id": "C:\\Users\\MANUELA\\Desktop\\Proyecto\\HankoSpa\\wwwroot\\img\\fondo2.jpg",
+      "PackagePath": "staticwebassets\\img\\fondo2.jpg"
+    },
+    {
       "Id": "C:\\Users\\MANUELA\\Desktop\\Proyecto\\HankoSpa\\wwwroot\\js\\site.js",
       "PackagePath": "staticwebassets\\js\\site.js"
     },

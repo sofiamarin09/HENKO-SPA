@@ -7,7 +7,7 @@
 
 <h2 class="mt-4 mb-3">✏️ Editar Tratamiento</h2>
 
-<form asp-action="Edit">
+<form asp-controller="Servicio" asp-action="Edit" method="post">
     <input type="hidden" asp-for="ServicioId" />
 
     <div class="mb-3">

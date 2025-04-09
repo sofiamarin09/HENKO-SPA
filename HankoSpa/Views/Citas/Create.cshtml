@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2 class="mt-4 mb-3"> Agendar una nueva cita</h2>
+<h2 class="mt-4 mb-3">📌 Agendar una nueva cita</h2>
 
 <form asp-action="Create" method="post">
     <div class="mb-3">
@@ -30,11 +30,8 @@
         <span asp-validation-for="EstadoCita" class="text-danger"></span>
     </div>
 
-    <div class="mb-3">
-        <label asp-for="UsuarioID" class="form-label">ID del Usuario</label>
-        <input asp-for="UsuarioID" class="form-control" type="number" />
-        <span asp-validation-for="UsuarioID" class="text-danger"></span>
-    </div>
+    <!-- Campo oculto para UsuarioID -->
+    <input type="hidden" asp-for="UsuarioID" />
 
     <button type="submit" class="btn btn-success">Guardar</button>
     <a asp-action="Index" class="btn btn-secondary ms-2">Cancelar</a>
