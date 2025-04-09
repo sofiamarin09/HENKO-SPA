@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿// ServicioController.cs
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using HankoSpa.Data;
 using HankoSpa.Models;
@@ -14,19 +15,11 @@ namespace HankoSpa.Controllers
             _context = context;
         }
 
+        // GET: Servicio
         public async Task<IActionResult> Index()
         {
             return View(await _context.Servicios.ToListAsync());
         }
-
-
-        // GET: Servicio
-        /*
-        public async Task<IActionResult> Index()
-        {
-            var servicios = await _context.Servicios.ToListAsync();
-            return View(servicios);
-        }*/
 
         // GET: Servicio/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -39,88 +32,6 @@ namespace HankoSpa.Controllers
 
             return View(servicio);
         }
-
-        // GET: Servicio/Create
-        public IActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Servicio/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Servicio servicio)
-        {
-            if (ModelState.IsValid)
-            {
-                _context.Add(servicio);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(servicio);
-        }
-
-        // GET: Servicio/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null) return NotFound();
-
-            var servicio = await _context.Servicios.FindAsync(id);
-            if (servicio == null) return NotFound();
-
-            return View(servicio);
-        }
-
-        // POST: Servicio/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, Servicio servicio)
-        {
-            if (id != servicio.ServicioId) return NotFound();
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(servicio);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!_context.Servicios.Any(e => e.ServicioId == id))
-                        return NotFound();
-                    else
-                        throw;
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            return View(servicio);
-        }
-
-        // GET: Servicio/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null) return NotFound();
-
-            var servicio = await _context.Servicios
-                .FirstOrDefaultAsync(m => m.ServicioId == id);
-            if (servicio == null) return NotFound();
-
-            return View(servicio);
-        }
-
-        // POST: Servicio/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var servicio = await _context.Servicios.FindAsync(id);
-            if (servicio != null)
-            {
-                _context.Servicios.Remove(servicio);
-                await _context.SaveChangesAsync();
-            }
-            return RedirectToAction(nameof(Index));
-        }
     }
 }
+

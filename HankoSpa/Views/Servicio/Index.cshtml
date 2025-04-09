@@ -7,7 +7,7 @@
 <h2>📋 Lista de Servicios</h2>
 
 <p>
-    <a href="@Url.Action("Create", "Servicio")" class="btn btn-success">➕ Agregar nuevo servicio</a>
+    <a href="@Url.Action("Create", "AdminServicio")" class="btn btn-success">➕ Agregar nuevo servicio</a>
 </p>
 
 <table class="table table-bordered table-striped">
@@ -22,26 +22,24 @@
     <tbody>
         @if (!Model.Any())
         {
-                <tr>
-                    <td colspan="4">No hay servicios registrados.</td>
-                </tr>
+            <tr>
+                <td colspan="4">No hay servicios registrados.</td>
+            </tr>
         }
         else
         {
             int count = 1;
             foreach (var item in Model)
             {
-                        <tr>
-                            <td>@count</td>
-                            <td>@item.NombreServicio</td>
-                            <td>@item.DescripcionServicio</td>
-                            <td>
-                                <a href="@Url.Action("Edit", "Servicio", new { id = item.ServicioId })" class="btn btn-primary">✏️
-                                    Editar</a>
-                                <a href="@Url.Action("Delete", "Servicio", new { id = item.ServicioId })" class="btn btn-danger">🗑️
-                                    Eliminar</a>
-                            </td>
-                        </tr>
+                <tr>
+                    <td>@count</td>
+                    <td>@item.NombreServicio</td>
+                    <td>@item.DescripcionServicio</td>
+                    <td>
+                        <a href="@Url.Action("Edit", "AdminServicio", new { id = item.ServicioId })" class="btn btn-primary">✏️ Editar</a>
+                        <a href="@Url.Action("Delete", "AdminServicio", new { id = item.ServicioId })" class="btn btn-danger">🗑️ Eliminar</a>
+                    </td>
+                </tr>
                 count++;
             }
         }
