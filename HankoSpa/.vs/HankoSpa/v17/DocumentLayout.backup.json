@@ -3,6 +3,38 @@
   "WorkspaceRootPath": "C:\\Users\\MANUELA\\Desktop\\hanko\\Proyecto\\HankoSpa\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{F968B74E-0884-43DC-9298-B3B1C5396790}|HankoSpa.csproj|c:\\users\\manuela\\desktop\\hanko\\proyecto\\hankospa\\controllers\\citacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F968B74E-0884-43DC-9298-B3B1C5396790}|HankoSpa.csproj|solutionrelative:controllers\\citacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F968B74E-0884-43DC-9298-B3B1C5396790}|HankoSpa.csproj|c:\\users\\manuela\\desktop\\hanko\\proyecto\\hankospa\\controllers\\serviciocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F968B74E-0884-43DC-9298-B3B1C5396790}|HankoSpa.csproj|solutionrelative:controllers\\serviciocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F968B74E-0884-43DC-9298-B3B1C5396790}|HankoSpa.csproj|c:\\users\\manuela\\desktop\\hanko\\proyecto\\hankospa\\models\\cita.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F968B74E-0884-43DC-9298-B3B1C5396790}|HankoSpa.csproj|solutionrelative:models\\cita.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F968B74E-0884-43DC-9298-B3B1C5396790}|HankoSpa.csproj|c:\\users\\manuela\\desktop\\hanko\\proyecto\\hankospa\\services\\citasservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F968B74E-0884-43DC-9298-B3B1C5396790}|HankoSpa.csproj|solutionrelative:services\\citasservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F968B74E-0884-43DC-9298-B3B1C5396790}|HankoSpa.csproj|c:\\users\\manuela\\desktop\\hanko\\proyecto\\hankospa\\services\\servicioservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F968B74E-0884-43DC-9298-B3B1C5396790}|HankoSpa.csproj|solutionrelative:services\\servicioservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F968B74E-0884-43DC-9298-B3B1C5396790}|HankoSpa.csproj|c:\\users\\manuela\\desktop\\hanko\\proyecto\\hankospa\\services\\interfaces\\icitasservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F968B74E-0884-43DC-9298-B3B1C5396790}|HankoSpa.csproj|solutionrelative:services\\interfaces\\icitasservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F968B74E-0884-43DC-9298-B3B1C5396790}|HankoSpa.csproj|c:\\users\\manuela\\desktop\\hanko\\proyecto\\hankospa\\services\\interfaces\\iservicioservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F968B74E-0884-43DC-9298-B3B1C5396790}|HankoSpa.csproj|solutionrelative:services\\interfaces\\iservicioservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F968B74E-0884-43DC-9298-B3B1C5396790}|HankoSpa.csproj|c:\\users\\manuela\\desktop\\hanko\\proyecto\\hankospa\\dtos\\citasserviciodto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F968B74E-0884-43DC-9298-B3B1C5396790}|HankoSpa.csproj|solutionrelative:dtos\\citasserviciodto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{F968B74E-0884-43DC-9298-B3B1C5396790}|HankoSpa.csproj|c:\\users\\manuela\\desktop\\hanko\\proyecto\\hankospa\\dtos\\citasdtos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{F968B74E-0884-43DC-9298-B3B1C5396790}|HankoSpa.csproj|solutionrelative:dtos\\citasdtos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -11,24 +43,12 @@
       "RelativeMoniker": "D:0:0:{F968B74E-0884-43DC-9298-B3B1C5396790}|HankoSpa.csproj|solutionrelative:dtos\\serviciodto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F968B74E-0884-43DC-9298-B3B1C5396790}|HankoSpa.csproj|c:\\users\\manuela\\desktop\\hanko\\proyecto\\hankospa\\controllers\\serviciocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F968B74E-0884-43DC-9298-B3B1C5396790}|HankoSpa.csproj|solutionrelative:controllers\\serviciocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{F968B74E-0884-43DC-9298-B3B1C5396790}|HankoSpa.csproj|c:\\users\\manuela\\desktop\\hanko\\proyecto\\hankospa\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{F968B74E-0884-43DC-9298-B3B1C5396790}|HankoSpa.csproj|solutionrelative:data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{F968B74E-0884-43DC-9298-B3B1C5396790}|HankoSpa.csproj|c:\\users\\manuela\\desktop\\hanko\\proyecto\\hankospa\\nucleo\\response.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{F968B74E-0884-43DC-9298-B3B1C5396790}|HankoSpa.csproj|solutionrelative:nucleo\\response.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F968B74E-0884-43DC-9298-B3B1C5396790}|HankoSpa.csproj|c:\\users\\manuela\\desktop\\hanko\\proyecto\\hankospa\\services\\servicioservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F968B74E-0884-43DC-9298-B3B1C5396790}|HankoSpa.csproj|solutionrelative:services\\servicioservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F968B74E-0884-43DC-9298-B3B1C5396790}|HankoSpa.csproj|c:\\users\\manuela\\desktop\\hanko\\proyecto\\hankospa\\services\\interfaces\\iservicioservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F968B74E-0884-43DC-9298-B3B1C5396790}|HankoSpa.csproj|solutionrelative:services\\interfaces\\iservicioservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{F968B74E-0884-43DC-9298-B3B1C5396790}|HankoSpa.csproj|c:\\users\\manuela\\desktop\\hanko\\proyecto\\hankospa\\helpers\\automapperprofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -41,10 +61,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{F968B74E-0884-43DC-9298-B3B1C5396790}|HankoSpa.csproj|c:\\users\\manuela\\desktop\\hanko\\proyecto\\hankospa\\models\\servicio.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{F968B74E-0884-43DC-9298-B3B1C5396790}|HankoSpa.csproj|solutionrelative:models\\servicio.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F968B74E-0884-43DC-9298-B3B1C5396790}|HankoSpa.csproj|c:\\users\\manuela\\desktop\\hanko\\proyecto\\hankospa\\controllers\\citacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F968B74E-0884-43DC-9298-B3B1C5396790}|HankoSpa.csproj|solutionrelative:controllers\\citacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{F968B74E-0884-43DC-9298-B3B1C5396790}|HankoSpa.csproj|c:\\users\\manuela\\desktop\\hanko\\proyecto\\hankospa\\models\\citasservicios.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -61,10 +77,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{F968B74E-0884-43DC-9298-B3B1C5396790}|HankoSpa.csproj|c:\\users\\manuela\\desktop\\hanko\\proyecto\\hankospa\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
       "RelativeMoniker": "D:0:0:{F968B74E-0884-43DC-9298-B3B1C5396790}|HankoSpa.csproj|solutionrelative:appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F968B74E-0884-43DC-9298-B3B1C5396790}|HankoSpa.csproj|c:\\users\\manuela\\desktop\\hanko\\proyecto\\hankospa\\models\\cita.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F968B74E-0884-43DC-9298-B3B1C5396790}|HankoSpa.csproj|solutionrelative:models\\cita.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -74,58 +86,32 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "CitasDTOs.cs",
-              "DocumentMoniker": "C:\\Users\\MANUELA\\Desktop\\hanko\\Proyecto\\HankoSpa\\DTOs\\CitasDTOs.cs",
-              "RelativeDocumentMoniker": "DTOs\\CitasDTOs.cs",
-              "ToolTip": "C:\\Users\\MANUELA\\Desktop\\hanko\\Proyecto\\HankoSpa\\DTOs\\CitasDTOs.cs*",
-              "RelativeToolTip": "DTOs\\CitasDTOs.cs*",
-              "ViewState": "AgIAAA4AAAAAAAAAAAAAABsAAAABAAAAAAAAAA==",
+              "DocumentIndex": 3,
+              "Title": "CitasService.cs",
+              "DocumentMoniker": "C:\\Users\\MANUELA\\Desktop\\hanko\\Proyecto\\HankoSpa\\Services\\CitasService.cs",
+              "RelativeDocumentMoniker": "Services\\CitasService.cs",
+              "ToolTip": "C:\\Users\\MANUELA\\Desktop\\hanko\\Proyecto\\HankoSpa\\Services\\CitasService.cs",
+              "RelativeToolTip": "Services\\CitasService.cs",
+              "ViewState": "AgIAAJAAAAAAAAAAAAAqwKEAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-08T18:49:57.843Z",
+              "WhenOpened": "2025-04-08T19:44:26.29Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 5,
-              "Title": "ServicioServices.cs",
-              "DocumentMoniker": "C:\\Users\\MANUELA\\Desktop\\hanko\\Proyecto\\HankoSpa\\Services\\ServicioServices.cs",
-              "RelativeDocumentMoniker": "Services\\ServicioServices.cs",
-              "ToolTip": "C:\\Users\\MANUELA\\Desktop\\hanko\\Proyecto\\HankoSpa\\Services\\ServicioServices.cs",
-              "RelativeToolTip": "Services\\ServicioServices.cs",
-              "ViewState": "AgIAAIwAAAAAAAAAAAAUvZ4AAAABAAAAAAAAAA==",
+              "Title": "ICitasService.cs",
+              "DocumentMoniker": "C:\\Users\\MANUELA\\Desktop\\hanko\\Proyecto\\HankoSpa\\Services\\Interfaces\\ICitasService.cs",
+              "RelativeDocumentMoniker": "Services\\Interfaces\\ICitasService.cs",
+              "ToolTip": "C:\\Users\\MANUELA\\Desktop\\hanko\\Proyecto\\HankoSpa\\Services\\Interfaces\\ICitasService.cs",
+              "RelativeToolTip": "Services\\Interfaces\\ICitasService.cs",
+              "ViewState": "AgIAAAQAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-08T00:52:20.478Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "AutoMapperProfile.cs",
-              "DocumentMoniker": "C:\\Users\\MANUELA\\Desktop\\hanko\\Proyecto\\HankoSpa\\Helpers\\AutoMapperProfile.cs",
-              "RelativeDocumentMoniker": "Helpers\\AutoMapperProfile.cs",
-              "ToolTip": "C:\\Users\\MANUELA\\Desktop\\hanko\\Proyecto\\HankoSpa\\Helpers\\AutoMapperProfile.cs",
-              "RelativeToolTip": "Helpers\\AutoMapperProfile.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAeAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-08T00:42:01.765Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "Response.cs",
-              "DocumentMoniker": "C:\\Users\\MANUELA\\Desktop\\hanko\\Proyecto\\HankoSpa\\Nucleo\\Response.cs",
-              "RelativeDocumentMoniker": "Nucleo\\Response.cs",
-              "ToolTip": "C:\\Users\\MANUELA\\Desktop\\hanko\\Proyecto\\HankoSpa\\Nucleo\\Response.cs",
-              "RelativeToolTip": "Nucleo\\Response.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAcAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-08T00:29:57.321Z",
+              "WhenOpened": "2025-04-08T19:44:02.653Z",
               "EditorCaption": ""
             },
             {
@@ -136,14 +122,92 @@
               "RelativeDocumentMoniker": "Services\\Interfaces\\IServicioServices.cs",
               "ToolTip": "C:\\Users\\MANUELA\\Desktop\\hanko\\Proyecto\\HankoSpa\\Services\\Interfaces\\IServicioServices.cs",
               "RelativeToolTip": "Services\\Interfaces\\IServicioServices.cs",
-              "ViewState": "AgIAAAIAAAAAAAAAAAAuwBAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-08T00:07:37.636Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "ServicioServices.cs",
+              "DocumentMoniker": "C:\\Users\\MANUELA\\Desktop\\hanko\\Proyecto\\HankoSpa\\Services\\ServicioServices.cs",
+              "RelativeDocumentMoniker": "Services\\ServicioServices.cs",
+              "ToolTip": "C:\\Users\\MANUELA\\Desktop\\hanko\\Proyecto\\HankoSpa\\Services\\ServicioServices.cs",
+              "RelativeToolTip": "Services\\ServicioServices.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-08T00:52:20.478Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "CitaController.cs",
+              "DocumentMoniker": "C:\\Users\\MANUELA\\Desktop\\hanko\\Proyecto\\HankoSpa\\Controllers\\CitaController.cs",
+              "RelativeDocumentMoniker": "Controllers\\CitaController.cs",
+              "ToolTip": "C:\\Users\\MANUELA\\Desktop\\hanko\\Proyecto\\HankoSpa\\Controllers\\CitaController.cs",
+              "RelativeToolTip": "Controllers\\CitaController.cs",
+              "ViewState": "AgIAAFoAAAAAAAAAAAAAAGMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-07T23:57:34.203Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 1,
+              "Title": "ServicioController.cs",
+              "DocumentMoniker": "C:\\Users\\MANUELA\\Desktop\\hanko\\Proyecto\\HankoSpa\\Controllers\\ServicioController.cs",
+              "RelativeDocumentMoniker": "Controllers\\ServicioController.cs",
+              "ToolTip": "C:\\Users\\MANUELA\\Desktop\\hanko\\Proyecto\\HankoSpa\\Controllers\\ServicioController.cs",
+              "RelativeToolTip": "Controllers\\ServicioController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-07T23:56:50.63Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Cita.cs",
+              "DocumentMoniker": "C:\\Users\\MANUELA\\Desktop\\hanko\\Proyecto\\HankoSpa\\Models\\Cita.cs",
+              "RelativeDocumentMoniker": "Models\\Cita.cs",
+              "ToolTip": "C:\\Users\\MANUELA\\Desktop\\hanko\\Proyecto\\HankoSpa\\Models\\Cita.cs",
+              "RelativeToolTip": "Models\\Cita.cs",
+              "ViewState": "AgIAABYAAAAAAAAAAAAAABoAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-06T18:50:58.082Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "CitasServicioDTO.cs",
+              "DocumentMoniker": "C:\\Users\\MANUELA\\Desktop\\hanko\\Proyecto\\HankoSpa\\DTOs\\CitasServicioDTO.cs",
+              "RelativeDocumentMoniker": "DTOs\\CitasServicioDTO.cs",
+              "ToolTip": "C:\\Users\\MANUELA\\Desktop\\hanko\\Proyecto\\HankoSpa\\DTOs\\CitasServicioDTO.cs",
+              "RelativeToolTip": "DTOs\\CitasServicioDTO.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-08T19:34:32.694Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "CitasDTOs.cs",
+              "DocumentMoniker": "C:\\Users\\MANUELA\\Desktop\\hanko\\Proyecto\\HankoSpa\\DTOs\\CitasDTOs.cs",
+              "RelativeDocumentMoniker": "DTOs\\CitasDTOs.cs",
+              "ToolTip": "C:\\Users\\MANUELA\\Desktop\\hanko\\Proyecto\\HankoSpa\\DTOs\\CitasDTOs.cs",
+              "RelativeToolTip": "DTOs\\CitasDTOs.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-08T18:49:57.843Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
               "Title": "ServicioDTO.cs",
               "DocumentMoniker": "C:\\Users\\MANUELA\\Desktop\\hanko\\Proyecto\\HankoSpa\\DTOs\\ServicioDTO.cs",
               "RelativeDocumentMoniker": "DTOs\\ServicioDTO.cs",
@@ -156,20 +220,33 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "ServicioController.cs",
-              "DocumentMoniker": "C:\\Users\\MANUELA\\Desktop\\hanko\\Proyecto\\HankoSpa\\Controllers\\ServicioController.cs",
-              "RelativeDocumentMoniker": "Controllers\\ServicioController.cs",
-              "ToolTip": "C:\\Users\\MANUELA\\Desktop\\hanko\\Proyecto\\HankoSpa\\Controllers\\ServicioController.cs*",
-              "RelativeToolTip": "Controllers\\ServicioController.cs*",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAHcAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 11,
+              "Title": "Response.cs",
+              "DocumentMoniker": "C:\\Users\\MANUELA\\Desktop\\hanko\\Proyecto\\HankoSpa\\Nucleo\\Response.cs",
+              "RelativeDocumentMoniker": "Nucleo\\Response.cs",
+              "ToolTip": "C:\\Users\\MANUELA\\Desktop\\hanko\\Proyecto\\HankoSpa\\Nucleo\\Response.cs",
+              "RelativeToolTip": "Nucleo\\Response.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAcAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-07T23:56:50.63Z",
+              "WhenOpened": "2025-04-08T00:29:57.321Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 12,
+              "Title": "AutoMapperProfile.cs",
+              "DocumentMoniker": "C:\\Users\\MANUELA\\Desktop\\hanko\\Proyecto\\HankoSpa\\Helpers\\AutoMapperProfile.cs",
+              "RelativeDocumentMoniker": "Helpers\\AutoMapperProfile.cs",
+              "ToolTip": "C:\\Users\\MANUELA\\Desktop\\hanko\\Proyecto\\HankoSpa\\Helpers\\AutoMapperProfile.cs",
+              "RelativeToolTip": "Helpers\\AutoMapperProfile.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAeAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-08T00:42:01.765Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
               "Title": "AppDbContext.cs",
               "DocumentMoniker": "C:\\Users\\MANUELA\\Desktop\\hanko\\Proyecto\\HankoSpa\\Data\\AppDbContext.cs",
               "RelativeDocumentMoniker": "Data\\AppDbContext.cs",
@@ -182,7 +259,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 13,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\MANUELA\\Desktop\\hanko\\Proyecto\\HankoSpa\\Program.cs",
               "RelativeDocumentMoniker": "Program.cs",
@@ -195,20 +272,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "CitaController.cs",
-              "DocumentMoniker": "C:\\Users\\MANUELA\\Desktop\\hanko\\Proyecto\\HankoSpa\\Controllers\\CitaController.cs",
-              "RelativeDocumentMoniker": "Controllers\\CitaController.cs",
-              "ToolTip": "C:\\Users\\MANUELA\\Desktop\\hanko\\Proyecto\\HankoSpa\\Controllers\\CitaController.cs",
-              "RelativeToolTip": "Controllers\\CitaController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-07T23:57:34.203Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 14,
               "Title": "Servicio.cs",
               "DocumentMoniker": "C:\\Users\\MANUELA\\Desktop\\hanko\\Proyecto\\HankoSpa\\Models\\Servicio.cs",
               "RelativeDocumentMoniker": "Models\\Servicio.cs",
@@ -222,18 +286,6 @@
             {
               "$type": "Document",
               "DocumentIndex": 15,
-              "Title": "Cita.cs",
-              "DocumentMoniker": "C:\\Users\\MANUELA\\Desktop\\hanko\\Proyecto\\HankoSpa\\Models\\Cita.cs",
-              "RelativeDocumentMoniker": "Models\\Cita.cs",
-              "ToolTip": "C:\\Users\\MANUELA\\Desktop\\hanko\\Proyecto\\HankoSpa\\Models\\Cita.cs",
-              "RelativeToolTip": "Models\\Cita.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-06T18:50:58.082Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
               "Title": "CitasServicios.cs",
               "DocumentMoniker": "C:\\Users\\MANUELA\\Desktop\\hanko\\Proyecto\\HankoSpa\\Models\\CitasServicios.cs",
               "RelativeDocumentMoniker": "Models\\CitasServicios.cs",
@@ -246,7 +298,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 18,
               "Title": "appsettings.Development.json",
               "DocumentMoniker": "C:\\Users\\MANUELA\\Desktop\\hanko\\Proyecto\\HankoSpa\\appsettings.Development.json",
               "RelativeDocumentMoniker": "appsettings.Development.json",
@@ -258,7 +310,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 17,
               "Title": "appsettings.json",
               "DocumentMoniker": "C:\\Users\\MANUELA\\Desktop\\hanko\\Proyecto\\HankoSpa\\appsettings.json",
               "RelativeDocumentMoniker": "appsettings.json",
@@ -270,7 +322,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 16,
               "Title": "Index.cshtml",
               "DocumentMoniker": "C:\\Users\\MANUELA\\Desktop\\hanko\\Proyecto\\HankoSpa\\Views\\Home\\Index.cshtml",
               "RelativeDocumentMoniker": "Views\\Home\\Index.cshtml",
