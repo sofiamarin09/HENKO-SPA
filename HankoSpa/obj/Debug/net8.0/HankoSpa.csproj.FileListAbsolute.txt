@@ -867,3 +867,5 @@ C:\Users\MANUELA\Desktop\Proyecto\HankoSpa\obj\Debug\net8.0\staticwebassets.upTo
 C:\Users\MANUELA\Desktop\Proyecto\HankoSpa\obj\Debug\net8.0\HankoSpa.csproj.Up2Date
 C:\Users\MANUELA\Desktop\Proyecto\HankoSpa\obj\Debug\net8.0\HankoSpa.genruntimeconfig.cache
 C:\Users\MANUELA\Desktop\Proyecto\HankoSpa\obj\Debug\net8.0\ref\HankoSpa.dll
+C:\Users\Harold\OneDrive\Escritorio\ITM\Proyecto\HankoSpa\bin\Debug\net8.0\AutoMapper.dll
+C:\Users\Harold\OneDrive\Escritorio\ITM\Proyecto\HankoSpa\bin\Debug\net8.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
