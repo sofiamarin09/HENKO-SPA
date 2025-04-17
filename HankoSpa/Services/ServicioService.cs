@@ -10,7 +10,7 @@ using HankoSpa.Services.Interfaces;
 
 namespace HankoSpa.Services
 {
-    public class ServicioService : IServicioService
+    public class ServicioService : IServicioServices
     {
         private readonly IServicioRepository _repository;
         private readonly IMapper _mapper;

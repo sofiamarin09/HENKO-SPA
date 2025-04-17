@@ -1,12 +1,12 @@
 ﻿using HankoSpa.DTOs;
 using HankoSpa.Nucleo;
-//using HankoSpa.Helpers; 
+using HankoSpa.Helpers; 
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace HankoSpa.Services.Interfaces
 {
-    public interface IServicioService
+    public interface IServicioServices
     {
         Task<Response<List<ServiceDTO>>> GetAllAsync();
         Task<Response<ServiceDTO>> GetOneAsync(int id);

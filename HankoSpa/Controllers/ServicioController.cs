@@ -7,9 +7,9 @@ namespace HankoSpa.Controllers
 {
     public class ServicioController : Controller
     {
-        private readonly IServicioService _servicioService;
+        private readonly IServicioServices _servicioService;
 
-        public ServicioController(IServicioService servicioService)
+        public ServicioController(IServicioServices servicioService)
         {
             _servicioService = servicioService;
         }
