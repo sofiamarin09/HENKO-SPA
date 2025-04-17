@@ -1,4 +1,4 @@
-﻿@model IEnumerable<HankoSpa.Models.Servicio>
+﻿@model IEnumerable<HankoSpa.DTOs.ServiceDTO>
 
 @{
     ViewBag.Title = "Servicios";
@@ -36,8 +36,10 @@
                     <td>@item.NombreServicio</td>
                     <td>@item.DescripcionServicio</td>
                     <td>
-                        <a href="@Url.Action("Edit", "AdminServicio", new { id = item.ServicioId })" class="btn btn-primary">✏️ Editar</a>
-                        <a href="@Url.Action("Delete", "AdminServicio", new { id = item.ServicioId })" class="btn btn-danger">🗑️ Eliminar</a>
+                        <a href="@Url.Action("Edit", "AdminServicio", new { id = item.ServicioId })" class="btn btn-primary">✏️
+                            Editar</a>
+                        <a href="@Url.Action("Delete", "AdminServicio", new { id = item.ServicioId })"
+                            class="btn btn-danger">🗑️ Eliminar</a>
                     </td>
                 </tr>
                 count++;
