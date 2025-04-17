@@ -1,37 +1,33 @@
-﻿// ServicioController.cs
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using HankoSpa.Data;
-using HankoSpa.Models;
+using HankoSpa.Services.Interfaces;
+using HankoSpa.DTOs;
 
 namespace HankoSpa.Controllers
 {
     public class ServicioController : Controller
     {
-        private readonly AppDbContext _context;
+        private readonly IServicioService _servicioService;
 
-        public ServicioController(AppDbContext context)
+        public ServicioController(IServicioService servicioService)
         {
-            _context = context;
+            _servicioService = servicioService;
         }
 
         // GET: Servicio
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Servicios.ToListAsync());
+            var response = await _servicioService.GetAllAsync();
+
+            if (!response.IsSuccess)
+            {
+                ViewBag.ErrorMessage = response.Message;
+                return View(new List<ServiceDTO>());
+            }
+
+            return View(response.Result);
         }
 
-        // GET: Servicio/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null) return NotFound();
-
-            var servicio = await _context.Servicios
-                .FirstOrDefaultAsync(m => m.ServicioId == id);
-            if (servicio == null) return NotFound();
-
-            return View(servicio);
-        }
     }
 }
 

@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+﻿/*using AutoMapper;
 using HankoSpa.Data;
 using HankoSpa.DTOs;
 using HankoSpa.Models;
@@ -159,3 +159,4 @@ namespace HankoSpa.Services
         }
     }
 }
+*/
