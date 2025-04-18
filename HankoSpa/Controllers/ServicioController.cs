@@ -103,38 +103,19 @@ namespace HankoSpa.Controllers
 
             return View(response.Result);
         }
-        /*
-
-        // POST: Servicio/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, ServiceDTO servicioDTO)
-        {
-            if (id != servicioDTO.ServicioId) return NotFound();
-
-            if (ModelState.IsValid)
-            {
-                var response = await _servicioService.UpdateAsync(servicioDTO);
-                if (response.IsSuccess)
-                {
-                    TempData["MensajeExito"] = "Servicio actualizado exitosamente.";
-                    return RedirectToAction("Index");
-                }
-
-                ViewBag.ErrorMessage = response.Message;
-            }
-
-            return View(servicioDTO);
-        }
 
         // GET: Servicio/Delete/5
+        [HttpGet]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null) return NotFound();
 
-            var response = await _servicioService.GetByIdAsync(id.Value);
+            var response = await _servicioService.GetOneAsync(id.Value);
             if (!response.IsSuccess || response.Result == null)
-                return NotFound();
+            {
+                TempData["MensajeError"] = "El servicio no fue encontrado.";
+                return RedirectToAction("Index");
+            }
 
             return View(response.Result);
         }
@@ -156,7 +137,7 @@ namespace HankoSpa.Controllers
 
             return RedirectToAction("Index");
         }
-        */
+
     }
 
 }
