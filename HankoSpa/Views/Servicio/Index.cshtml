@@ -1,49 +1,72 @@
 ﻿@model IEnumerable<HankoSpa.DTOs.ServiceDTO>
 
 @{
-    ViewBag.Title = "Servicios";
+    ViewData["Title"] = "Servicios";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var serviciosOrdenados = Model.OrderBy(s => s.NombreServicio).ToList();
 }
 
-<h2>📋 Lista de Servicios</h2>
+<div class="mt-4">
+    <h2 class="text-primary">📋 Lista de Servicios</h2>
+    <hr />
 
-<p>
-    <a href="@Url.Action("Create", "AdminServicio")" class="btn btn-success">➕ Agregar nuevo servicio</a>
-</p>
+    @* Mensaje de éxito *@
+    @if (TempData["MensajeExito"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            @TempData["MensajeExito"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
 
-<table class="table table-bordered table-striped">
-    <thead>
-        <tr>
-            <th>#</th>
-            <th>Nombre del Servicio</th>
-            <th>Descripción</th>
-            <th>Acciones</th>
-        </tr>
-    </thead>
-    <tbody>
-        @if (!Model.Any())
-        {
+    @* Mensaje de error *@
+    @if (TempData["MensajeError"] != null)
+    {
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            @TempData["MensajeError"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+
+    <p>
+        <a class="btn btn-success" asp-controller="Servicio" asp-action="Create">➕ Agregar nuevo servicio</a>
+    </p>
+
+    <table class="table table-bordered table-striped shadow-sm">
+        <thead class="bg-white text-dark">
             <tr>
-                <td colspan="4">No hay servicios registrados.</td>
+                <th>#</th>
+                <th>Nombre del Servicio</th>
+                <th>Descripción</th>
+                <th class="text-center">Acciones</th>
             </tr>
-        }
-        else
-        {
-            int count = 1;
-            foreach (var item in Model)
+        </thead>
+        <tbody>
+            @if (!serviciosOrdenados.Any())
             {
                 <tr>
-                    <td>@count</td>
-                    <td>@item.NombreServicio</td>
-                    <td>@item.DescripcionServicio</td>
-                    <td>
-                        <a href="@Url.Action("Edit", "AdminServicio", new { id = item.ServicioId })" class="btn btn-primary">✏️
-                            Editar</a>
-                        <a href="@Url.Action("Delete", "AdminServicio", new { id = item.ServicioId })"
-                            class="btn btn-danger">🗑️ Eliminar</a>
-                    </td>
+                    <td colspan="4" class="text-center">No hay servicios registrados.</td>
                 </tr>
-                count++;
             }
-        }
-    </tbody>
-</table>
+            else
+            {
+                var i = 1;
+                foreach (var item in serviciosOrdenados)
+                {
+                    <tr>
+                        <td>@i</td>
+                        <td>@item.NombreServicio</td>
+                        <td>@item.DescripcionServicio</td>
+                        <td class="text-center">
+                            <a class="btn btn-outline-warning btn-sm me-1" asp-controller="AdminServicio" asp-action="Edit"
+                                asp-route-id="@item.ServicioId">✏️ Editar</a>
+                            <a class="btn btn-outline-danger btn-sm" asp-controller="AdminServicio" asp-action="Delete"
+                                asp-route-id="@item.ServicioId">🗑️ Eliminar</a>
+                        </td>
+                    </tr>
+                    i++;
+                }
+            }
+        </tbody>
+    </table>
+</div>

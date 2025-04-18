@@ -1,4 +1,4 @@
-﻿@model HankoSpa.Models.Servicio
+﻿@model HankoSpa.DTOs.ServiceDTO
 
 @{
     ViewBag.Title = "Crear Servicio";
@@ -6,7 +6,7 @@
 
 <h2>✍️ Crear Servicio</h2>
 
-@using (Html.BeginForm("Create", "AdminServicio", FormMethod.Post))
+@using (Html.BeginForm("Create", "Servicio", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
 

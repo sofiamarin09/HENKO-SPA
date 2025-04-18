@@ -1,18 +1,18 @@
-﻿// AdminServicioController.cs
+﻿/*
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using HankoSpa.Data;
-using HankoSpa.Models;
+using Hanko.Spa.DTOs;
+using Hanko.Spa.Services;
 
 namespace HankoSpa.Controllers
 {
     public class AdminServicioController : Controller
     {
-        private readonly AppDbContext _context;
+        private readonly IServicioService _servicioService;
 
-        public AdminServicioController(AppDbContext context)
+        public AdminServicioController(IServicioService servicioService)
         {
-            _context = context;
+            _servicioService = servicioService;
         }
 
         // GET: AdminServicio/Create
@@ -28,7 +28,7 @@ namespace HankoSpa.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(servicio);
+                _context.Add(servicioDTO);
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Index", "Servicio");
             }
@@ -99,3 +99,4 @@ namespace HankoSpa.Controllers
         }
     }
 }
+*/

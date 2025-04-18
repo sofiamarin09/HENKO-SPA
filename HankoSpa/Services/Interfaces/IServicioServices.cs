@@ -13,5 +13,6 @@ namespace HankoSpa.Services.Interfaces
         Task<Response<ServiceDTO>> CreateAsync(ServiceDTO dto);
         Task<Response<ServiceDTO>> EditAsync(ServiceDTO dto);
         Task<Response<object>> DeleteAsync(int id);
+
     }
 }
