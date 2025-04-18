@@ -34,6 +34,17 @@ namespace HankoSpa.Controllers
             return View();
         }
 
+        // GET: Servicio/Edit
+        public IActionResult Edit()
+        {
+            return View();
+        }
+
+        // GET: Servicio/Delete
+        public IActionResult Delete()
+        {
+            return View();
+        }
 
         // POST: Servicio/Create
         [HttpPost]
@@ -56,21 +67,19 @@ namespace HankoSpa.Controllers
             return View(servicioDTO);
         }
 
-        /*
-
-
-        ---// POST: Servicio/Create
+        // POST: Servicio/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(ServiceDTO servicioDTO)
+        public async Task<IActionResult> Edit(int id, ServiceDTO servicioDTO)
         {
+            if (id != servicioDTO.ServicioId) return NotFound();
+
             if (ModelState.IsValid)
             {
-                var response = await _servicioService.CreateAsync(servicioDTO);
-
+                var response = await _servicioService.EditAsync(servicioDTO);
                 if (response.IsSuccess)
                 {
-                    TempData["MensajeExito"] = "Servicio creado exitosamente.";
+                    TempData["MensajeExito"] = "Servicio actualizado exitosamente.";
                     return RedirectToAction("Index");
                 }
 
@@ -78,19 +87,23 @@ namespace HankoSpa.Controllers
             }
 
             return View(servicioDTO);
-        }---
+        }
+
 
         // GET: Servicio/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        [HttpGet]
+        public async Task<IActionResult> Edit(int id)
         {
-            if (id == null) return NotFound();
-
-            var response = await _servicioService.GetByIdAsync(id.Value);
+            var response = await _servicioService.GetOneAsync(id);
             if (!response.IsSuccess || response.Result == null)
-                return NotFound();
+            {
+                TempData["MensajeError"] = "El servicio no fue encontrado.";
+                return RedirectToAction("Index");
+            }
 
             return View(response.Result);
         }
+        /*
 
         // POST: Servicio/Edit/5
         [HttpPost]
