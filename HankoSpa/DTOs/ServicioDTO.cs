@@ -10,6 +10,7 @@ namespace HankoSpa.DTOs
         [StringLength(100, ErrorMessage = "Máximo 100 caracteres")]
         public string NombreServicio { get; set; }
 
+        [Required(ErrorMessage = "La descripción del servicio es obligatoria")]
         [StringLength(500, ErrorMessage = "Máximo 500 caracteres")]
         public string DescripcionServicio { get; set; }
     }
