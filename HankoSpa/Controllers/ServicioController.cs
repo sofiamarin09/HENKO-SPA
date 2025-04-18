@@ -34,8 +34,6 @@ namespace HankoSpa.Controllers
             return View();
         }
 
-        /*
-
 
         // POST: Servicio/Create
         [HttpPost]
@@ -57,6 +55,30 @@ namespace HankoSpa.Controllers
 
             return View(servicioDTO);
         }
+
+        /*
+
+
+        ---// POST: Servicio/Create
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create(ServiceDTO servicioDTO)
+        {
+            if (ModelState.IsValid)
+            {
+                var response = await _servicioService.CreateAsync(servicioDTO);
+
+                if (response.IsSuccess)
+                {
+                    TempData["MensajeExito"] = "Servicio creado exitosamente.";
+                    return RedirectToAction("Index");
+                }
+
+                ViewBag.ErrorMessage = response.Message;
+            }
+
+            return View(servicioDTO);
+        }---
 
         // GET: Servicio/Edit/5
         public async Task<IActionResult> Edit(int? id)
