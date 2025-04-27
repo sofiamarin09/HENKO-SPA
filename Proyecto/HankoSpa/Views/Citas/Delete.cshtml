@@ -1,0 +1,33 @@
+﻿@model HankoSpa.Models.Cita
+
+@{
+    ViewData["Title"] = "Eliminar Cita";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="mt-4 mb-3 text-danger">🗑️ Eliminar Cita</h2>
+
+<div class="alert alert-warning" role="alert">
+    ¿Estás seguro que deseas eliminar esta cita? Esta acción no se puede deshacer.
+</div>
+
+<div class="mb-3">
+    <dl class="row">
+        <dt class="col-sm-3">Fecha:</dt>
+        <dd class="col-sm-9">@Model.FechaCita.ToShortDateString()</dd>
+
+        <dt class="col-sm-3">Hora:</dt>
+        <dd class="col-sm-9">@Model.HoraCita.ToString(@"hh\:mm")</dd>
+
+        <dt class="col-sm-3">Estado:</dt>
+        <dd class="col-sm-9">@Model.EstadoCita</dd>
+    </dl>
+</div>
+
+<form asp-action="DeleteConfirmed" method="post">
+    <input type="hidden" asp-for="CitaId" />
+    <input type="hidden" asp-for="UsuarioID" />
+
+    <button type="submit" class="btn btn-danger">Eliminar</button>
+    <a asp-action="Index" class="btn btn-secondary ms-2">Cancelar</a>
+</form>
