@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using System.ComponentModel.DataAnnotations;
-using System.Diagnostics.Metrics;
 
 namespace HankoSpa.Models
 {
@@ -19,10 +18,7 @@ namespace HankoSpa.Models
 
         [Display(Name = "User")]
         public string FullName => $"{FirstName} {LastName}";
-
-        public virtual ICollection<Cita> Citas { get; set; }
-
-
+        public virtual ICollection<Cita>? Citas { get; set; }
     }
     public enum UserType
     {

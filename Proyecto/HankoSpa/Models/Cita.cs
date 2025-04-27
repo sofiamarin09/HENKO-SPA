@@ -21,13 +21,13 @@ namespace HankoSpa.Models
 
         [Required(ErrorMessage = "El estado de la cita es obligatorio")]
         public string EstadoCita { get; set; }
-
-        // Este campo no se mostrará en formularios, pero se puede asignar automáticamente en el backend
-        public int UsuarioID { get; set; }
-
+        
         // Relación muchos a muchos
         public virtual ICollection<CitasServicios> CitasServicios { get; set; }
-        //public string? UserId { get; set; }
-        public virtual User User { get; set; }+
+
+        // Este campo no se mostrará en formularios, pero se puede asignar automáticamente en el backend
+        //[ForeignKey("User")]
+        public string? UsuarioID { get; set; }
+        public virtual User? User { get; set; }
     }
 }

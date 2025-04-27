@@ -18,6 +18,7 @@ namespace HankoSpa.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<CitasServicios>()
                 .HasOne(cs => cs.Cita)
                 .WithMany(c => c.CitasServicios)
@@ -28,7 +29,21 @@ namespace HankoSpa.Data
                 .WithMany(s => s.CitasServicios)
                 .HasForeignKey(cs => cs.ServicioID);
 
-            modelBuilder.Entity<User>().HasNoKey();
+            modelBuilder.Entity<Cita>()
+                .HasOne(c => c.User) // Cita tiene un User
+                .WithMany(u => u.Citas) // User tiene muchas Citas
+                .HasForeignKey(c => c.UsuarioID); // Clave foránea
+
+            DisableCascadingDelete(modelBuilder);
+        }
+
+        private void DisableCascadingDelete(ModelBuilder modelBuilder)
+        {
+            var relationships = modelBuilder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys());
+            foreach (var relationship in relationships)
+            {
+                relationship.DeleteBehavior = DeleteBehavior.Restrict;
+            }
         }
     }
 }

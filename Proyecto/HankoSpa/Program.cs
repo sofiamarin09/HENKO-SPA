@@ -34,7 +34,6 @@ builder.Services.AddIdentity<User, IdentityRole>(x =>
     .AddDefaultTokenProviders();
 
 
-
 var app = builder.Build();
 
 using (var scope = app.Services.CreateScope())
@@ -54,6 +53,7 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(
