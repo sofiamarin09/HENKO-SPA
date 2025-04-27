@@ -53,7 +53,7 @@ namespace HankoSpa.Controllers
             if (ModelState.IsValid)
             {
 
-                // Simulaccita.UsuarioID = 1;ión de usuario (reemplazar con ID real de usuario autenticado en el futuro)
+                // Simula ccita.UsuarioID = 1;ión de usuario (reemplazar con ID real de usuario autenticado en el futuro)
                 //cita.UsuarioID = 1;
                 _context.Add(cita);
                 await _context.SaveChangesAsync();
