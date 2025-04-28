@@ -9,6 +9,8 @@ namespace HankoSpa.Helpers
         public AutoMapperProfile()
         {
             CreateMap<Servicio, ServiceDTO>().ReverseMap();
+            CreateMap<Cita, CitaDTO>().ReverseMap();
         }
+
     }
 }

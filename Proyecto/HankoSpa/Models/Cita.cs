@@ -9,7 +9,7 @@ namespace HankoSpa.Models
     public class Cita
     {
         [Key]
-        public int CitaId { get; set; }
+        public int CitaID { get; set; }
 
         [Required(ErrorMessage = "La fecha de la cita es obligatoria")]
         [DataType(DataType.Date)]
@@ -27,7 +27,7 @@ namespace HankoSpa.Models
 
         // Este campo no se mostrará en formularios, pero se puede asignar automáticamente en el backend
         //[ForeignKey("User")]
-        public string? UsuarioID { get; set; }
+        public String? UsuarioID { get; set; }
         public virtual User? User { get; set; }
     }
 }

@@ -1,15 +1,28 @@
-﻿public class CitaDTO
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace HankoSpa.DTOs
 {
-    public int CitasID { get; set; }
+    public class CitaDTO
+    {
+        public int CitasID { get; set; }
 
-    public DateTime FechaCita { get; set; }
+        [Required(ErrorMessage = "La fecha de la cita es obligatoria")]
+        [DataType(DataType.Date, ErrorMessage = "Formato de fecha inválido")]
+        public DateTime FechaCita { get; set; }
 
-    public TimeSpan HoraCita { get; set; }
+        [Required(ErrorMessage = "La hora de la cita es obligatoria")]
+        [DataType(DataType.Time, ErrorMessage = "Formato de hora inválido")]
+        public TimeSpan HoraCita { get; set; }
 
-    public string EstadoCita { get; set; }
+        [Required(ErrorMessage = "El estado de la cita es obligatorio")]
+        [StringLength(50, ErrorMessage = "Máximo 50 caracteres")]
+        public string EstadoCita { get; set; }
 
-    public int UsuarioID { get; set; }
+        [Required(ErrorMessage = "El ID del usuario es obligatorio")]
+        public String UsuarioID { get; set; }
 
-    // Relación muchos a muchos con servicios
-    public List<int> ServiciosSeleccionados { get; set; }
+        // Relación muchos a muchos con servicios
+        //[Required(ErrorMessage = "Debe seleccionar al menos un servicio")]
+        //public List<int> ServiciosSeleccionados { get; set; }
+    }
 }

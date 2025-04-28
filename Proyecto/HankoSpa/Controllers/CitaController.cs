@@ -1,41 +1,30 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using HankoSpa.Data;
-using HankoSpa.Models;
+using HankoSpa.Services.Interfaces;
+using HankoSpa.DTOs;
 
 namespace HankoSpa.Controllers
 {
     public class CitasController : Controller
     {
-        private readonly AppDbContext _context;
+        private readonly ICitasService _citaService;
 
-        public CitasController(AppDbContext context)
+        public CitasController(ICitasService citaService)
         {
-            _context = context;
+            _citaService = citaService;
         }
 
         // GET: Citas
         public async Task<IActionResult> Index()
         {
-            var citas = await _context.Citas
-                .OrderBy(c => c.FechaCita)
-                .ThenBy(c => c.HoraCita)
-                .ToListAsync();
+            var response = await _citaService.GetAllAsync();
 
-            return View(citas);
-        }
+            if (!response.IsSuccess)
+            {
+                ViewBag.ErrorMessage = response.Message;
+                return View(new List<CitaDTO>());
+            }
 
-        // GET: Citas/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null) return NotFound();
-
-            var cita = await _context.Citas
-                .FirstOrDefaultAsync(c => c.CitaId == id);
-
-            if (cita == null) return NotFound();
-
-            return View(cita);
+            return View(response.Result);
         }
 
         // GET: Citas/Create
@@ -47,78 +36,74 @@ namespace HankoSpa.Controllers
         // POST: Citas/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(CitaDTO cita)
+        public async Task<IActionResult> Create(CitaDTO citaDTO)
         {
-            
             if (ModelState.IsValid)
             {
+                var response = await _citaService.CreateAsync(citaDTO);
 
-                // Simula ccita.UsuarioID = 1;ión de usuario (reemplazar con ID real de usuario autenticado en el futuro)
-                //cita.UsuarioID = 1;
-                _context.Add(cita);
-                await _context.SaveChangesAsync();
-                TempData["MensajeExito"] = "✅ La cita fue agendada correctamente.";
-                return RedirectToAction(nameof(Index));
+                if (response.IsSuccess)
+                {
+                    TempData["MensajeExito"] = "Cita creada exitosamente.";
+                    return RedirectToAction("Index");
+                }
+
+                ViewBag.ErrorMessage = response.Message;
             }
-            return View(cita);
+
+            return View(citaDTO);
         }
 
         // GET: Citas/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        [HttpGet]
+        public async Task<IActionResult> Edit(int id)
         {
-            if (id == null) return NotFound();
+            var response = await _citaService.GetOneAsync(id);
+            if (!response.IsSuccess || response.Result == null)
+            {
+                TempData["MensajeError"] = "La cita no fue encontrada.";
+                return RedirectToAction("Index");
+            }
 
-            var cita = await _context.Citas.FindAsync(id);
-            if (cita == null) return NotFound();
-
-            return View(cita);
+            return View(response.Result);
         }
 
         // POST: Citas/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, Cita cita)
+        public async Task<IActionResult> Edit(int id, CitaDTO citaDTO)
         {
-            if (id != cita.CitaId) return NotFound();
+            if (id != citaDTO.CitasID) return NotFound();
 
             if (ModelState.IsValid)
             {
-                try
+                var response = await _citaService.EditAsync(citaDTO);
+                if (response.IsSuccess)
                 {
-                    // Mantener el valor de UsuarioID si no se muestra en la vista
-                    var citaExistente = await _context.Citas.AsNoTracking().FirstOrDefaultAsync(c => c.CitaId == id);
-                    if (citaExistente != null)
-                    {
-                        cita.UsuarioID = citaExistente.UsuarioID;
-                    }
+                    TempData["MensajeExito"] = "Cita actualizada exitosamente.";
+                    return RedirectToAction("Index");
+                }
 
-                    _context.Update(cita);
-                    await _context.SaveChangesAsync();
-                    TempData["MensajeExito"] = "✅ La cita fue actualizada correctamente.";
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!_context.Citas.Any(e => e.CitaId == id))
-                        return NotFound();
-                    else
-                        throw;
-                }
-                return RedirectToAction(nameof(Index));
+                ViewBag.ErrorMessage = response.Message;
             }
-            return View(cita);
+
+            return View(citaDTO);
         }
 
         // GET: Citas/Delete/5
+        [HttpGet]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null) return NotFound();
 
-            var cita = await _context.Citas
-                .FirstOrDefaultAsync(c => c.CitaId == id);
+            var response = await _citaService.GetOneAsync(id.Value);
+            if (!response.IsSuccess || response.Result == null)
+            {
+                TempData["MensajeError"] = "La cita no fue encontrada.";
+                return RedirectToAction("Index");
+            }
 
-            if (cita == null) return NotFound();
-
-            return View(cita);
+            return View(response.Result);
         }
 
         // POST: Citas/Delete/5
@@ -126,15 +111,17 @@ namespace HankoSpa.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var cita = await _context.Citas.FindAsync(id);
-            if (cita != null)
+            var response = await _citaService.DeleteAsync(id);
+            if (response.IsSuccess)
             {
-                _context.Citas.Remove(cita);
-                await _context.SaveChangesAsync();
-                TempData["MensajeExito"] = "✅ La cita fue eliminada con éxito.";
+                TempData["MensajeExito"] = "Cita eliminada exitosamente.";
+            }
+            else
+            {
+                TempData["MensajeError"] = response.Message;
             }
 
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("Index");
         }
     }
 }

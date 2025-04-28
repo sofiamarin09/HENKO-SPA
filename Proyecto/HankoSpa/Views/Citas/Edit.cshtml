@@ -1,41 +1,46 @@
-﻿@model HankoSpa.Models.Cita
+﻿@model HankoSpa.DTOs.CitaDTO
 
 @{
-    ViewData["Title"] = "Editar Cita";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Editar Cita";
 }
 
-<h2 class="mt-4 mb-3">✏️ Editar Cita</h2>
+<h2>✏️ Editar Cita</h2>
 
-<form asp-action="Edit" method="post">
-    <input type="hidden" asp-for="CitaId" />
-    <input type="hidden" asp-for="UsuarioID" />
+@using (Html.BeginForm("Edit", "Citas", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
 
-    <div class="mb-3">
-        <label asp-for="FechaCita" class="form-label">Fecha</label>
-        <input asp-for="FechaCita" class="form-control" type="date" />
-        <span asp-validation-for="FechaCita" class="text-danger"></span>
+    @Html.HiddenFor(model => model.CitasID)
+
+    <div class="form-horizontal">
+        <div class="form-group mb-3">
+            @Html.LabelFor(model => model.FechaCita, htmlAttributes: new { @class = "form-label" })
+            @Html.TextBoxFor(model => model.FechaCita, new { @class = "form-control", type = "date" })
+            @Html.ValidationMessageFor(model => model.FechaCita, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group mb-3">
+            @Html.LabelFor(model => model.HoraCita, htmlAttributes: new { @class = "form-label" })
+            @Html.TextBoxFor(model => model.HoraCita, new { @class = "form-control", type = "time" })
+            @Html.ValidationMessageFor(model => model.HoraCita, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group mb-3">
+            @Html.LabelFor(model => model.EstadoCita, htmlAttributes: new { @class = "form-label" })
+            @Html.TextBoxFor(model => model.EstadoCita, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.EstadoCita, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group mb-3">
+            @Html.LabelFor(model => model.UsuarioID, htmlAttributes: new { @class = "form-label" })
+            @Html.TextBoxFor(model => model.UsuarioID, new { @class = "form-control", type = "number" })
+            @Html.ValidationMessageFor(model => model.UsuarioID, "", new { @class = "text-danger" })
+        </div>
+
+        <button type="submit" class="btn btn-warning">Guardar cambios</button>
+        <a href="@Url.Action("Index", "Citas")" class="btn btn-secondary ms-2">Cancelar</a>
     </div>
-
-    <div class="mb-3">
-        <label asp-for="HoraCita" class="form-label">Hora</label>
-        <input asp-for="HoraCita" class="form-control" type="time" />
-        <span asp-validation-for="HoraCita" class="text-danger"></span>
-    </div>
-
-    <div class="mb-3">
-        <label asp-for="EstadoCita" class="form-label">Estado</label>
-        <select asp-for="EstadoCita" class="form-select">
-            <option value="Pendiente">Pendiente</option>
-            <option value="Confirmada">Confirmada</option>
-            <option value="Cancelada">Cancelada</option>
-        </select>
-        <span asp-validation-for="EstadoCita" class="text-danger"></span>
-    </div>
-
-    <button type="submit" class="btn btn-primary">💾 Guardar Cambios</button>
-    <a asp-action="Index" class="btn btn-secondary ms-2">Cancelar</a>
-</form>
+}
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />

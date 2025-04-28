@@ -1,4 +1,5 @@
-﻿/*using AutoMapper;
+﻿
+using AutoMapper;
 using HankoSpa.Data;
 using HankoSpa.DTOs;
 using HankoSpa.Models;
@@ -22,13 +23,13 @@ namespace HankoSpa.Services
             _mapper = mapper;
         }
 
-        public async Task<Response<List<CitasDTO>>> GetAllAsync()
+        public async Task<Response<List<CitaDTO>>> GetAllAsync()
         {
-            var response = new Response<List<CitasDTO>>();
+            var response = new Response<List<CitaDTO>>();
             try
             {
                 var citas = await _context.Citas.ToListAsync();
-                var dtoList = _mapper.Map<List<CitasDTO>>(citas);
+                var dtoList = _mapper.Map<List<CitaDTO>>(citas);
                 response.IsSuccess = true;
                 response.Result = dtoList;
                 response.Message = "Citas obtenidas correctamente.";
@@ -43,9 +44,9 @@ namespace HankoSpa.Services
             return response;
         }
 
-        public async Task<Response<CitasDTO>> GetOneAsync(int id)
+        public async Task<Response<CitaDTO>> GetOneAsync(int id)
         {
-            var response = new Response<CitasDTO>();
+            var response = new Response<CitaDTO>();
             try
             {
                 var cita = await _context.Citas.FindAsync(id);
@@ -57,7 +58,7 @@ namespace HankoSpa.Services
                 }
 
                 response.IsSuccess = true;
-                response.Result = _mapper.Map<CitasDTO>(cita);
+                response.Result = _mapper.Map<CitaDTO>(cita);
                 response.Message = "Cita obtenida correctamente.";
             }
             catch (Exception ex)
@@ -70,9 +71,9 @@ namespace HankoSpa.Services
             return response;
         }
 
-        public async Task<Response<CitasDTO>> CreateAsync(CitasDTO dto)
+        public async Task<Response<CitaDTO>> CreateAsync(CitaDTO dto)
         {
-            var response = new Response<CitasDTO>();
+            var response = new Response<CitaDTO>();
             try
             {
                 var cita = _mapper.Map<Cita>(dto);
@@ -80,7 +81,7 @@ namespace HankoSpa.Services
                 await _context.SaveChangesAsync();
 
                 response.IsSuccess = true;
-                response.Result = _mapper.Map<CitasDTO>(cita);
+                response.Result = _mapper.Map<CitaDTO>(cita);
                 response.Message = "Cita creada correctamente.";
             }
             catch (Exception ex)
@@ -93,9 +94,9 @@ namespace HankoSpa.Services
             return response;
         }
 
-        public async Task<Response<CitasDTO>> EditAsync(CitasDTO dto)
+        public async Task<Response<CitaDTO>> EditAsync(CitaDTO dto)
         {
-            var response = new Response<CitasDTO>();
+            var response = new Response<CitaDTO>();
             try
             {
                 var cita = await _context.Citas.FindAsync(dto.CitasID);
@@ -116,7 +117,7 @@ namespace HankoSpa.Services
                 await _context.SaveChangesAsync();
 
                 response.IsSuccess = true;
-                response.Result = _mapper.Map<CitasDTO>(cita);
+                response.Result = _mapper.Map<CitaDTO>(cita);
                 response.Message = "Cita actualizada correctamente.";
             }
             catch (Exception ex)
@@ -159,4 +160,3 @@ namespace HankoSpa.Services
         }
     }
 }
-*/
