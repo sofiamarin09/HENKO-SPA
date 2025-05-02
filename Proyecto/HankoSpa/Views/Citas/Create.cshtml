@@ -25,7 +25,12 @@
 
         <div class="form-group">
             @Html.LabelFor(model => model.EstadoCita)
-            @Html.TextBoxFor(model => model.EstadoCita, new { @class = "form-control" })
+            @Html.DropDownListFor(
+                     model => model.EstadoCita,
+                     new SelectList(new[] { "Pendiente", "Completada", "Cancelada" }),
+                     "Seleccione un estado",
+                     new { @class = "form-control" }
+                     )
             @Html.ValidationMessageFor(model => model.EstadoCita)
         </div>
 

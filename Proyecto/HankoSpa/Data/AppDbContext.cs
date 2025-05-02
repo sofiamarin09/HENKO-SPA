@@ -22,7 +22,7 @@ namespace HankoSpa.Data
             modelBuilder.Entity<CitasServicios>()
                 .HasOne(cs => cs.Cita)
                 .WithMany(c => c.CitasServicios)
-                .HasForeignKey(cs => cs.CitasID);
+                .HasForeignKey(cs => cs.CitaId);
 
             modelBuilder.Entity<CitasServicios>()
                 .HasOne(cs => cs.Servicio)

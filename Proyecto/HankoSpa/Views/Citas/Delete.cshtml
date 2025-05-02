@@ -26,7 +26,7 @@
 @using (Html.BeginForm("Delete", "Citas", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
-    @Html.HiddenFor(model => model.CitasID)
+    @Html.HiddenFor(model => model.CitaId)
 
     <div class="mt-4">
         <button type="submit" class="btn btn-danger">Sí, eliminar</button>

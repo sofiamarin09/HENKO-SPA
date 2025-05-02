@@ -9,7 +9,7 @@ namespace HankoSpa.Models
     public class Cita
     {
         [Key]
-        public int CitaID { get; set; }
+        public int CitaId { get; set; }
 
         [Required(ErrorMessage = "La fecha de la cita es obligatoria")]
         [DataType(DataType.Date)]

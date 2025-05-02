@@ -30,7 +30,7 @@ namespace HankoSpa.Repository
             return await _context.Citas
                 .Include(c => c.CitasServicios) // Incluye la relación con servicios
                 .ThenInclude(cs => cs.Servicio)
-                .FirstOrDefaultAsync(c => c.CitaID == id);
+                .FirstOrDefaultAsync(c => c.CitaId == id);
         }
 
         // Agregar una nueva cita

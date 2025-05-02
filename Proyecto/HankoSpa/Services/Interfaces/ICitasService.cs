@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace HankoSpa.Services.Interfaces
 {
-    public interface ICitasService
+    public interface ICitaServices
     {
         Task<Response<List<CitaDTO>>> GetAllAsync();
         Task<Response<CitaDTO>> GetOneAsync(int id);

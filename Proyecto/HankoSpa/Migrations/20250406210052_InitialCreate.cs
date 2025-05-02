@@ -47,15 +47,15 @@ namespace HankoSpa.Migrations
                 {
                     Citas_ServiciosID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    CitasID = table.Column<int>(type: "int", nullable: false),
+                    CitaId = table.Column<int>(type: "int", nullable: false),
                     ServicioID = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_CitasServicios", x => x.Citas_ServiciosID);
                     table.ForeignKey(
-                        name: "FK_CitasServicios_Citas_CitasID",
-                        column: x => x.CitasID,
+                        name: "FK_CitasServicios_Citas_CitaId",
+                        column: x => x.CitaId,
                         principalTable: "Citas",
                         principalColumn: "CitaId",
                         onDelete: ReferentialAction.Cascade);
@@ -68,9 +68,9 @@ namespace HankoSpa.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_CitasServicios_CitasID",
+                name: "IX_CitasServicios_CitaId",
                 table: "CitasServicios",
-                column: "CitasID");
+                column: "CitaId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_CitasServicios_ServicioID",

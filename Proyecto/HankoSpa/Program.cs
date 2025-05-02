@@ -16,7 +16,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<ICitaRepository, CitaRepository>();
-builder.Services.AddScoped<ICitasService, CitasService>();
+builder.Services.AddScoped<ICitaServices, CitasService>();
 builder.Services.AddScoped<IServicioRepository, ServicioRepository>();
 builder.Services.AddScoped<IServicioServices, ServicioService>();
 builder.Services.AddScoped<IUserRepository, UsersRepository>();

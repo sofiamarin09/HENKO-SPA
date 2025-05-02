@@ -7,7 +7,7 @@ namespace HankoSpa.Models
         [Key]
         public int Citas_ServiciosID { get; set; }
 
-        public int CitasID { get; set; }
+        public int CitaId { get; set; }
         public virtual Cita Cita { get; set; }
 
         public int ServicioID { get; set; }

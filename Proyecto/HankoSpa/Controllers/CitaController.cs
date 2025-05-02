@@ -1,14 +1,15 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using HankoSpa.Services.Interfaces;
 using HankoSpa.DTOs;
+using HankoSpa.Models;
 
 namespace HankoSpa.Controllers
 {
     public class CitasController : Controller
     {
-        private readonly ICitasService _citaService;
+        private readonly ICitaServices _citaService;
 
-        public CitasController(ICitasService citaService)
+        public CitasController(ICitaServices citaService)
         {
             _citaService = citaService;
         }
@@ -21,10 +22,20 @@ namespace HankoSpa.Controllers
             if (!response.IsSuccess)
             {
                 ViewBag.ErrorMessage = response.Message;
-                return View(new List<CitaDTO>());
+                return View(new List<Cita>());
             }
 
-            return View(response.Result);
+            // Convertir CitaDTO a Cita
+            var citas = response.Result.Select(dto => new Cita
+            {
+                CitaId = dto.CitaId,
+                FechaCita = dto.FechaCita,
+                HoraCita = dto.HoraCita,
+                EstadoCita = dto.EstadoCita,
+                UsuarioID = dto.UsuarioID
+            }).ToList();
+
+            return View(citas);
         }
 
         // GET: Citas/Create
@@ -73,7 +84,7 @@ namespace HankoSpa.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, CitaDTO citaDTO)
         {
-            if (id != citaDTO.CitasID) return NotFound();
+            if (id != citaDTO.CitaId) return NotFound();
 
             if (ModelState.IsValid)
             {

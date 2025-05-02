@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace HankoSpa.Services
 {
-    public class CitasService : ICitasService
+    public class CitasService : ICitaServices
     {
         private readonly AppDbContext _context;
         private readonly IMapper _mapper;
@@ -99,7 +99,7 @@ namespace HankoSpa.Services
             var response = new Response<CitaDTO>();
             try
             {
-                var cita = await _context.Citas.FindAsync(dto.CitasID);
+                var cita = await _context.Citas.FindAsync(dto.CitaId);
                 if (cita == null)
                 {
                     response.IsSuccess = false;
@@ -157,6 +157,8 @@ namespace HankoSpa.Services
             }
 
             return response;
+
+
         }
     }
 }
