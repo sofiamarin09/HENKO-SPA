@@ -1,0 +1,46 @@
+﻿@model HankoSpa.DTOs.CitaDTO
+
+@{
+    ViewBag.Title = "Crear Cita";
+}
+
+<h2>✍️ Crear Cita</h2>
+
+@using (Html.BeginForm("Create", "Citas", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <div class="form-group">
+            @Html.LabelFor(model => model.FechaCita)
+            @Html.TextBoxFor(model => model.FechaCita, new { @class = "form-control", type = "date" })
+            @Html.ValidationMessageFor(model => model.FechaCita)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.HoraCita)
+            @Html.TextBoxFor(model => model.HoraCita, new { @class = "form-control", type = "time" })
+            @Html.ValidationMessageFor(model => model.HoraCita)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.EstadoCita)
+            @Html.DropDownListFor(
+                     model => model.EstadoCita,
+                     new SelectList(new[] { "Pendiente", "Completada", "Cancelada" }),
+                     "Seleccione un estado",
+                     new { @class = "form-control" }
+                     )
+            @Html.ValidationMessageFor(model => model.EstadoCita)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.UsuarioID)
+            @Html.TextBoxFor(model => model.UsuarioID, new { @class = "form-control", type = "number" })
+            @Html.ValidationMessageFor(model => model.UsuarioID)
+        </div>
+
+        <button type="submit" class="btn btn-success">Guardar</button>
+        <a href="@Url.Action("Index", "Citas")" class="btn btn-secondary">Cancelar</a>
+    </div>
+}
