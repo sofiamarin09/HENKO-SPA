@@ -19,8 +19,7 @@ namespace HankoSpa.Repository
         public async Task<List<Cita>> GetAllAsync()
         {
             return await _context.Citas
-                .Include(c => c.CitasServicios) // Incluye la relación con servicios
-                .ThenInclude(cs => cs.Servicio)
+                .Include(c => c.Servicio) // Incluye la relación con el servicio
                 .ToListAsync();
         }
 
@@ -28,9 +27,8 @@ namespace HankoSpa.Repository
         public async Task<Cita?> GetByIdAsync(int id)
         {
             return await _context.Citas
-                .Include(c => c.CitasServicios) // Incluye la relación con servicios
-                .ThenInclude(cs => cs.Servicio)
-                .FirstOrDefaultAsync(c => c.CitaId == id);
+            .Include(c => c.Servicio) // Incluye la relación con el servicio
+            .FirstOrDefaultAsync(c => c.CitaId == id);
         }
 
         // Agregar una nueva cita

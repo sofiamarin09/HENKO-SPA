@@ -14,25 +14,22 @@ namespace HankoSpa.Data
 
         public DbSet<Cita> Citas { get; set; }
         public DbSet<Servicio> Servicios { get; set; }
-        public DbSet<CitasServicios> CitasServicios { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            modelBuilder.Entity<CitasServicios>()
-                .HasOne(cs => cs.Cita)
-                .WithMany(c => c.CitasServicios)
-                .HasForeignKey(cs => cs.CitaId);
 
-            modelBuilder.Entity<CitasServicios>()
-                .HasOne(cs => cs.Servicio)
-                .WithMany(s => s.CitasServicios)
-                .HasForeignKey(cs => cs.ServicioID);
+
+            // Relacion entre Cita y Servicio
+            modelBuilder.Entity<Cita>()
+                .HasOne(c => c.Servicio) // Cita tiene un Servicio
+                .WithMany(s => s.Citas) // Servicio tiene muchas Citas
+                .HasForeignKey(c => c.ServicioID); // Clave foranea
 
             modelBuilder.Entity<Cita>()
                 .HasOne(c => c.User) // Cita tiene un User
                 .WithMany(u => u.Citas) // User tiene muchas Citas
-                .HasForeignKey(c => c.UsuarioID); // Clave foránea
+                .HasForeignKey(c => c.UsuarioID); // Clave forï¿½nea
 
             DisableCascadingDelete(modelBuilder);
         }
