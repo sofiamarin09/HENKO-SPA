@@ -13,11 +13,12 @@ namespace HankoSpa.Models
         public string NombreServicio { get; set; }
 
 
-        [Required(ErrorMessage = "La descripción del servicio es obligatorio")]
+        [Required(ErrorMessage = "La descripciï¿½n del servicio es obligatorio")]
         [StringLength(500)]
         public string DescripcionServicio { get; set; }
 
-        public virtual ICollection<CitasServicios> CitasServicios { get; set; }
+        //navegador de citas
+        public virtual ICollection<Cita> Citas { get; set; }
 
     }
 }
