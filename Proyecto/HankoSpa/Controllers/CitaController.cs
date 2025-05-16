@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using HankoSpa.Services.Interfaces;
 using HankoSpa.DTOs;
 using HankoSpa.Models;
@@ -8,10 +9,12 @@ namespace HankoSpa.Controllers
     public class CitasController : Controller
     {
         private readonly ICitaServices _citaService;
+        private readonly IServicioServices _servicioService;
 
-        public CitasController(ICitaServices citaService)
+        public CitasController(ICitaServices citaService, IServicioServices servicioService)
         {
             _citaService = citaService;
+            _servicioService = servicioService;
         }
 
         // GET: Citas
@@ -25,7 +28,6 @@ namespace HankoSpa.Controllers
                 return View(new List<Cita>());
             }
 
-            // Convertir CitaDTO a Cita
             var citas = response.Result.Select(dto => new Cita
             {
                 CitaId = dto.CitaId,
@@ -39,8 +41,9 @@ namespace HankoSpa.Controllers
         }
 
         // GET: Citas/Create
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
+            await CargarServiciosAsync();
             return View();
         }
 
@@ -62,6 +65,7 @@ namespace HankoSpa.Controllers
                 ViewBag.ErrorMessage = response.Message;
             }
 
+            await CargarServiciosAsync(citaDTO.ServiciosSeleccionados);
             return View(citaDTO);
         }
 
@@ -76,6 +80,7 @@ namespace HankoSpa.Controllers
                 return RedirectToAction("Index");
             }
 
+            await CargarServiciosAsync(response.Result.ServiciosSeleccionados);
             return View(response.Result);
         }
 
@@ -98,6 +103,7 @@ namespace HankoSpa.Controllers
                 ViewBag.ErrorMessage = response.Message;
             }
 
+            await CargarServiciosAsync(citaDTO.ServiciosSeleccionados);
             return View(citaDTO);
         }
 
@@ -133,6 +139,13 @@ namespace HankoSpa.Controllers
             }
 
             return RedirectToAction("Index");
+        }
+
+        // Método auxiliar para cargar servicios
+        private async Task CargarServiciosAsync(List<int>? seleccionados = null)
+        {
+            var servicios = await _servicioService.GetAllAsync();
+            ViewBag.Servicios = new MultiSelectList(servicios.Result, "ServicioId", "NombreServicio", seleccionados);
         }
     }
 }
