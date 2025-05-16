@@ -34,7 +34,8 @@ namespace HankoSpa.Controllers
                 FechaCita = dto.FechaCita,
                 HoraCita = dto.HoraCita,
                 EstadoCita = dto.EstadoCita,
-                UsuarioID = dto.UsuarioID
+                UsuarioID = dto.UsuarioID,
+                ServicioID = dto.ServicioID
             }).ToList();
 
             return View(citas);
@@ -65,7 +66,7 @@ namespace HankoSpa.Controllers
                 ViewBag.ErrorMessage = response.Message;
             }
 
-            await CargarServiciosAsync(citaDTO.ServiciosSeleccionados);
+            await CargarServiciosAsync(citaDTO.ServicioID);
             return View(citaDTO);
         }
 
@@ -80,7 +81,7 @@ namespace HankoSpa.Controllers
                 return RedirectToAction("Index");
             }
 
-            await CargarServiciosAsync(response.Result.ServiciosSeleccionados);
+            await CargarServiciosAsync(response.Result.ServicioID);
             return View(response.Result);
         }
 
@@ -103,7 +104,7 @@ namespace HankoSpa.Controllers
                 ViewBag.ErrorMessage = response.Message;
             }
 
-            await CargarServiciosAsync(citaDTO.ServiciosSeleccionados);
+            await CargarServiciosAsync(citaDTO.ServicioID);
             return View(citaDTO);
         }
 
@@ -142,10 +143,10 @@ namespace HankoSpa.Controllers
         }
 
         // Método auxiliar para cargar servicios
-        private async Task CargarServiciosAsync(List<int>? seleccionados = null)
+        private async Task CargarServiciosAsync(int? seleccionado = null)
         {
             var servicios = await _servicioService.GetAllAsync();
-            ViewBag.Servicios = new MultiSelectList(servicios.Result, "ServicioId", "NombreServicio", seleccionados);
+            ViewBag.Servicios = new SelectList(servicios.Result, "ServicioId", "NombreServicio", seleccionado);
         }
     }
 }
