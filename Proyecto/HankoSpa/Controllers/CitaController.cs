@@ -48,6 +48,21 @@ namespace HankoSpa.Controllers
             return View();
         }
 
+        // GET: Citas/Details/5
+        [HttpGet]
+        public async Task<IActionResult> Details(int id)
+        {
+            var response = await _citaService.GetOneAsync(id);
+            if (!response.IsSuccess || response.Result == null)
+            {
+                TempData["MensajeError"] = "La cita no fue encontrada.";
+                return RedirectToAction("Index");
+            }
+
+            return View(response.Result);
+        }
+                
+
         // POST: Citas/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
