@@ -6,24 +6,21 @@ namespace HankoSpa.Models
     public class User : IdentityUser
     {
         [Display(Name = "FirstName")]
-        [Required(ErrorMessageResourceName = "RequiredField")]
+        [Required(ErrorMessage = "El nombre es obligatorio")]
         public string FirstName { get; set; } = null!;
 
         [Display(Name = "LastName")]
-        [Required(ErrorMessageResourceName = "RequiredField")]
+        [Required(ErrorMessage = "El apellido es obligatorio")]
         public string LastName { get; set; } = null!;
-
-        [Display(Name = "UserType")]
-        public UserType UserType { get; set; }
 
         [Display(Name = "User")]
         public string FullName => $"{FirstName} {LastName}";
+
+        [Display(Name = "Document")]
+        [Required(ErrorMessage = "El documento es obligatorio")]
+        public string Document { get; set; } = null!;
+
         public virtual ICollection<Cita>? Citas { get; set; }
-    }
-    public enum UserType
-    {
-        Cliente,
-        Profesional,
-        Administrador
+
     }
 }

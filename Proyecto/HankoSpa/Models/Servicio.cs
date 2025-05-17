@@ -12,8 +12,7 @@ namespace HankoSpa.Models
         [StringLength(100)]
         public string NombreServicio { get; set; }
 
-
-        [Required(ErrorMessage = "La descripci�n del servicio es obligatorio")]
+        [Required(ErrorMessage = "La descripcion del servicio es obligatorio")]
         [StringLength(500)]
         public string DescripcionServicio { get; set; }
 

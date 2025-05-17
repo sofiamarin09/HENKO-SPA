@@ -35,7 +35,7 @@ namespace HankoSpa.Controllers
                 HoraCita = dto.HoraCita,
                 EstadoCita = dto.EstadoCita,
                 UsuarioID = dto.UsuarioID,
-                ServicioID = dto.ServicioID
+                ServicioId = dto.ServicioID
             }).ToList();
 
             return View(citas);

@@ -24,7 +24,7 @@ namespace HankoSpa.Data
             modelBuilder.Entity<Cita>()
                 .HasOne(c => c.Servicio) // Cita tiene un Servicio
                 .WithMany(s => s.Citas) // Servicio tiene muchas Citas
-                .HasForeignKey(c => c.ServicioID); // Clave foranea
+                .HasForeignKey(c => c.ServicioId); // Clave foranea
 
             modelBuilder.Entity<Cita>()
                 .HasOne(c => c.User) // Cita tiene un User

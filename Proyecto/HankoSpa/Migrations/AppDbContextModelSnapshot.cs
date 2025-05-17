@@ -40,7 +40,7 @@ namespace HankoSpa.Migrations
                     b.Property<TimeSpan>("HoraCita")
                         .HasColumnType("time");
 
-                    b.Property<int>("ServicioID")
+                    b.Property<int>("ServicioId")
                         .HasColumnType("int");
 
                     b.Property<string>("UsuarioID")
@@ -48,7 +48,7 @@ namespace HankoSpa.Migrations
 
                     b.HasKey("CitaId");
 
-                    b.HasIndex("ServicioID");
+                    b.HasIndex("ServicioId");
 
                     b.HasIndex("UsuarioID");
 
@@ -88,6 +88,10 @@ namespace HankoSpa.Migrations
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Document")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
@@ -137,9 +141,6 @@ namespace HankoSpa.Migrations
                     b.Property<string>("UserName")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
-
-                    b.Property<int>("UserType")
-                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -291,7 +292,7 @@ namespace HankoSpa.Migrations
                 {
                     b.HasOne("HankoSpa.Models.Servicio", "Servicio")
                         .WithMany("Citas")
-                        .HasForeignKey("ServicioID")
+                        .HasForeignKey("ServicioId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
