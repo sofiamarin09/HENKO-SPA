@@ -157,8 +157,6 @@ namespace HankoSpa.Services
             }
 
             return response;
-
-
         }
     }
 }

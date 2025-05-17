@@ -6,27 +6,11 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace HankoSpa.Migrations
 {
     /// <inheritdoc />
-    public partial class addUser : Migration
+    public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropForeignKey(
-                name: "FK_CitasServicios_Citas_CitasID",
-                table: "CitasServicios");
-
-            migrationBuilder.DropForeignKey(
-                name: "FK_CitasServicios_Servicios_ServicioID",
-                table: "CitasServicios");
-
-            migrationBuilder.AlterColumn<string>(
-                name: "UsuarioID",
-                table: "Citas",
-                type: "nvarchar(450)",
-                nullable: true,
-                oldClrType: typeof(int),
-                oldType: "int");
-
             migrationBuilder.CreateTable(
                 name: "AspNetRoles",
                 columns: table => new
@@ -48,7 +32,7 @@ namespace HankoSpa.Migrations
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     FirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    UserType = table.Column<int>(type: "int", nullable: false),
+                    Document = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -67,6 +51,20 @@ namespace HankoSpa.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Servicios",
+                columns: table => new
+                {
+                    ServicioId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    NombreServicio = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    DescripcionServicio = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Servicios", x => x.ServicioId);
                 });
 
             migrationBuilder.CreateTable(
@@ -175,10 +173,34 @@ namespace HankoSpa.Migrations
                         onDelete: ReferentialAction.Restrict);
                 });
 
-            migrationBuilder.CreateIndex(
-                name: "IX_Citas_UsuarioID",
-                table: "Citas",
-                column: "UsuarioID");
+            migrationBuilder.CreateTable(
+                name: "Citas",
+                columns: table => new
+                {
+                    CitaId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    FechaCita = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    HoraCita = table.Column<TimeSpan>(type: "time", nullable: false),
+                    EstadoCita = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    UsuarioID = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    ServicioId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Citas", x => x.CitaId);
+                    table.ForeignKey(
+                        name: "FK_Citas_AspNetUsers_UsuarioID",
+                        column: x => x.UsuarioID,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Citas_Servicios_ServicioId",
+                        column: x => x.ServicioId,
+                        principalTable: "Servicios",
+                        principalColumn: "ServicioId",
+                        onDelete: ReferentialAction.Restrict);
+                });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -219,46 +241,20 @@ namespace HankoSpa.Migrations
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
 
-            migrationBuilder.AddForeignKey(
-                name: "FK_Citas_AspNetUsers_UsuarioID",
+            migrationBuilder.CreateIndex(
+                name: "IX_Citas_ServicioId",
                 table: "Citas",
-                column: "UsuarioID",
-                principalTable: "AspNetUsers",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Restrict);
+                column: "ServicioId");
 
-            migrationBuilder.AddForeignKey(
-                name: "FK_CitasServicios_Citas_CitasID",
-                table: "CitasServicios",
-                column: "CitasID",
-                principalTable: "Citas",
-                principalColumn: "CitaId",
-                onDelete: ReferentialAction.Restrict);
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_CitasServicios_Servicios_ServicioID",
-                table: "CitasServicios",
-                column: "ServicioID",
-                principalTable: "Servicios",
-                principalColumn: "ServicioId",
-                onDelete: ReferentialAction.Restrict);
+            migrationBuilder.CreateIndex(
+                name: "IX_Citas_UsuarioID",
+                table: "Citas",
+                column: "UsuarioID");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropForeignKey(
-                name: "FK_Citas_AspNetUsers_UsuarioID",
-                table: "Citas");
-
-            migrationBuilder.DropForeignKey(
-                name: "FK_CitasServicios_Citas_CitasID",
-                table: "CitasServicios");
-
-            migrationBuilder.DropForeignKey(
-                name: "FK_CitasServicios_Servicios_ServicioID",
-                table: "CitasServicios");
-
             migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
 
@@ -275,40 +271,16 @@ namespace HankoSpa.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "Citas");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
 
-            migrationBuilder.DropIndex(
-                name: "IX_Citas_UsuarioID",
-                table: "Citas");
-
-            migrationBuilder.AlterColumn<int>(
-                name: "UsuarioID",
-                table: "Citas",
-                type: "int",
-                nullable: false,
-                defaultValue: 0,
-                oldClrType: typeof(string),
-                oldType: "nvarchar(450)",
-                oldNullable: true);
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_CitasServicios_Citas_CitasID",
-                table: "CitasServicios",
-                column: "CitasID",
-                principalTable: "Citas",
-                principalColumn: "CitaId",
-                onDelete: ReferentialAction.Cascade);
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_CitasServicios_Servicios_ServicioID",
-                table: "CitasServicios",
-                column: "ServicioID",
-                principalTable: "Servicios",
-                principalColumn: "ServicioId",
-                onDelete: ReferentialAction.Cascade);
+            migrationBuilder.DropTable(
+                name: "Servicios");
         }
     }
 }

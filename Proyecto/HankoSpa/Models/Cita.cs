@@ -29,7 +29,7 @@ namespace HankoSpa.Models
 
         //relacion 1:n con servicio
 
-        public int ServicioID { get; set; }
+        public int ServicioId { get; set; }
         public virtual Servicio Servicio { get; set; }
 
     }
