@@ -19,6 +19,8 @@ builder.Services.AddScoped<IServicioRepository, ServicioRepository>();
 builder.Services.AddScoped<IServicioServices, ServicioService>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<ICustomRolRepository, CustomRolRepository>();
+builder.Services.AddScoped<ICustomRolService, CustomRolService>();
 builder.Services.AddAutoMapper(typeof(AutoMapperProfile));
 
 builder.Services.AddIdentity<User, IdentityRole>(x =>

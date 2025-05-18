@@ -1,8 +1,6 @@
 using HankoSpa.Data;
 using HankoSpa.Models;
 using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace HankoSpa.Repository
 {
