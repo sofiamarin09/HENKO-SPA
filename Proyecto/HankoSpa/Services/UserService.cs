@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Identity;
 using HankoSpa.Services.Interfaces;
 using System.Threading.Tasks;
 using System.Collections.Generic;
+using HankoSpa.Nucleo;
 
 namespace HankoSpa.Services
 {
@@ -15,9 +16,11 @@ namespace HankoSpa.Services
     {
         private readonly IUserRepository _userRepository;
         private readonly IMapper _mapper;
+        private readonly ICustomRolService _customRolSerivce;
 
-        public UserService(IUserRepository userRepository, IMapper mapper)
+        public UserService(IUserRepository userRepository, IMapper mapper, ICustomRolService customRolSerivce)
         {
+            _customRolSerivce = customRolSerivce;
             _userRepository = userRepository;
             _mapper = mapper;
         }
@@ -87,6 +90,12 @@ namespace HankoSpa.Services
             if (user == null) return false;
 
             return await _userRepository.AssignCustomRoleAsync(user, customRolId);
+        }
+
+        public async Task<List<CustomRolDTO>> GetAllRolesAsync()
+        {
+            var response = await _customRolSerivce.GetAllAsync();
+            return response.Result ?? new List<CustomRolDTO>();
         }
 
     }

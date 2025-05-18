@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using HankoSpa.Models;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace HankoSpa.DTOs
 {
@@ -41,6 +42,7 @@ namespace HankoSpa.DTOs
 
         public ICollection<Cita>? Citas { get; set; }
 
+        public IEnumerable<SelectListItem> CustomRoles { get; set; }
 
     }
 }
