@@ -37,7 +37,7 @@ namespace HankoSpa.DTOs
         [Required(ErrorMessage = "El campo '{0}' es requerido.")]
         public int CustomRolId { get; set; }
 
-        public CustomRol? CustomRol { get; set; }
+        public string? CustomRol { get; set; }
 
         public ICollection<Cita>? Citas { get; set; }
 

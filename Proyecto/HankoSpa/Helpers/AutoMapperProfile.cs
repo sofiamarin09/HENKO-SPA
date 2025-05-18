@@ -10,6 +10,12 @@ namespace HankoSpa.Helpers
         {
             CreateMap<Servicio, ServiceDTO>().ReverseMap();
             CreateMap<Cita, CitaDTO>().ReverseMap();
+            CreateMap<User, UserDTO>()
+                .ForMember(dest => dest.CustomRolId, opt => opt.MapFrom(src => src.CustomRolId))
+                .ForMember(dest => dest.CustomRol, opt => opt.MapFrom(src => src.CustomRol.NombreRol))
+                .ReverseMap()
+                .ForMember(dest => dest.CustomRol, opt => opt.Ignore());
+
         }
 
     }
