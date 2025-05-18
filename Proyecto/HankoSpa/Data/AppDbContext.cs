@@ -14,6 +14,9 @@ namespace HankoSpa.Data
 
         public DbSet<Cita> Citas { get; set; }
         public DbSet<Servicio> Servicios { get; set; }
+        public DbSet<Rol> CustomRoles { get; set; }
+        public DbSet<RolPermission> RolPermissions { get; set; }
+        public DbSet<Permission> Permissions { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -26,10 +29,33 @@ namespace HankoSpa.Data
                 .WithMany(s => s.Citas) // Servicio tiene muchas Citas
                 .HasForeignKey(c => c.ServicioId); // Clave foranea
 
+            // Relacion entre Cita y User
             modelBuilder.Entity<Cita>()
                 .HasOne(c => c.User) // Cita tiene un User
                 .WithMany(u => u.Citas) // User tiene muchas Citas
                 .HasForeignKey(c => c.UsuarioID); // Clave for�nea
+
+            // Relacion entre Rol y User
+            modelBuilder.Entity<User>()
+                .HasOne(u => u.Rol) // User tiene un Rol
+                .WithMany(r => r.Usuarios) // Rol tiene muchos Users
+                .HasForeignKey(u => u.RolId); // Clave foranea
+
+            // Relacion entre Rol y RolPermission
+            modelBuilder.Entity<RolPermission>()
+                .HasKey(rp => new { rp.RolId, rp.PermissionId }); // Clave compuesta
+
+            // Relacion entre RolPermission y Rol
+            modelBuilder.Entity<RolPermission>()
+                .HasOne(rp => rp.Rol) // RolPermission tiene un Rol
+                .WithMany(r => r.RolPermissions) // Rol tiene muchas RolPermissions
+                .HasForeignKey(rp => rp.RolId); // Clave foránea
+
+            // Relacion entre RolPermission y Permission
+            modelBuilder.Entity<RolPermission>()
+                .HasOne(rp => rp.Permission) // RolPermission tiene un Permission
+                .WithMany(p => p.RolPermissions) // Permission tiene muchas RolPermissions
+                .HasForeignKey(rp => rp.PermissionId); // Clave foránea
 
             DisableCascadingDelete(modelBuilder);
         }

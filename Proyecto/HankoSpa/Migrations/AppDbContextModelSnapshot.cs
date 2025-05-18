@@ -55,6 +55,61 @@ namespace HankoSpa.Migrations
                     b.ToTable("Citas");
                 });
 
+            modelBuilder.Entity("HankoSpa.Models.Permission", b =>
+                {
+                    b.Property<int>("PermisoId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PermisoId"));
+
+                    b.Property<string>("Module")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NombrePermiso")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.HasKey("PermisoId");
+
+                    b.ToTable("Permissions");
+                });
+
+            modelBuilder.Entity("HankoSpa.Models.Rol", b =>
+                {
+                    b.Property<int>("RolId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RolId"));
+
+                    b.Property<string>("NombreRol")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.HasKey("RolId");
+
+                    b.ToTable("CustomRoles");
+                });
+
+            modelBuilder.Entity("HankoSpa.Models.RolPermission", b =>
+                {
+                    b.Property<int>("RolId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PermissionId")
+                        .HasColumnType("int");
+
+                    b.HasKey("RolId", "PermissionId");
+
+                    b.HasIndex("PermissionId");
+
+                    b.ToTable("RolPermissions");
+                });
+
             modelBuilder.Entity("HankoSpa.Models.Servicio", b =>
                 {
                     b.Property<int>("ServicioId")
@@ -132,6 +187,9 @@ namespace HankoSpa.Migrations
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
 
+                    b.Property<int>("RolId")
+                        .HasColumnType("int");
+
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
 
@@ -151,6 +209,8 @@ namespace HankoSpa.Migrations
                         .IsUnique()
                         .HasDatabaseName("UserNameIndex")
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
+
+                    b.HasIndex("RolId");
 
                     b.ToTable("AspNetUsers", (string)null);
                 });
@@ -306,6 +366,36 @@ namespace HankoSpa.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("HankoSpa.Models.RolPermission", b =>
+                {
+                    b.HasOne("HankoSpa.Models.Permission", "Permission")
+                        .WithMany("RolPermissions")
+                        .HasForeignKey("PermissionId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("HankoSpa.Models.Rol", "Rol")
+                        .WithMany("RolPermissions")
+                        .HasForeignKey("RolId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Permission");
+
+                    b.Navigation("Rol");
+                });
+
+            modelBuilder.Entity("HankoSpa.Models.User", b =>
+                {
+                    b.HasOne("HankoSpa.Models.Rol", "Rol")
+                        .WithMany("Usuarios")
+                        .HasForeignKey("RolId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Rol");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -355,6 +445,18 @@ namespace HankoSpa.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("HankoSpa.Models.Permission", b =>
+                {
+                    b.Navigation("RolPermissions");
+                });
+
+            modelBuilder.Entity("HankoSpa.Models.Rol", b =>
+                {
+                    b.Navigation("RolPermissions");
+
+                    b.Navigation("Usuarios");
                 });
 
             modelBuilder.Entity("HankoSpa.Models.Servicio", b =>
