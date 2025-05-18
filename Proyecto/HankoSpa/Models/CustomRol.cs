@@ -4,10 +4,10 @@ using System.ComponentModel.DataAnnotations;
 
 namespace HankoSpa.Models
 {
-    public class Rol
+    public class CustomRol
     {
         [Key]
-        public int RolId { get; set; }
+        public int CustomRolId { get; set; }
 
         [Required(ErrorMessage = "El nombre del rol es obligatorio")]
         [StringLength(50)]

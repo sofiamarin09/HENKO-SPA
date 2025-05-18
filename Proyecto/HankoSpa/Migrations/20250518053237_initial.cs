@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace HankoSpa.Migrations
 {
     /// <inheritdoc />
-    public partial class Inicial : Migration
+    public partial class initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -29,13 +29,13 @@ namespace HankoSpa.Migrations
                 name: "CustomRoles",
                 columns: table => new
                 {
-                    RolId = table.Column<int>(type: "int", nullable: false)
+                    CustomRolId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     NombreRol = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CustomRoles", x => x.RolId);
+                    table.PrimaryKey("PK_CustomRoles", x => x.CustomRolId);
                 });
 
             migrationBuilder.CreateTable(
@@ -95,7 +95,7 @@ namespace HankoSpa.Migrations
                     FirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Document = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    RolId = table.Column<int>(type: "int", nullable: false),
+                    CustomRolId = table.Column<int>(type: "int", nullable: false),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -115,10 +115,10 @@ namespace HankoSpa.Migrations
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_AspNetUsers_CustomRoles_RolId",
-                        column: x => x.RolId,
+                        name: "FK_AspNetUsers_CustomRoles_CustomRolId",
+                        column: x => x.CustomRolId,
                         principalTable: "CustomRoles",
-                        principalColumn: "RolId",
+                        principalColumn: "CustomRolId",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -126,17 +126,17 @@ namespace HankoSpa.Migrations
                 name: "RolPermissions",
                 columns: table => new
                 {
-                    RolId = table.Column<int>(type: "int", nullable: false),
+                    CustomRolId = table.Column<int>(type: "int", nullable: false),
                     PermissionId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_RolPermissions", x => new { x.RolId, x.PermissionId });
+                    table.PrimaryKey("PK_RolPermissions", x => new { x.CustomRolId, x.PermissionId });
                     table.ForeignKey(
-                        name: "FK_RolPermissions_CustomRoles_RolId",
-                        column: x => x.RolId,
+                        name: "FK_RolPermissions_CustomRoles_CustomRolId",
+                        column: x => x.CustomRolId,
                         principalTable: "CustomRoles",
-                        principalColumn: "RolId",
+                        principalColumn: "CustomRolId",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_RolPermissions_Permissions_PermissionId",
@@ -293,9 +293,9 @@ namespace HankoSpa.Migrations
                 column: "NormalizedEmail");
 
             migrationBuilder.CreateIndex(
-                name: "IX_AspNetUsers_RolId",
+                name: "IX_AspNetUsers_CustomRolId",
                 table: "AspNetUsers",
-                column: "RolId");
+                column: "CustomRolId");
 
             migrationBuilder.CreateIndex(
                 name: "UserNameIndex",
