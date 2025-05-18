@@ -2,6 +2,7 @@ using System.ComponentModel.DataAnnotations;
 using HankoSpa.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
+
 namespace HankoSpa.DTOs
 {
     public class UserDTO
@@ -18,6 +19,8 @@ namespace HankoSpa.DTOs
 
         [Display(Name = "Nombre completo")]
         public string FullName => $"{FirstName} {LastName}";
+
+        public string UserName => $"{FirstName}{LastName}".ToLower();
 
         [Display(Name = "Documento")]
         [Required(ErrorMessage = "El documento es obligatorio")]

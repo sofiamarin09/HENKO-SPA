@@ -42,6 +42,7 @@ namespace HankoSpa.Services
 
         public async Task<IdentityResult> CreateUserAsync(UserDTO userDto, string password)
         {
+            userDto.Id = Guid.NewGuid().ToString();
             var user = _mapper.Map<User>(userDto);
             var result = await _userRepository.AddUserAsync(user, password);
             if (!result.Succeeded) return result;
