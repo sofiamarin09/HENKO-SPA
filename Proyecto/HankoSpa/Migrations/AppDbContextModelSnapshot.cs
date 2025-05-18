@@ -55,6 +55,24 @@ namespace HankoSpa.Migrations
                     b.ToTable("Citas");
                 });
 
+            modelBuilder.Entity("HankoSpa.Models.CustomRol", b =>
+                {
+                    b.Property<int>("CustomRolId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CustomRolId"));
+
+                    b.Property<string>("NombreRol")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.HasKey("CustomRolId");
+
+                    b.ToTable("CustomRoles");
+                });
+
             modelBuilder.Entity("HankoSpa.Models.Permission", b =>
                 {
                     b.Property<int>("PermisoId")
@@ -77,33 +95,15 @@ namespace HankoSpa.Migrations
                     b.ToTable("Permissions");
                 });
 
-            modelBuilder.Entity("HankoSpa.Models.Rol", b =>
-                {
-                    b.Property<int>("RolId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RolId"));
-
-                    b.Property<string>("NombreRol")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.HasKey("RolId");
-
-                    b.ToTable("CustomRoles");
-                });
-
             modelBuilder.Entity("HankoSpa.Models.RolPermission", b =>
                 {
-                    b.Property<int>("RolId")
+                    b.Property<int>("CustomRolId")
                         .HasColumnType("int");
 
                     b.Property<int>("PermissionId")
                         .HasColumnType("int");
 
-                    b.HasKey("RolId", "PermissionId");
+                    b.HasKey("CustomRolId", "PermissionId");
 
                     b.HasIndex("PermissionId");
 
@@ -144,6 +144,9 @@ namespace HankoSpa.Migrations
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("CustomRolId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Document")
                         .IsRequired()
@@ -187,9 +190,6 @@ namespace HankoSpa.Migrations
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
 
-                    b.Property<int>("RolId")
-                        .HasColumnType("int");
-
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
 
@@ -202,6 +202,8 @@ namespace HankoSpa.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CustomRolId");
+
                     b.HasIndex("NormalizedEmail")
                         .HasDatabaseName("EmailIndex");
 
@@ -209,8 +211,6 @@ namespace HankoSpa.Migrations
                         .IsUnique()
                         .HasDatabaseName("UserNameIndex")
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
-
-                    b.HasIndex("RolId");
 
                     b.ToTable("AspNetUsers", (string)null);
                 });
@@ -368,32 +368,32 @@ namespace HankoSpa.Migrations
 
             modelBuilder.Entity("HankoSpa.Models.RolPermission", b =>
                 {
+                    b.HasOne("HankoSpa.Models.CustomRol", "CustomRol")
+                        .WithMany("RolPermissions")
+                        .HasForeignKey("CustomRolId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
                     b.HasOne("HankoSpa.Models.Permission", "Permission")
                         .WithMany("RolPermissions")
                         .HasForeignKey("PermissionId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("HankoSpa.Models.Rol", "Rol")
-                        .WithMany("RolPermissions")
-                        .HasForeignKey("RolId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                    b.Navigation("CustomRol");
 
                     b.Navigation("Permission");
-
-                    b.Navigation("Rol");
                 });
 
             modelBuilder.Entity("HankoSpa.Models.User", b =>
                 {
-                    b.HasOne("HankoSpa.Models.Rol", "Rol")
+                    b.HasOne("HankoSpa.Models.CustomRol", "CustomRol")
                         .WithMany("Usuarios")
-                        .HasForeignKey("RolId")
+                        .HasForeignKey("CustomRolId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.Navigation("Rol");
+                    b.Navigation("CustomRol");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -447,16 +447,16 @@ namespace HankoSpa.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("HankoSpa.Models.Permission", b =>
-                {
-                    b.Navigation("RolPermissions");
-                });
-
-            modelBuilder.Entity("HankoSpa.Models.Rol", b =>
+            modelBuilder.Entity("HankoSpa.Models.CustomRol", b =>
                 {
                     b.Navigation("RolPermissions");
 
                     b.Navigation("Usuarios");
+                });
+
+            modelBuilder.Entity("HankoSpa.Models.Permission", b =>
+                {
+                    b.Navigation("RolPermissions");
                 });
 
             modelBuilder.Entity("HankoSpa.Models.Servicio", b =>

@@ -14,7 +14,7 @@ namespace HankoSpa.Data
 
         public DbSet<Cita> Citas { get; set; }
         public DbSet<Servicio> Servicios { get; set; }
-        public DbSet<Rol> CustomRoles { get; set; }
+        public DbSet<CustomRol> CustomRoles { get; set; }
         public DbSet<RolPermission> RolPermissions { get; set; }
         public DbSet<Permission> Permissions { get; set; }
 
@@ -37,19 +37,19 @@ namespace HankoSpa.Data
 
             // Relacion entre Rol y User
             modelBuilder.Entity<User>()
-                .HasOne(u => u.Rol) // User tiene un Rol
+                .HasOne(u => u.CustomRol) // User tiene un Rol
                 .WithMany(r => r.Usuarios) // Rol tiene muchos Users
-                .HasForeignKey(u => u.RolId); // Clave foranea
+                .HasForeignKey(u => u.CustomRolId); // Clave foranea
 
             // Relacion entre Rol y RolPermission
             modelBuilder.Entity<RolPermission>()
-                .HasKey(rp => new { rp.RolId, rp.PermissionId }); // Clave compuesta
+                .HasKey(rp => new { rp.CustomRolId, rp.PermissionId }); // Clave compuesta
 
             // Relacion entre RolPermission y Rol
             modelBuilder.Entity<RolPermission>()
-                .HasOne(rp => rp.Rol) // RolPermission tiene un Rol
+                .HasOne(rp => rp.CustomRol) // RolPermission tiene un Rol
                 .WithMany(r => r.RolPermissions) // Rol tiene muchas RolPermissions
-                .HasForeignKey(rp => rp.RolId); // Clave foránea
+                .HasForeignKey(rp => rp.CustomRolId); // Clave foránea
 
             // Relacion entre RolPermission y Permission
             modelBuilder.Entity<RolPermission>()

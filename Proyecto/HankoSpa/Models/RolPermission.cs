@@ -6,8 +6,8 @@ namespace HankoSpa.Models
 {
     public class RolPermission
     {
-        public int RolId { get; set; }
-        public Rol Rol { get; set; }
+        public int CustomRolId { get; set; }
+        public CustomRol CustomRol { get; set; }
 
         public int PermissionId { get; set; }
         public Permission Permission { get; set; }
