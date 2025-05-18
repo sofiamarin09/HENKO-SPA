@@ -40,6 +40,27 @@ namespace HankoSpa.Controllers
             return View(model);
         }
 
+        // Get: User/Edit/5
+        [HttpGet]
+        public async Task<IActionResult> Edit(Guid id)
+        {
+            var user = await _userService.GetUserByIdAsync(id);
+            if (user == null)
+                return NotFound();
+
+            return View(user);
+        }
+
+        // Get: User/Delete/5
+        [HttpGet]
+        public async Task<IActionResult> Delete(Guid id)
+        {
+            var user = await _userService.GetUserByIdAsync(id);
+            if (user == null)
+                return NotFound();
+
+            return View(user);
+        }
 
     }
 

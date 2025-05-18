@@ -64,9 +64,11 @@
                         <td>@user.PhoneNumber</td>
                         <td>@user.Email</td>
                         <td class="text-center">
-                            <a class="btn btn-outline-warning btn-sm me-1" asp-controller="Usuario" asp-action="Edit"
+
+                            <a class="btn btn-outline-warning btn-sm me-1" asp-controller="User" asp-action="Edit"
                                 asp-route-id="@user.Id">✏️ Editar</a>
-                            <a class="btn btn-outline-danger btn-sm" asp-controller="Usuario" asp-action="Delete"
+
+                            <a class="btn btn-outline-danger btn-sm" asp-controller="User" asp-action="Delete"
                                 asp-route-id="@user.Id">🗑️ Eliminar</a>
                         </td>
                     </tr>

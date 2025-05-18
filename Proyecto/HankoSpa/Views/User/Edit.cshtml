@@ -1,0 +1,53 @@
+@model HankoSpa.DTOs.UserDTO
+
+@{
+    ViewBag.Title = "Editar Usuario";
+}
+
+<h2>✏️ Editar Usuario</h2>
+
+@using (Html.BeginForm("Edit", "User", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    @Html.HiddenFor(model => model.Id)
+
+    <div class="form-horizontal">
+        <div class="form-group mb-3">
+            @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "form-label" })
+            @Html.TextBoxFor(model => model.FirstName, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group mb-3">
+            @Html.LabelFor(model => model.LastName, htmlAttributes: new { @class = "form-label" })
+            @Html.TextBoxFor(model => model.LastName, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group mb-3">
+            @Html.LabelFor(model => model.Document, htmlAttributes: new { @class = "form-label" })
+            @Html.TextBoxFor(model => model.Document, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Document, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group mb-3">
+            @Html.LabelFor(model => model.PhoneNumber, htmlAttributes: new { @class = "form-label" })
+            @Html.TextBoxFor(model => model.PhoneNumber, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group mb-3">
+            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "form-label" })
+            @Html.TextBoxFor(model => model.Email, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+        </div>
+
+        <button type="submit" class="btn btn-warning">Guardar cambios</button>
+        <a href="@Url.Action("Index", "User")" class="btn btn-secondary ms-2">Cancelar</a>
+    </div>
+}
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

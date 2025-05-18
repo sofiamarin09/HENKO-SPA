@@ -44,5 +44,13 @@ namespace HankoSpa.DTOs
 
         public IEnumerable<SelectListItem> CustomRoles { get; set; }
 
+        [DataType(DataType.Password)]
+        [Required(ErrorMessage = "La contraseña es obligatoria.")]
+        public string? Password { get; set; }
+
+        [DataType(DataType.Password)]
+        [Compare("Password", ErrorMessage = "Las contraseñas no coinciden.")]
+        public string? ConfirmPassword { get; set; }
+
     }
 }

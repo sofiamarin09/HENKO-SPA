@@ -47,6 +47,18 @@
         <span asp-validation-for="CustomRolId" class="text-danger"></span>
     </div>
 
+    <div class="form-group">
+        <label for="Password" class="control-label">Contraseña</label>
+        <input asp-for="Password" type="password" class="form-control" />
+        <span asp-validation-for="Password" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label for="ConfirmPassword" class="control-label">Confirmar Contraseña</label>
+        <input asp-for="ConfirmPassword" type="password" class="form-control" />
+        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+    </div>
+
     <br />
 
     <button type="submit" class="btn btn-success">Guardar</button>
