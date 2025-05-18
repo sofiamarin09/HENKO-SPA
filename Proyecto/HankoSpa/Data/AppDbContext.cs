@@ -22,7 +22,6 @@ namespace HankoSpa.Data
         {
             base.OnModelCreating(modelBuilder);
 
-
             // Relacion entre Cita y Servicio
             modelBuilder.Entity<Cita>()
                 .HasOne(c => c.Servicio) // Cita tiene un Servicio
