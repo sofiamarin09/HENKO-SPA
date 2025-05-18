@@ -23,15 +23,13 @@ namespace HankoSpa.DTOs
         [Required(ErrorMessage = "El documento es obligatorio")]
         public string Document { get; set; } = null!;
 
-
         [Display(Name = "Telefono")]
-        [Required(ErrorMessage = "El telefono es obligatorio")]
+        [Required(ErrorMessage = "El teléfono es obligatorio")]
         public string PhoneNumber { get; set; } = null!;
 
         [Display(Name = "Email")]
         [Required(ErrorMessage = "El email es obligatorio")]
         public string Email { get; set; } = null!;
-
 
         [Display(Name = "Rol")]
         [Range(1, int.MaxValue, ErrorMessage = "Debe seleccionar un rol")]
@@ -42,15 +40,15 @@ namespace HankoSpa.DTOs
 
         public ICollection<Cita>? Citas { get; set; }
 
-        public IEnumerable<SelectListItem> CustomRoles { get; set; }
+        public IEnumerable<SelectListItem> CustomRoles { get; set; } = new List<SelectListItem>();
 
         [DataType(DataType.Password)]
         [Required(ErrorMessage = "La contraseña es obligatoria.")]
         public string? Password { get; set; }
 
         [DataType(DataType.Password)]
+        [Required(ErrorMessage = "Debe confirmar la contraseña.")]
         [Compare("Password", ErrorMessage = "Las contraseñas no coinciden.")]
         public string? ConfirmPassword { get; set; }
-
     }
 }
