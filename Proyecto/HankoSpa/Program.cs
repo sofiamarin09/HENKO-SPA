@@ -4,7 +4,6 @@ using HankoSpa.Helpers;
 using HankoSpa.Repository;
 using HankoSpa.Services;
 using HankoSpa.Services.Interfaces;
-using HankoSpa.Services.Users;
 using HankoSpa.Models;
 using Microsoft.AspNetCore.Identity;
 
@@ -19,7 +18,7 @@ builder.Services.AddScoped<ICitaServices, CitasService>();
 builder.Services.AddScoped<IServicioRepository, ServicioRepository>();
 builder.Services.AddScoped<IServicioServices, ServicioService>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
-builder.Services.AddScoped<IUsersService, UsersService>();
+builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddAutoMapper(typeof(AutoMapperProfile));
 
 builder.Services.AddIdentity<User, IdentityRole>(x =>
