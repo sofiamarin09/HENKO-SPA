@@ -125,6 +125,44 @@ namespace HankoSpa.Controllers
             return RedirectToAction(nameof(Index));
         }*/
 
+        // ...existing code...
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(UserDTO userDTO)
+        {
+            if (string.IsNullOrEmpty(userDTO.Id) || !Guid.TryParse(userDTO.Id, out var userId))
+            {
+                ModelState.AddModelError(string.Empty, "Id de usuario inválido.");
+                await GetRolesAvailables(userDTO);
+                return View(userDTO);
+            }
+
+            // Elimina la validación de contraseña al editar
+            ModelState.Remove(nameof(userDTO.Password));
+            ModelState.Remove(nameof(userDTO.ConfirmPassword));
+
+            if (!ModelState.IsValid)
+            {
+                await GetRolesAvailables(userDTO);
+                return View(userDTO);
+            }
+
+            userDTO.Password = null;
+            userDTO.ConfirmPassword = null;
+
+            var updated = await _userService.UpdateUserAsync(userDTO);
+            if (!updated)
+            {
+                ModelState.AddModelError(string.Empty, "Error al actualizar el usuario.");
+                await GetRolesAvailables(userDTO);
+                return View(userDTO);
+            }
+
+            return RedirectToAction(nameof(Index));
+        }
+
+
 
     }
 
