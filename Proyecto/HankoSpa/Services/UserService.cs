@@ -61,13 +61,12 @@ namespace HankoSpa.Services
             var user = await _userRepository.GetUserByIdAsync(Guid.Parse(userDto.Id!));
             if (user == null) return false;
 
-            // Mapea las propiedades editables desde DTO a entidad (sin tocar CustomRol directamente)
             _mapper.Map(userDto, user);
 
-            // Actualizar el usuario
+            System.Diagnostics.Debug.WriteLine($"Usuario después del mapeo: {user.FirstName}, {user.LastName}, {user.Email}");
+
             var rowsAffected = await _userRepository.UpdateUserAsync(user);
 
-            // Asignar el rol si cambió o está definido
             if (user.CustomRolId != userDto.CustomRolId && userDto.CustomRolId > 0)
             {
                 await _userRepository.AssignCustomRoleAsync(user, userDto.CustomRolId);
