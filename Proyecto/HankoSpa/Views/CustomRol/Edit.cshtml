@@ -1,0 +1,18 @@
+﻿@model HankoSpa.DTOs.CustomRolDTO
+@{
+    ViewData["Title"] = "Editar Rol";
+}
+<h2>Editar Rol</h2>
+<form asp-action="Edit" method="post">
+    <input type="hidden" asp-for="CustomRolId" />
+    <div class="form-group">
+        <label asp-for="NombreRol"></label>
+        <input asp-for="NombreRol" class="form-control" />
+        <span asp-validation-for="NombreRol" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Guardar</button>
+    <a asp-action="Index" class="btn btn-secondary">Volver</a>
+</form>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
