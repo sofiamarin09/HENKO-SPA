@@ -94,7 +94,7 @@ namespace HankoSpa.Controllers
             return View(userDTO);
         }
 
-        [HttpPost]
+        /*[HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(UserDTO userDTO)
         {
@@ -123,7 +123,7 @@ namespace HankoSpa.Controllers
             }
 
             return RedirectToAction(nameof(Index));
-        }
+        }*/
 
 
     }
