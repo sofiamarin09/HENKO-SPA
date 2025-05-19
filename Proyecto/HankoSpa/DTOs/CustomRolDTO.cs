@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using HankoSpa.Models;
 using System.ComponentModel.DataAnnotations;
 
 namespace HankoSpa.DTOs

@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Identity;
 using HankoSpa.Services.Interfaces;
 using System.Threading.Tasks;
 using System.Collections.Generic;
+using HankoSpa.Nucleo;
 
 namespace HankoSpa.Services
 {
@@ -15,9 +16,11 @@ namespace HankoSpa.Services
     {
         private readonly IUserRepository _userRepository;
         private readonly IMapper _mapper;
+        private readonly ICustomRolService _customRolSerivce;
 
-        public UserService(IUserRepository userRepository, IMapper mapper)
+        public UserService(IUserRepository userRepository, IMapper mapper, ICustomRolService customRolSerivce)
         {
+            _customRolSerivce = customRolSerivce;
             _userRepository = userRepository;
             _mapper = mapper;
         }
@@ -39,6 +42,7 @@ namespace HankoSpa.Services
 
         public async Task<IdentityResult> CreateUserAsync(UserDTO userDto, string password)
         {
+            userDto.Id = Guid.NewGuid().ToString();
             var user = _mapper.Map<User>(userDto);
             var result = await _userRepository.AddUserAsync(user, password);
             if (!result.Succeeded) return result;
@@ -57,13 +61,12 @@ namespace HankoSpa.Services
             var user = await _userRepository.GetUserByIdAsync(Guid.Parse(userDto.Id!));
             if (user == null) return false;
 
-            // Mapea las propiedades editables desde DTO a entidad (sin tocar CustomRol directamente)
             _mapper.Map(userDto, user);
 
-            // Actualizar el usuario
+            System.Diagnostics.Debug.WriteLine($"Usuario después del mapeo: {user.FirstName}, {user.LastName}, {user.Email}");
+
             var rowsAffected = await _userRepository.UpdateUserAsync(user);
 
-            // Asignar el rol si cambió o está definido
             if (user.CustomRolId != userDto.CustomRolId && userDto.CustomRolId > 0)
             {
                 await _userRepository.AssignCustomRoleAsync(user, userDto.CustomRolId);
@@ -87,6 +90,12 @@ namespace HankoSpa.Services
             if (user == null) return false;
 
             return await _userRepository.AssignCustomRoleAsync(user, customRolId);
+        }
+
+        public async Task<List<CustomRolDTO>> GetAllRolesAsync()
+        {
+            var response = await _customRolSerivce.GetAllAsync();
+            return response.Result ?? new List<CustomRolDTO>();
         }
 
     }

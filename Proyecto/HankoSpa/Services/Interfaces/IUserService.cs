@@ -11,5 +11,6 @@ namespace HankoSpa.Services.Interfaces
         Task<bool> UpdateUserAsync(UserDTO userDto);
         Task<bool> DeleteUserAsync(Guid id);
         Task<bool> AssignRoleToUserAsync(Guid userId, int customRolId);
+        Task<List<CustomRolDTO>> GetAllRolesAsync();
     }
 }
