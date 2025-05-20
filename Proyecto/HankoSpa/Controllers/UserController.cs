@@ -105,6 +105,10 @@ namespace HankoSpa.Controllers
                 return View(userDTO);
             }
 
+
+            ModelState.Remove(nameof(userDTO.Password));
+            ModelState.Remove(nameof(userDTO.ConfirmPassword));
+
             if (!ModelState.IsValid)
             {
                 await GetRolesAvailables(userDTO);
@@ -125,6 +129,24 @@ namespace HankoSpa.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Delete(UserDTO userDTO)
+        {
+            if (string.IsNullOrEmpty(userDTO.Id) || !Guid.TryParse(userDTO.Id, out var userId))
+            {
+                return NotFound();
+            }
+
+            var deleted = await _userService.DeleteUserAsync(userId);
+            if (!deleted)
+            {
+                ModelState.AddModelError(string.Empty, "No se pudo eliminar el usuario.");
+                return View(userDTO);
+            }
+
+            return RedirectToAction(nameof(Index));
+        }
 
     }
 

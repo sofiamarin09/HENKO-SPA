@@ -36,11 +36,11 @@
         <thead class="bg-white text-dark">
             <tr>
                 <th>#</th>
-                <th>Nombre</th>
-                <th>Apellido</th>
+                <th>Nombre Completo</th>
                 <th>Documento</th>
                 <th>Teléfono</th>
                 <th>Email</th>
+                <th>Rol</th>
                 <th class="text-center">Acciones</th>
             </tr>
         </thead>
@@ -58,11 +58,11 @@
                 {
                     <tr>
                         <td>@i</td>
-                        <td>@user.FirstName</td>
-                        <td>@user.LastName</td>
+                        <td>@user.LastName @user.FirstName</td>
                         <td>@user.Document</td>
                         <td>@user.PhoneNumber</td>
                         <td>@user.Email</td>
+                        <td>@user.CustomRol</td>
                         <td class="text-center">
 
                             <a class="btn btn-outline-warning btn-sm me-1" asp-controller="User" asp-action="Edit"
