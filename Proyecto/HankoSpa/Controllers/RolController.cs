@@ -14,14 +14,14 @@ namespace HankoSpa.Controllers
     {
         private readonly ICustomRolService _rolService;
         private readonly INotyfService _notifyService;
-        //private readonly ICombosHelper _combosHelper;
+        private readonly ICombosHelper _combosHelper;
         private readonly IMapper _mapper;
 
-        public RolController(ICustomRolService rolService, INotyfService notifyService,/* ICombosHelper combosHelper,*/ IMapper mapper)
+        public RolController(ICustomRolService rolService, INotyfService notifyService,ICombosHelper combosHelper, IMapper mapper)
         {
             _rolService = rolService;
             _notifyService = notifyService;
-           // _combosHelper = combosHelper;
+            _combosHelper = combosHelper;
             _mapper = mapper;
         }
 
