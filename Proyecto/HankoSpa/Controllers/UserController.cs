@@ -138,7 +138,7 @@ namespace HankoSpa.Controllers
                 return View(userDTO);
             }
 
-            // Elimina la validación de contraseña al editar
+
             ModelState.Remove(nameof(userDTO.Password));
             ModelState.Remove(nameof(userDTO.ConfirmPassword));
 
@@ -162,7 +162,25 @@ namespace HankoSpa.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Delete(UserDTO userDTO)
+        {
+            if (string.IsNullOrEmpty(userDTO.Id) || !Guid.TryParse(userDTO.Id, out var userId))
+            {
+                return NotFound();
+            }
 
+            var deleted = await _userService.DeleteUserAsync(userId);
+            if (!deleted)
+            {
+                // Puedes mostrar un mensaje de error si lo deseas
+                ModelState.AddModelError(string.Empty, "No se pudo eliminar el usuario.");
+                return View(userDTO);
+            }
+
+            return RedirectToAction(nameof(Index));
+        }
 
     }
 
