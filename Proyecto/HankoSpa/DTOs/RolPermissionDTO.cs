@@ -9,5 +9,7 @@
         public string? NombreRol { get; set; }
         public string? NombrePermiso { get; set; }
         public string? Module { get; set; }
+
+        public bool Assigned { get; set; }
     }
 }

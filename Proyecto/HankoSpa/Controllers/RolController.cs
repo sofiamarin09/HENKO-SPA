@@ -8,6 +8,7 @@ using HankoSpa.Attributes;
 using System.Collections.Generic;
 using AspNetCoreHero.ToastNotification.Notyf.Models;
 
+
 namespace HankoSpa.Controllers
 {
     public class RolController : Controller
@@ -105,5 +106,7 @@ namespace HankoSpa.Controllers
             _notifyService.Success(response.Message);
             return RedirectToAction(nameof(Index));
         }
+
+
     }
 }

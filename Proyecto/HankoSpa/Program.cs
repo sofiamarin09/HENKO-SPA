@@ -22,6 +22,8 @@ builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<ICustomRolRepository, CustomRolRepository>();
 builder.Services.AddScoped<ICustomRolService, CustomRolService>();
 builder.Services.AddAutoMapper(typeof(AutoMapperProfile));
+builder.Services.AddScoped<ICombosHelper, CombosHelper>();
+
 
 builder.Services.AddIdentity<User, IdentityRole>(x =>
 {

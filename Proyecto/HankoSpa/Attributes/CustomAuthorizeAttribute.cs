@@ -18,10 +18,27 @@ namespace HankoSpa.Attributes
 
         public void OnAuthorization(AuthorizationFilterContext context)
         {
-            // Aquí deberías implementar la lógica real de autorización
-            // Por ejemplo, verificar si el usuario tiene el permiso y módulo requeridos
-            // Si no está autorizado:
-            // context.Result = new ForbidResult();
+            var user = context.HttpContext.User;
+
+            // Si el usuario no está autenticado
+            if (!user.Identity?.IsAuthenticated ?? true)
+            {
+                context.Result = new RedirectToRouteResult(new { controller = "Account", action = "Login" });
+                return;
+            }
+
+            // Ejemplo: Supón que los permisos están en claims tipo "Permission" y "Module"
+            var hasPermission = user.Claims.Any(c =>
+                c.Type == "Permission" && c.Value == Permission &&
+                user.Claims.Any(m => m.Type == "Module" && m.Value == Module)
+            );
+
+            // Si el usuario no tiene el permiso requerido
+            if (!hasPermission)
+            {
+                context.Result = new ForbidResult();
+            }
+            
         }
     }
 }
