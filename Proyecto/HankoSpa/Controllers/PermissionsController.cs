@@ -3,7 +3,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using HankoSpa.Services.Interfaces;
 using HankoSpa.DTOs;
-using HankoSpa.Attributes;
+using HankoSpa.Controllers.Attributes;
 
 namespace HankoSpa.Controllers
 {

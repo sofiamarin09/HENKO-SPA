@@ -133,8 +133,7 @@ namespace HankoSpa.Services
         }
         public async Task<SignInResult> LoginAsync(LoginDTO dto)
         {
-            var es = await _signInManager.PasswordSignInAsync(dto.Email, dto.Password, false, false);
-            return es;
+            return await _signInManager.PasswordSignInAsync(dto.Email, dto.Password, false, false);
         }
 
         public async Task LogoutAsync()

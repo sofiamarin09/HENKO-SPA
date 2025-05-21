@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace HankoSpa.Migrations
 {
     /// <inheritdoc />
-    public partial class initial : Migration
+    public partial class Entities : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -84,7 +84,7 @@ namespace HankoSpa.Migrations
                         column: x => x.RoleId,
                         principalTable: "AspNetRoles",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -119,7 +119,7 @@ namespace HankoSpa.Migrations
                         column: x => x.CustomRolId,
                         principalTable: "CustomRoles",
                         principalColumn: "CustomRolId",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -137,13 +137,13 @@ namespace HankoSpa.Migrations
                         column: x => x.CustomRolId,
                         principalTable: "CustomRoles",
                         principalColumn: "CustomRolId",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_RolPermissions_Permissions_PermissionId",
                         column: x => x.PermissionId,
                         principalTable: "Permissions",
                         principalColumn: "PermisoId",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -164,7 +164,7 @@ namespace HankoSpa.Migrations
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -184,7 +184,7 @@ namespace HankoSpa.Migrations
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -202,13 +202,13 @@ namespace HankoSpa.Migrations
                         column: x => x.RoleId,
                         principalTable: "AspNetRoles",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_AspNetUserRoles_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -228,7 +228,7 @@ namespace HankoSpa.Migrations
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -240,24 +240,24 @@ namespace HankoSpa.Migrations
                     FechaCita = table.Column<DateTime>(type: "datetime2", nullable: false),
                     HoraCita = table.Column<TimeSpan>(type: "time", nullable: false),
                     EstadoCita = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    UsuarioID = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    UsuarioID = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     ServicioId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Citas", x => x.CitaId);
                     table.ForeignKey(
-                        name: "FK_Citas_AspNetUsers_UsuarioID",
-                        column: x => x.UsuarioID,
+                        name: "FK_Citas_AspNetUsers_UserId",
+                        column: x => x.UserId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Citas_Servicios_ServicioId",
                         column: x => x.ServicioId,
                         principalTable: "Servicios",
                         principalColumn: "ServicioId",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
@@ -310,9 +310,9 @@ namespace HankoSpa.Migrations
                 column: "ServicioId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Citas_UsuarioID",
+                name: "IX_Citas_UserId",
                 table: "Citas",
-                column: "UsuarioID");
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_RolPermissions_PermissionId",

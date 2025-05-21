@@ -12,15 +12,15 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HankoSpa.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250518053237_initial")]
-    partial class initial
+    [Migration("20250521194116_Entities")]
+    partial class Entities
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "9.0.3")
+                .HasAnnotation("ProductVersion", "9.0.5")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -46,14 +46,17 @@ namespace HankoSpa.Migrations
                     b.Property<int>("ServicioId")
                         .HasColumnType("int");
 
-                    b.Property<string>("UsuarioID")
+                    b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("UsuarioID")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("CitaId");
 
                     b.HasIndex("ServicioId");
 
-                    b.HasIndex("UsuarioID");
+                    b.HasIndex("UserId");
 
                     b.ToTable("Citas");
                 });
@@ -356,13 +359,12 @@ namespace HankoSpa.Migrations
                     b.HasOne("HankoSpa.Models.Servicio", "Servicio")
                         .WithMany("Citas")
                         .HasForeignKey("ServicioId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("HankoSpa.Models.User", "User")
                         .WithMany("Citas")
-                        .HasForeignKey("UsuarioID")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .HasForeignKey("UserId");
 
                     b.Navigation("Servicio");
 
@@ -374,13 +376,13 @@ namespace HankoSpa.Migrations
                     b.HasOne("HankoSpa.Models.CustomRol", "CustomRol")
                         .WithMany("RolPermissions")
                         .HasForeignKey("CustomRolId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("HankoSpa.Models.Permission", "Permission")
                         .WithMany("RolPermissions")
                         .HasForeignKey("PermissionId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("CustomRol");
@@ -393,7 +395,7 @@ namespace HankoSpa.Migrations
                     b.HasOne("HankoSpa.Models.CustomRol", "CustomRol")
                         .WithMany("Usuarios")
                         .HasForeignKey("CustomRolId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("CustomRol");
@@ -404,7 +406,7 @@ namespace HankoSpa.Migrations
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
@@ -413,7 +415,7 @@ namespace HankoSpa.Migrations
                     b.HasOne("HankoSpa.Models.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
@@ -422,7 +424,7 @@ namespace HankoSpa.Migrations
                     b.HasOne("HankoSpa.Models.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
@@ -431,13 +433,13 @@ namespace HankoSpa.Migrations
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("HankoSpa.Models.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
@@ -446,7 +448,7 @@ namespace HankoSpa.Migrations
                     b.HasOne("HankoSpa.Models.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 

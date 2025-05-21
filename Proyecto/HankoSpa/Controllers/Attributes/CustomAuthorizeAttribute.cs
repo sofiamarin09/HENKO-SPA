@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 
-namespace HankoSpa.Controllers.CustomAuthorizeAttribute
+namespace HankoSpa.Controllers.Attributes
 {
     public class CustomAuthorizeAttribute : TypeFilterAttribute
     {

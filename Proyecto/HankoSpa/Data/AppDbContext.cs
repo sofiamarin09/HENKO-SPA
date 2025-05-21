@@ -3,11 +3,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using HankoSpa.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace HankoSpa.Data
 {
     // Definición de AppDbContext
-    public class AppDbContext : DbContext
+    public class AppDbContext : IdentityDbContext<User>
     {
         public AppDbContext(DbContextOptions<AppDbContext> options)
             : base(options)
@@ -17,7 +18,7 @@ namespace HankoSpa.Data
         public DbSet<Permission> Permissions { get; set; }
         public DbSet<CustomRol> CustomRoles { get; set; }
         public DbSet<RolPermission> RolPermissions { get; set; }
-        public DbSet<User> Users { get; set; }
+        //public DbSet<User> Users { get; set; }
         public DbSet<Cita> Citas { get; set; }
         public DbSet<Servicio> Servicios { get; set; } // <-- Agregado para mapear la entidad Servicio
 
