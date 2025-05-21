@@ -14,10 +14,12 @@ namespace HankoSpa.DTOs
         [StringLength(50)]
         public string NombreRol { get; set; } = null!;
 
+        // Para vistas con checkboxes
+        public bool Assigned { get; set; }
+
         //navegador de usuarios
         public virtual ICollection<User> Usuarios { get; set; } = new HashSet<User>();
 
         public virtual ICollection<RolPermission> RolPermissions { get; set; } = new HashSet<RolPermission>();
     }
-
 }

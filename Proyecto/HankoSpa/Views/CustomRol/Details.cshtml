@@ -1,0 +1,11 @@
+﻿@model HankoSpa.DTOs.CustomRolDTO
+@{
+    ViewData["Title"] = "Detalles del Rol";
+}
+<h2>Detalles del Rol</h2>
+<div class="form-group">
+    <label>Nombre del Rol:</label>
+    <span>@Model.NombreRol</span>
+</div>
+<a asp-action="Edit" asp-route-id="@Model.CustomRolId" class="btn btn-warning">Editar</a>
+<a asp-action="Index" class="btn btn-secondary">Volver</a>

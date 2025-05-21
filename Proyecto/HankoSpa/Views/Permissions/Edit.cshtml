@@ -1,0 +1,23 @@
+﻿@model HankoSpa.DTOs.PermissionDTO
+@{
+    ViewData["Title"] = "Editar Permiso";
+}
+<h2>Editar Permiso</h2>
+<form asp-action="Edit" method="post">
+    <input type="hidden" asp-for="PermisoId" />
+    <div class="form-group">
+        <label asp-for="NombrePermiso"></label>
+        <input asp-for="NombrePermiso" class="form-control" />
+        <span asp-validation-for="NombrePermiso" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Module"></label>
+        <input asp-for="Module" class="form-control" />
+        <span asp-validation-for="Module" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Guardar</button>
+    <a asp-action="Index" class="btn btn-secondary">Volver</a>
+</form>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
