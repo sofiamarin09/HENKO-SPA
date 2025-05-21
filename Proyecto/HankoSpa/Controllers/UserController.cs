@@ -31,7 +31,6 @@ namespace HankoSpa.Controllers
             return View(model);
         }
 
-
         // roles disponibles
         private async Task GetRolesAvailables(UserDTO userDTO)
         {
@@ -42,7 +41,6 @@ namespace HankoSpa.Controllers
                 Text = r.NombreRol
             }).ToList();
         }
-
 
         // Get: User/Edit/5
         [HttpGet]
@@ -100,11 +98,10 @@ namespace HankoSpa.Controllers
         {
             if (string.IsNullOrEmpty(userDTO.Id) || !Guid.TryParse(userDTO.Id, out var userId))
             {
-                ModelState.AddModelError(string.Empty, "Id de usuario inválido.");
+                ModelState.AddModelError(string.Empty, "Id de usuario invï¿½lido.");
                 await GetRolesAvailables(userDTO);
                 return View(userDTO);
             }
-
 
             ModelState.Remove(nameof(userDTO.Password));
             ModelState.Remove(nameof(userDTO.ConfirmPassword));
