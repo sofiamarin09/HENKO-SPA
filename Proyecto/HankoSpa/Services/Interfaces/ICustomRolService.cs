@@ -1,5 +1,7 @@
 using HankoSpa.DTOs;
 using HankoSpa.Nucleo;
+using System.Threading.Tasks;
+using System.Collections.Generic;
 
 namespace HankoSpa.Services.Interfaces
 {
@@ -10,5 +12,9 @@ namespace HankoSpa.Services.Interfaces
         Task<Response<CustomRolDTO>> CreateAsync(CustomRolDTO dto);
         Task<Response<CustomRolDTO>> UpdateAsync(CustomRolDTO dto);
         Task<Response<bool>> DeleteAsync(int id);
+
+        // Métodos agregados
+        Task InitializeRolesAndPermissionsAsync();
+        Task AssignBasePermissionsAsync(int customRolId, string nombreRol);
     }
 }

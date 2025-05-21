@@ -1,6 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using HankoSpa.Data; 
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
+using Microsoft.Extensions.DependencyInjection;
 using System;
+using System.Linq;
+
+
+// El resto del código permanece igual
+
 
 namespace HankoSpa.Attributes
 {
@@ -20,26 +27,40 @@ namespace HankoSpa.Attributes
         {
             var user = context.HttpContext.User;
 
-            // Si el usuario no está autenticado
             if (!user.Identity?.IsAuthenticated ?? true)
             {
                 context.Result = new RedirectToRouteResult(new { controller = "Account", action = "Login" });
                 return;
             }
 
-            // Ejemplo: Supón que los permisos están en claims tipo "Permission" y "Module"
-            var hasPermission = user.Claims.Any(c =>
-                c.Type == "Permission" && c.Value == Permission &&
-                user.Claims.Any(m => m.Type == "Module" && m.Value == Module)
-            );
+            // Obtener el servicio de base de datos
+            var db = context.HttpContext.RequestServices.GetRequiredService<AppDbContext>();
 
-            // Si el usuario no tiene el permiso requerido
-            if (!hasPermission)
+            // Obtener el usuario autenticado
+            var userId = user.Claims.FirstOrDefault(c => c.Type == "sub" || c.Type == "UserId" || c.Type == "Id")?.Value;
+            if (string.IsNullOrEmpty(userId))
+            {
+                context.Result = new ForbidResult();
+                return;
+            }
+
+            // Buscar el usuario y su rol
+            var usuario = db.Users.FirstOrDefault(u => u.Id == userId);
+            if (usuario == null || usuario.CustomRolId == 0)
+            {
+                context.Result = new ForbidResult();
+                return;
+            }
+
+            // Buscar los permisos del rol
+            var tienePermiso = db.RolPermissions
+                .Where(rp => rp.CustomRolId == usuario.CustomRolId)
+                .Any(rp => rp.Permission.NombrePermiso == Permission && rp.Permission.Module == Module);
+
+            if (!tienePermiso)
             {
                 context.Result = new ForbidResult();
             }
-            
         }
     }
 }
-

@@ -4,6 +4,8 @@ using HankoSpa.Models;
 using HankoSpa.Nucleo;
 using HankoSpa.Repository;
 using HankoSpa.Services.Interfaces;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace HankoSpa.Services
 {
@@ -20,12 +22,9 @@ namespace HankoSpa.Services
 
         public async Task<Response<List<CustomRolDTO>>> GetAllAsync()
         {
-            var response = new Response<List<CustomRolDTO>>();
-
             var customRoles = await _customRolRepository.GetAllAsync();
             var dtoList = _mapper.Map<List<CustomRolDTO>>(customRoles);
             return new Response<List<CustomRolDTO>>(true, "Roles obtenidos correctamente.", dtoList);
-
         }
 
         public async Task<Response<CustomRolDTO>> GetByIdAsync(int id)
@@ -40,6 +39,8 @@ namespace HankoSpa.Services
         {
             var entity = _mapper.Map<CustomRol>(dto);
             await _customRolRepository.AddAsync(entity);
+            // Asignar permisos base automáticamente
+            await _customRolRepository.AssignBasePermissionsAsync(entity.CustomRolId, entity.NombreRol);
             return new Response<CustomRolDTO>(true, "Rol creado correctamente", _mapper.Map<CustomRolDTO>(entity));
         }
 
@@ -58,6 +59,16 @@ namespace HankoSpa.Services
             await _customRolRepository.DeleteAsync(id);
             return new Response<bool>(true, "Rol eliminado correctamente", true);
         }
+
+        // Métodos agregados
+        public async Task InitializeRolesAndPermissionsAsync()
+        {
+            await _customRolRepository.InitializeRolesAndPermissionsAsync();
+        }
+
+        public async Task AssignBasePermissionsAsync(int customRolId, string nombreRol)
+        {
+            await _customRolRepository.AssignBasePermissionsAsync(customRolId, nombreRol);
+        }
     }
 }
-

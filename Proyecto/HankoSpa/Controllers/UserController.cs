@@ -100,7 +100,7 @@ namespace HankoSpa.Controllers
         {
             if (string.IsNullOrEmpty(userDTO.Id) || !Guid.TryParse(userDTO.Id, out var userId))
             {
-                ModelState.AddModelError(string.Empty, "Id de usuario inv√°lido.");
+                ModelState.AddModelError(string.Empty, "Id de usuario inv·lido.");
                 await GetRolesAvailables(userDTO);
                 return View(userDTO);
             }

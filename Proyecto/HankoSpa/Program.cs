@@ -6,6 +6,10 @@ using HankoSpa.Services;
 using HankoSpa.Services.Interfaces;
 using HankoSpa.Models;
 using Microsoft.AspNetCore.Identity;
+using AspNetCoreHero.ToastNotification;
+using AspNetCoreHero.ToastNotification.Extensions;
+using AspNetCoreHero.ToastNotification.Notyf;
+using System;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,6 +28,12 @@ builder.Services.AddScoped<ICustomRolService, CustomRolService>();
 builder.Services.AddAutoMapper(typeof(AutoMapperProfile));
 builder.Services.AddScoped<ICombosHelper, CombosHelper>();
 
+// Registro del servicio Notyf
+builder.Services.AddNotyf(config => {
+    config.DurationInSeconds = 5;
+    config.IsDismissable = true;
+    config.Position = NotyfPosition.TopRight;
+});
 
 builder.Services.AddIdentity<User, IdentityRole>(x =>
 {
@@ -37,13 +47,14 @@ builder.Services.AddIdentity<User, IdentityRole>(x =>
     .AddEntityFrameworkStores<AppDbContext>()
     .AddDefaultTokenProviders();
 
-
 var app = builder.Build();
 
 using (var scope = app.Services.CreateScope())
 {
     var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
     db.Database.Migrate();
+    // Llama al método de seed para inicializar roles y permisos
+    await AppDbContextSeed.SeedAsync(db);
 }
 
 // Configure the HTTP request pipeline.
@@ -59,6 +70,9 @@ app.UseStaticFiles();
 app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
+
+// Middleware de Notyf
+app.UseNotyf();
 
 app.MapControllerRoute(
     name: "default",
