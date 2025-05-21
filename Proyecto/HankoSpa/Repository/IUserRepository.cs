@@ -16,6 +16,10 @@ namespace HankoSpa.Repository
         Task<bool> AssignCustomRoleAsync(User user, int customRolId);
         Task<bool> CustomRoleExistsAsync(string roleName);
         Task<IdentityResult> DeleteUserAsync(User user);
-
+        Task<bool> IsUserInRoleAsync(User user, string roleName);
+        Task AddUserToRoleAsync(User user, string roleName);
+        Task CheckRoleAsync(string roleName);
+        Task<User> GetUserAsync(string email);
+        Task<List<User>> GetAllAsync();
     }
 }

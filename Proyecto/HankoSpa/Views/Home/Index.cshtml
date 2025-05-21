@@ -1,6 +1,20 @@
-﻿@{
+﻿﻿@{
     ViewData["Title"] = "Inicio";
     Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using HankoSpa.Models
+@inject HankoSpa.Services.Interfaces.IUserService _usersService
+
+@{
+    User? user;
+    try
+    {
+        user = await _usersService.GetUserAsync(User.Identity.Name);
+    }
+    catch (Exception)
+    {
+        user = null;
+    }
 }
 
 <style>
@@ -69,10 +83,18 @@
 <div class="hero-section">
     <div class="hero-overlay"></div>
     <div class="hero-content">
-        <h1 class="display-4">Bienvenido a HenkoSpa</h1>
-        <p class="lead">Tu bienestar es nuestra prioridad</p>
+        @if (user is not null)
+        {
+            <h3 class="display-4">Bienvenido/a @user.FullName.ToString()</h3>
+            <p class="lead">Tu bienestar es nuestra prioridad</p>
+        }
+        else
+        {
+            <h3 class="display-4">Bienvenido Hanko Spa</h3>
+            <p class="lead">Tu bienestar es nuestra prioridad</p>
+        }
+
     </div>
 
     <!-- Aquí se eliminó la sección con los botones -->
 </div>
-

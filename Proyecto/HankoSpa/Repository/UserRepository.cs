@@ -9,15 +9,15 @@ namespace HankoSpa.Repository
     {
         private readonly AppDbContext _context;
         private readonly UserManager<User> _userManager;
-        private readonly SignInManager<User> _signInManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
 
         public UserRepository(AppDbContext context,
                             UserManager<User> userManager,
-                            SignInManager<User> signInManager)
+                            RoleManager<IdentityRole> roleManager)
         {
             _context = context;
             _userManager = userManager;
-            _signInManager = signInManager;
+            _roleManager = roleManager;
         }
 
         public async Task<IdentityResult> AddUserAsync(User user, string password)
@@ -48,6 +48,11 @@ namespace HankoSpa.Repository
                                 .Include(u => u.CustomRol)
                                 .Include(u => u.Citas)
                                 .FirstOrDefaultAsync(u => u.Id == id.ToString());
+        }
+
+        public async Task<List<User>> GetAllAsync()
+        {
+            return await _context.Users.ToListAsync();
         }
 
         public Task<IQueryable<User>> GetUsersQueryableAsync()
@@ -85,5 +90,33 @@ namespace HankoSpa.Repository
             return await _userManager.DeleteAsync(user);
         }
 
+        public async Task<bool> IsUserInRoleAsync(User user, string roleName)
+        {
+            return await _userManager.IsInRoleAsync(user, roleName);
+        }
+
+        public async Task AddUserToRoleAsync(User user, string roleName)
+        {
+            await _userManager.AddToRoleAsync(user, roleName);
+        }
+
+        public async Task CheckRoleAsync(string roleName)
+        {
+            var roleExists = await _roleManager.RoleExistsAsync(roleName);
+            if (!roleExists)
+            {
+                await _roleManager.CreateAsync(new IdentityRole
+                {
+                    Name = roleName
+                });
+            }
+        }
+
+        public async Task<User> GetUserAsync(string email)
+        {
+            var user = await _context.Users
+             .FirstOrDefaultAsync(x => x.Email == email);
+            return user!;
+        }
     }
 }

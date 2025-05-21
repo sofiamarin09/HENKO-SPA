@@ -10,11 +10,13 @@ namespace HankoSpa.Controllers
     {
         private readonly ICitaServices _citaService;
         private readonly IServicioServices _servicioService;
+        private readonly IUserService _userService;
 
-        public CitasController(ICitaServices citaService, IServicioServices servicioService)
+        public CitasController(ICitaServices citaService, IServicioServices servicioService, IUserService userService)
         {
             _citaService = citaService;
             _servicioService = servicioService;
+            _userService = userService;
         }
 
         // GET: Citas
@@ -44,6 +46,7 @@ namespace HankoSpa.Controllers
         // GET: Citas/Create
         public async Task<IActionResult> Create()
         {
+            await CargarUsersAsync();
             await CargarServiciosAsync();
             return View();
         }
@@ -162,6 +165,13 @@ namespace HankoSpa.Controllers
         {
             var servicios = await _servicioService.GetAllAsync();
             ViewBag.Servicios = new SelectList(servicios.Result, "ServicioId", "NombreServicio", seleccionado);
+        }
+
+        // Método auxiliar para cargar Users
+        private async Task CargarUsersAsync(int? seleccionado = null)
+        {
+            var users = await _userService.GetAllUsersComboAsync();
+            ViewBag.Users = new SelectList(users.Result, "Id", "FullName", seleccionado);
         }
     }
 }

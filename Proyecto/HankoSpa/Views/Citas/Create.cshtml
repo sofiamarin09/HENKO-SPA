@@ -35,8 +35,11 @@
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.UsuarioID)
-        @Html.TextBoxFor(model => model.UsuarioID, new { @class = "form-control", type = "text" })
+            @Html.LabelFor(model => model.ServicioID, "Users")
+            @Html.DropDownListFor(model => model.UsuarioID, (SelectList)ViewBag.Users, "Seleccione un usuario", new
+                {
+                    @class = "form-control"
+                })
         @Html.ValidationMessageFor(model => model.UsuarioID)
     </div>
 

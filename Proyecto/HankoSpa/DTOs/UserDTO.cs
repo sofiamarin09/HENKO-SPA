@@ -20,7 +20,7 @@ namespace HankoSpa.DTOs
         [Display(Name = "Nombre completo")]
         public string FullName => $"{FirstName} {LastName}";
 
-        public string UserName => $"{FirstName}{LastName}".ToLower();
+        public string UserName => $"{Email}".ToLower();
 
         [Display(Name = "Documento")]
         [Required(ErrorMessage = "El documento es obligatorio")]
