@@ -1,10 +1,12 @@
 ﻿using AspNetCoreHero.ToastNotification.Abstractions;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 using HankoSpa.Services.Interfaces;
 using HankoSpa.DTOs;
 
 namespace HankoSpa.Controllers
 {
+    [Authorize(Policy = "RolCRUD")] // Solo roles autorizados pueden acceder a la gestión de permisos de roles
     public class RolPermissionsController : Controller
     {
         private readonly IRolPermissionService _rolPermissionService;
@@ -98,4 +100,3 @@ namespace HankoSpa.Controllers
         }
     }
 }
-

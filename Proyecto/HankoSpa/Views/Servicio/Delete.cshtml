@@ -2,32 +2,42 @@
 
 @{
     ViewBag.Title = "Eliminar Servicio";
+    var customRolId = User.FindFirst("CustomRolId")?.Value;
     //Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h2 class="mt-4 mb-3 text-danger">🗑️ Eliminar Tratamiento</h2>
 
-<h5>¿Estás seguro de que deseas eliminar el siguiente servicio?</h5>
-
-<div class="card shadow-sm mt-3">
-    <div class="card-body">
-        <dl class="row">
-            <dt class="col-sm-4">Nombre del Servicio:</dt>
-            <dd class="col-sm-8">@Model.NombreServicio</dd>
-
-            <dt class="col-sm-4">Descripción:</dt>
-            <dd class="col-sm-8">@Model.DescripcionServicio</dd>
-        </dl>
-    </div>
-</div>
-
-@using (Html.BeginForm("Delete", "Servicio", FormMethod.Post))
+@if (customRolId == "1" || customRolId == "4" || customRolId == "5")
 {
-    @Html.AntiForgeryToken()
-    @Html.HiddenFor(model => model.ServicioId)
+    <h5>¿Estás seguro de que deseas eliminar el siguiente servicio?</h5>
 
-    <div class="mt-4">
-        <button type="submit" class="btn btn-danger">Sí, eliminar</button>
-        <a href="@Url.Action("Index", "Servicio")" class="btn btn-secondary ms-2">Cancelar</a>
+    <div class="card shadow-sm mt-3">
+        <div class="card-body">
+            <dl class="row">
+                <dt class="col-sm-4">Nombre del Servicio:</dt>
+                <dd class="col-sm-8">@Model.NombreServicio</dd>
+
+                <dt class="col-sm-4">Descripción:</dt>
+                <dd class="col-sm-8">@Model.DescripcionServicio</dd>
+            </dl>
+        </div>
+    </div>
+
+    @using (Html.BeginForm("Delete", "Servicio", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.ServicioId)
+
+        <div class="mt-4">
+            <button type="submit" class="btn btn-danger">Sí, eliminar</button>
+            <a href="@Url.Action("Index", "Servicio")" class="btn btn-secondary ms-2">Cancelar</a>
+        </div>
+    }
+}
+else
+{
+    <div class="alert alert-danger mt-4">
+        No tienes permisos para eliminar servicios.
     </div>
 }

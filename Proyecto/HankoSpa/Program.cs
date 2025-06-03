@@ -20,7 +20,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddTransient<SeedDb>();
-
+builder.Services.AddScoped<IUserClaimsPrincipalFactory<User>, CustomUserClaimsPrincipalFactory>();
 builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<ICitaRepository, CitaRepository>();
 builder.Services.AddScoped<ICitaServices, CitasService>();
@@ -52,8 +52,51 @@ builder.Services.AddIdentity<User, IdentityRole>(x =>
     .AddEntityFrameworkStores<AppDbContext>()
     .AddDefaultTokenProviders();
 
+// Configuración de la ruta de acceso denegado
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.AccessDeniedPath = "/Account/AccessDenied";
+});
+
+// Políticas de autorización personalizadas
+builder.Services.AddAuthorization(options =>
+{
+    // Políticas para Servicios, Citas y Usuarios (sin cambios)
+    options.AddPolicy("Servicios_Create", policy => policy.RequireClaim("CustomRolId", "1", "4", "5"));
+    options.AddPolicy("Servicios_Read", policy => policy.RequireClaim("CustomRolId", "1", "2", "3", "4", "5"));
+    options.AddPolicy("Servicios_Update", policy => policy.RequireClaim("CustomRolId", "1", "4", "5"));
+    options.AddPolicy("Servicios_Delete", policy => policy.RequireClaim("CustomRolId", "1", "4", "5"));
+
+    options.AddPolicy("Citas_Create", policy => policy.RequireClaim("CustomRolId", "1", "3", "4", "5"));
+    options.AddPolicy("Citas_Read", policy => policy.RequireClaim("CustomRolId", "1", "2", "3", "4", "5"));
+    options.AddPolicy("Citas_Update", policy => policy.RequireClaim("CustomRolId", "1", "3", "4", "5"));
+    options.AddPolicy("Citas_Delete", policy => policy.RequireClaim("CustomRolId", "1", "4", "5"));
+
+    options.AddPolicy("Usuarios_Create", policy => policy.RequireClaim("CustomRolId", "1", "4", "5"));
+    options.AddPolicy("Usuarios_Read", policy => policy.RequireClaim("CustomRolId", "1", "2", "4", "5"));
+    options.AddPolicy("Usuarios_Update", policy => policy.RequireClaim("CustomRolId", "1", "4", "5"));
+    options.AddPolicy("Usuarios_Delete", policy => policy.RequireClaim("CustomRolId", "1", "4", "5"));
+
+    // Política unificada para todas las acciones de Usuario
+    options.AddPolicy("UsuarioCRUD", policy => policy.RequireClaim("CustomRolId", "1", "4", "5"));
+
+    // Política unificada para todas las acciones de Rol
+    options.AddPolicy("RolCRUD", policy => policy.RequireClaim("CustomRolId", "1", "4", "5"));
+    // Si tienes acciones que usan Rol_Read, puedes mantenerla para compatibilidad
+    options.AddPolicy("Rol_Read", policy => policy.RequireClaim("CustomRolId", "1", "4", "5"));
+});
+
 var app = builder.Build();
-SeedData(app);
+
+// Primero migrar y crear roles/permisos
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+    db.Database.Migrate();
+    await AppDbContextSeed.SeedAsync(db);
+}
+
+// Después crear usuarios y otros datos dependientes
 void SeedData(WebApplication app)
 {
     var scopedFactory = app.Services.GetService<IServiceScopeFactory>();
@@ -61,14 +104,7 @@ void SeedData(WebApplication app)
     var service = scope.ServiceProvider.GetService<SeedDb>();
     service!.SeedAsync().Wait();
 }
-
-using (var scope = app.Services.CreateScope())
-{
-    var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-    db.Database.Migrate();
-    // Llama al método de seed para inicializar roles y permisos
-    await AppDbContextSeed.SeedAsync(db);
-}
+SeedData(app);
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

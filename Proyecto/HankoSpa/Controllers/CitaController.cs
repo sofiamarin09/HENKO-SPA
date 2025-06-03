@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization; // <-- Agrega esta línea
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using HankoSpa.Services.Interfaces;
 using HankoSpa.DTOs;
@@ -6,6 +7,8 @@ using HankoSpa.Models;
 
 namespace HankoSpa.Controllers
 {
+    [Route("Citas")]
+    [Authorize] // <--- Control de acceso: solo usuarios autenticados pueden acceder a cualquier acción de este controlador
     public class CitasController : Controller
     {
         private readonly ICitaServices _citaService;
@@ -20,6 +23,8 @@ namespace HankoSpa.Controllers
         }
 
         // GET: Citas
+        [HttpGet("")]
+        [Authorize(Policy = "Citas_Read")]
         public async Task<IActionResult> Index()
         {
             var response = await _citaService.GetAllAsync();
@@ -44,6 +49,8 @@ namespace HankoSpa.Controllers
         }
 
         // GET: Citas/Create
+        [HttpGet("Create")]
+        [Authorize(Policy = "Citas_Create")]
         public async Task<IActionResult> Create()
         {
             await CargarUsersAsync();
@@ -52,7 +59,8 @@ namespace HankoSpa.Controllers
         }
 
         // GET: Citas/Details/5
-        [HttpGet]
+        [HttpGet("Details/{id}")]
+        [Authorize(Policy = "Citas_Read")]
         public async Task<IActionResult> Details(int id)
         {
             var response = await _citaService.GetOneAsync(id);
@@ -64,11 +72,11 @@ namespace HankoSpa.Controllers
 
             return View(response.Result);
         }
-                
 
         // POST: Citas/Create
-        [HttpPost]
+        [HttpPost("Create")]
         [ValidateAntiForgeryToken]
+        [Authorize(Policy = "Citas_Create")]
         public async Task<IActionResult> Create(CitaDTO citaDTO)
         {
             if (ModelState.IsValid)
@@ -89,7 +97,8 @@ namespace HankoSpa.Controllers
         }
 
         // GET: Citas/Edit/5
-        [HttpGet]
+        [HttpGet("Edit/{id}")]
+        [Authorize(Policy = "Citas_Update")]
         public async Task<IActionResult> Edit(int id)
         {
             var response = await _citaService.GetOneAsync(id);
@@ -104,8 +113,9 @@ namespace HankoSpa.Controllers
         }
 
         // POST: Citas/Edit/5
-        [HttpPost]
+        [HttpPost("Edit/{id}")]
         [ValidateAntiForgeryToken]
+        [Authorize(Policy = "Citas_Update")]
         public async Task<IActionResult> Edit(int id, CitaDTO citaDTO)
         {
             if (id != citaDTO.CitaId) return NotFound();
@@ -127,7 +137,8 @@ namespace HankoSpa.Controllers
         }
 
         // GET: Citas/Delete/5
-        [HttpGet]
+        [HttpGet("Delete/{id}")]
+        [Authorize(Policy = "Citas_Delete")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null) return NotFound();
@@ -143,8 +154,9 @@ namespace HankoSpa.Controllers
         }
 
         // POST: Citas/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [HttpPost("Delete/{id}"), ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Policy = "Citas_Delete")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var response = await _citaService.DeleteAsync(id);

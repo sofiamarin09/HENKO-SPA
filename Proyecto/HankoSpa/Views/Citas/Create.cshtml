@@ -2,59 +2,70 @@
 
 @{
     ViewBag.Title = "Crear Cita";
+    var customRolId = User.FindFirst("CustomRolId")?.Value;
 }
 
 <h2>✍️ Crear Cita</h2>
 
-@using (Html.BeginForm("Create", "Citas", FormMethod.Post))
+@if (customRolId == "1" || customRolId == "3" || customRolId == "4" || customRolId == "5")
 {
-    @Html.AntiForgeryToken()
+    @using (Html.BeginForm("Create", "Citas", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
 
-    <div class="form-horizontal">
-        <div class="form-group">
-            @Html.LabelFor(model => model.FechaCita)
-            @Html.TextBoxFor(model => model.FechaCita, new { @class = "form-control", type = "date" })
-            @Html.ValidationMessageFor(model => model.FechaCita)
+        <div class="form-horizontal">
+            <div class="form-group">
+                @Html.LabelFor(model => model.FechaCita)
+                @Html.TextBoxFor(model => model.FechaCita, new { @class = "form-control", type = "date" })
+                @Html.ValidationMessageFor(model => model.FechaCita)
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.HoraCita)
+                @Html.TextBoxFor(model => model.HoraCita, new { @class = "form-control", type = "time" })
+                @Html.ValidationMessageFor(model => model.HoraCita)
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.EstadoCita)
+                @Html.DropDownListFor(
+                         model => model.EstadoCita,
+                         new SelectList(new[] { "Pendiente", "Completada", "Cancelada" }),
+                         "Seleccione un estado",
+                         new { @class = "form-control" }
+                         )
+                @Html.ValidationMessageFor(model => model.EstadoCita)
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ServicioID, "Users")
+                @Html.DropDownListFor(model => model.UsuarioID, (SelectList)ViewBag.Users, "Seleccione un usuario", new
+                    {
+                        @class = "form-control"
+                    })
+                @Html.ValidationMessageFor(model => model.UsuarioID)
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ServicioID, "Servicios")
+                @Html.DropDownListFor(model => model.ServicioID, (SelectList)ViewBag.Servicios, "Seleccione un servicio", new
+                    {
+                        @class = "form-control"
+                    })
+                @Html.ValidationMessageFor(model => model.ServicioID)
+            </div>
+
+            <br>
+            <button type="submit" class="btn btn-success">Guardar</button>
+            <a href="@Url.Action("Index", "Citas")" class="btn btn-secondary">Cancelar</a>
         </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.HoraCita)
-            @Html.TextBoxFor(model => model.HoraCita, new { @class = "form-control", type = "time" })
-            @Html.ValidationMessageFor(model => model.HoraCita)
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.EstadoCita)
-            @Html.DropDownListFor(
-            model => model.EstadoCita,
-                new SelectList(new[] { "Pendiente", "Completada", "Cancelada" }),
-                "Seleccione un estado",
-                new { @class = "form-control" }
-                )
-        @Html.ValidationMessageFor(model => model.EstadoCita)
+    }
+}
+else
+{
+    <div class="alert alert-danger mt-4">
+        No tienes permisos para crear citas.
     </div>
-
-    <div class="form-group">
-            @Html.LabelFor(model => model.ServicioID, "Users")
-            @Html.DropDownListFor(model => model.UsuarioID, (SelectList)ViewBag.Users, "Seleccione un usuario", new
-                {
-                    @class = "form-control"
-                })
-        @Html.ValidationMessageFor(model => model.UsuarioID)
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.ServicioID, "Servicios")
-        @Html.DropDownListFor(model => model.ServicioID, (SelectList)ViewBag.Servicios, "Seleccione un servicio", new {
-                @class = "form-control" })
-        @Html.ValidationMessageFor(model => model.ServicioID)
-    </div>
-
-
-    <br>
-    <button type="submit" class="btn btn-success">Guardar</button>
-    <a href="@Url.Action("Index", "Citas")" class="btn btn-secondary">Cancelar</a>
-</div>
 }
 
 @section Scripts {
@@ -69,3 +80,4 @@
         });
     </script>
 }
+

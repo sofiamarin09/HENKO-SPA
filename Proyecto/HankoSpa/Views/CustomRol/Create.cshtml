@@ -1,17 +1,32 @@
 ﻿@model HankoSpa.DTOs.CustomRolDTO
 @{
     ViewData["Title"] = "Crear Rol";
+    var customRolId = User.FindFirst("CustomRolId")?.Value;
 }
-<h2>Crear Rol</h2>
-<form asp-action="Create" method="post">
-    <div class="form-group">
-        <label asp-for="NombreRol"></label>
-        <input asp-for="NombreRol" class="form-control" />
-        <span asp-validation-for="NombreRol" class="text-danger"></span>
+
+<h2 class="mt-4 mb-3 text-primary">✍️ Crear Rol</h2>
+
+@if (customRolId == "1" || customRolId == "4" || customRolId == "5")
+{
+    <form asp-action="Create" method="post">
+        <div class="form-group">
+            <label asp-for="NombreRol"></label>
+            <input asp-for="NombreRol" class="form-control" placeholder="Ingrese el nombre del rol" />
+            <span asp-validation-for="NombreRol" class="text-danger"></span>
+        </div>
+        <br />
+        <button type="submit" class="btn btn-success">Crear</button>
+        <a asp-action="Index" class="btn btn-secondary ms-2">Volver</a>
+    </form>
+}
+else
+{
+    <div class="alert alert-danger mt-4">
+        No tienes permisos para crear roles.
     </div>
-    <button type="submit" class="btn btn-success">Crear</button>
-    <a asp-action="Index" class="btn btn-secondary">Volver</a>
-</form>
+}
+
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
 }
+

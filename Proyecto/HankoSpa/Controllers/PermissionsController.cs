@@ -1,12 +1,13 @@
 ﻿using AspNetCoreHero.ToastNotification.Abstractions;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 using HankoSpa.Services.Interfaces;
 using HankoSpa.DTOs;
-using HankoSpa.Controllers.Attributes;
 
 namespace HankoSpa.Controllers
 {
+    [Authorize] // Solo usuarios autenticados pueden acceder a este controlador
     public class PermissionsController : Controller
     {
         private readonly IPermissionService _permissionService;
@@ -21,7 +22,7 @@ namespace HankoSpa.Controllers
         }
 
         [HttpGet]
-        [CustomAuthorize(permission: "showPermissions", module: "Permisos")]
+        [Authorize(Policy = "Permiso_Read")]
         public async Task<IActionResult> Index()
         {
             var response = await _permissionService.GetAllAsync();
@@ -34,7 +35,7 @@ namespace HankoSpa.Controllers
         }
 
         [HttpGet]
-        [CustomAuthorize(permission: "createPermissions", module: "Permisos")]
+        [Authorize(Policy = "PermisoCRUD")]
         public IActionResult Create()
         {
             var dto = new PermissionDTO();
@@ -42,7 +43,7 @@ namespace HankoSpa.Controllers
         }
 
         [HttpPost]
-        [CustomAuthorize(permission: "createPermissions", module: "Permisos")]
+        [Authorize(Policy = "PermisoCRUD")]
         public async Task<IActionResult> Create(PermissionDTO dto)
         {
             if (!ModelState.IsValid)
@@ -64,7 +65,7 @@ namespace HankoSpa.Controllers
         }
 
         [HttpGet]
-        [CustomAuthorize(permission: "updatePermissions", module: "Permisos")]
+        [Authorize(Policy = "PermisoCRUD")]
         public async Task<IActionResult> Edit(int id)
         {
             if (id == 0)
@@ -80,7 +81,7 @@ namespace HankoSpa.Controllers
         }
 
         [HttpPost]
-        [CustomAuthorize(permission: "updatePermissions", module: "Permisos")]
+        [Authorize(Policy = "PermisoCRUD")]
         public async Task<IActionResult> Edit(PermissionDTO dto)
         {
             if (!ModelState.IsValid)

@@ -1,11 +1,28 @@
 ﻿@model HankoSpa.DTOs.CustomRolDTO
 @{
     ViewData["Title"] = "Detalles del Rol";
+    var customRolId = User.FindFirst("CustomRolId")?.Value;
 }
-<h2>Detalles del Rol</h2>
-<div class="form-group">
-    <label>Nombre del Rol:</label>
-    <span>@Model.NombreRol</span>
-</div>
-<a asp-action="Edit" asp-route-id="@Model.CustomRolId" class="btn btn-warning">Editar</a>
-<a asp-action="Index" class="btn btn-secondary">Volver</a>
+
+<h2 class="mt-4 mb-3 text-primary">🔎 Detalles del Rol</h2>
+
+@if (customRolId == "1" || customRolId == "4" || customRolId == "5")
+{
+    <div class="card shadow-sm mt-3 mb-3">
+        <div class="card-body">
+            <dl class="row">
+                <dt class="col-sm-4">Nombre del Rol:</dt>
+                <dd class="col-sm-8">@Model.NombreRol</dd>
+            </dl>
+        </div>
+    </div>
+
+    <a asp-action="Edit" asp-route-id="@Model.CustomRolId" class="btn btn-warning">Editar</a>
+    <a asp-action="Index" class="btn btn-secondary ms-2">Volver</a>
+}
+else
+{
+    <div class="alert alert-danger mt-4">
+        No tienes permisos para ver los detalles de este rol.
+    </div>
+}

@@ -1,10 +1,12 @@
 ﻿using HankoSpa.DTOs;
 using HankoSpa.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 namespace HankoSpa.Controllers
 {
-    public class AccountController: Controller
+    [Authorize]
+    public class AccountController : Controller
     {
         private readonly IUserService _userService;
 
@@ -14,11 +16,14 @@ namespace HankoSpa.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public IActionResult Login()
         {
             return View();
         }
+
         [HttpPost]
+        [AllowAnonymous]
         public async Task<IActionResult> Login(LoginDTO dto)
         {
             if (ModelState.IsValid)
@@ -32,12 +37,11 @@ namespace HankoSpa.Controllers
                 ModelState.AddModelError(string.Empty, "Email o contraseña incorrecta");
             }
             return View(dto);
-
         }
 
         [HttpGet]
         [Route("/Errors/{statuscode:int}")]
-
+        [AllowAnonymous]
         public IActionResult Error(int statuscode)
         {
             string errorMessage = "Ha ocurrido un error";
@@ -56,8 +60,17 @@ namespace HankoSpa.Controllers
             ViewBag.ErrorMessage = errorMessage;
             return View(statuscode);
         }
+
         [HttpGet]
+        [AllowAnonymous]
         public IActionResult NotAuthorized()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public IActionResult AccessDenied()
         {
             return View();
         }
@@ -67,7 +80,6 @@ namespace HankoSpa.Controllers
         {
             await _userService.LogoutAsync();
             return RedirectToAction(nameof(Login));
-
         }
     }
 }

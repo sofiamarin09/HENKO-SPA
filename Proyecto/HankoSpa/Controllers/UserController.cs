@@ -1,11 +1,13 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 using HankoSpa.Services.Interfaces;
 using HankoSpa.DTOs;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace HankoSpa.Controllers
 {
+    [Authorize] // Solo usuarios autenticados pueden acceder a este controlador
     public class UserController : Controller
     {
         private readonly IUserService _userService;
@@ -15,15 +17,20 @@ namespace HankoSpa.Controllers
             _userService = userService;
         }
 
+        // READ: Listado de usuarios
         [HttpGet]
+        [Authorize(Policy = "Usuarios_Read")]
         public async Task<IActionResult> Index()
         {
             var users = await _userService.GetAllUsersAsync();
             return View(users);
         }
 
-        // GET: User
+        // CREATE: Mostrar formulario
         [HttpGet]
+      
+        [Authorize(Policy = "Usuarios_Read")]
+
         public async Task<IActionResult> Create()
         {
             var model = new UserDTO();
@@ -42,8 +49,9 @@ namespace HankoSpa.Controllers
             }).ToList();
         }
 
-        // Get: User/Edit/5
+        // UPDATE: Mostrar formulario
         [HttpGet]
+        [Authorize(Policy = "UsuarioCRUD")]
         public async Task<IActionResult> Edit(Guid id)
         {
             var user = await _userService.GetUserByIdAsync(id);
@@ -54,9 +62,9 @@ namespace HankoSpa.Controllers
             return View(user);
         }
 
-
-        // Get: User/Delete/5
+        // DELETE: Mostrar confirmación
         [HttpGet]
+        [Authorize(Policy = "UsuarioCRUD")]
         public async Task<IActionResult> Delete(Guid id)
         {
             var user = await _userService.GetUserByIdAsync(id);
@@ -66,9 +74,10 @@ namespace HankoSpa.Controllers
             return View(user);
         }
 
-        // POST: User/Create	
+        // CREATE: Guardar usuario
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Policy = "UsuarioCRUD")]
         public async Task<IActionResult> Create(UserDTO userDTO)
         {
             if (!ModelState.IsValid)
@@ -92,13 +101,15 @@ namespace HankoSpa.Controllers
             return View(userDTO);
         }
 
+        // UPDATE: Guardar cambios
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Policy = "UsuarioCRUD")]
         public async Task<IActionResult> Edit(UserDTO userDTO)
         {
             if (string.IsNullOrEmpty(userDTO.Id) || !Guid.TryParse(userDTO.Id, out var userId))
             {
-                ModelState.AddModelError(string.Empty, "Id de usuario inv�lido.");
+                ModelState.AddModelError(string.Empty, "Id de usuario inválido.");
                 await GetRolesAvailables(userDTO);
                 return View(userDTO);
             }
@@ -126,8 +137,10 @@ namespace HankoSpa.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        // DELETE: Confirmar eliminación
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Policy = "UsuarioCRUD")]
         public async Task<IActionResult> Delete(UserDTO userDTO)
         {
             if (string.IsNullOrEmpty(userDTO.Id) || !Guid.TryParse(userDTO.Id, out var userId))
@@ -144,7 +157,5 @@ namespace HankoSpa.Controllers
 
             return RedirectToAction(nameof(Index));
         }
-
     }
-
 }

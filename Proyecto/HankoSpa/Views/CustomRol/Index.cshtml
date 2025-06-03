@@ -2,13 +2,15 @@
 @{
     ViewData["Title"] = "Roles";
 }
-<h2>Roles</h2>
-<a asp-action="Create" class="btn btn-primary mb-2">Nuevo Rol</a>
-<table class="table table-bordered">
-    <thead>
+
+<h2 class="mt-4 mb-3 text-primary">🛡️ Roles</h2>
+<a asp-action="Create" asp-controller="Rol" class="btn btn-primary mb-3">Nuevo Rol</a>
+
+<table class="table table-bordered table-hover shadow-sm">
+    <thead class="table-light">
         <tr>
             <th>Nombre del Rol</th>
-            <th>Acciones</th>
+            <th style="width:220px;">Acciones</th>
         </tr>
     </thead>
     <tbody>
@@ -17,11 +19,12 @@
             <tr>
                 <td>@item.NombreRol</td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.CustomRolId" class="btn btn-sm btn-warning">Editar</a>
-                    <a asp-action="Details" asp-route-id="@item.CustomRolId" class="btn btn-sm btn-info">Detalles</a>
+                    <a asp-action="Edit" asp-controller="Rol" asp-route-id="@item.CustomRolId" class="btn btn-sm btn-warning me-1">Editar</a>
+                    <a asp-action="Details" asp-controller="Rol" asp-route-id="@item.CustomRolId" class="btn btn-sm btn-info me-1">Detalles</a>
+                    <a asp-action="Delete" asp-controller="Rol" asp-route-id="@item.CustomRolId" class="btn btn-sm btn-danger"
+                       onclick="return confirm('¿Estás seguro de que deseas eliminar este rol?');">Eliminar</a>
                 </td>
             </tr>
         }
     </tbody>
 </table>
-

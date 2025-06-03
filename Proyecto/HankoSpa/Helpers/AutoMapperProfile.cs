@@ -15,7 +15,7 @@ namespace HankoSpa.Helpers
                 .ForMember(dest => dest.CustomRol, opt => opt.MapFrom(src => src.CustomRol.NombreRol))
                 .ReverseMap()
                 .ForMember(dest => dest.CustomRol, opt => opt.Ignore());
-            CreateMap<CustomRol, CustomRolDTO>();
+            CreateMap<CustomRol, CustomRolDTO>().ReverseMap(); // <-- Modificado aquí
             CreateMap<Permission, PermissionDTO>().ReverseMap();
             CreateMap<RolPermission, RolPermissionDTO>()
                 .ForMember(dest => dest.NombreRol, opt => opt.MapFrom(src => src.CustomRol != null ? src.CustomRol.NombreRol : null))
@@ -24,9 +24,6 @@ namespace HankoSpa.Helpers
                 .ReverseMap()
                 .ForMember(dest => dest.CustomRol, opt => opt.Ignore())
                 .ForMember(dest => dest.Permission, opt => opt.Ignore());
-
-
         }
-
     }
-}         
+}
