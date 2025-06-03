@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using HankoSpa.Models;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace HankoSpa.DTOs
 {
@@ -21,5 +22,17 @@ namespace HankoSpa.DTOs
         public virtual ICollection<User> Usuarios { get; set; } = new HashSet<User>();
 
         public virtual ICollection<RolPermission> RolPermissions { get; set; } = new HashSet<RolPermission>();
+    }
+
+    // ViewModel para crear rol con selección múltiple de permisos
+    public class CreateRolViewModel
+    {
+        [Required]
+        public string NombreRol { get; set; }
+
+        [Display(Name = "Permisos")]
+        public List<int> SelectedPermissionIds { get; set; } = new();
+
+        public List<SelectListItem> AllPermissions { get; set; } = new();
     }
 }

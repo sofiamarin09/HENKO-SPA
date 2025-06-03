@@ -1,4 +1,4 @@
-﻿@model HankoSpa.DTOs.CustomRolDTO
+﻿@model HankoSpa.DTOs.CreateRolViewModel
 @{
     ViewData["Title"] = "Crear Rol";
     var customRolId = User.FindFirst("CustomRolId")?.Value;
@@ -13,6 +13,11 @@
             <label asp-for="NombreRol"></label>
             <input asp-for="NombreRol" class="form-control" placeholder="Ingrese el nombre del rol" />
             <span asp-validation-for="NombreRol" class="text-danger"></span>
+        </div>
+        <div class="form-group mt-3">
+            <label asp-for="SelectedPermissionIds"></label>
+            <select asp-for="SelectedPermissionIds" asp-items="Model.AllPermissions" class="form-control" multiple="multiple"></select>
+            <span asp-validation-for="SelectedPermissionIds" class="text-danger"></span>
         </div>
         <br />
         <button type="submit" class="btn btn-success">Crear</button>
@@ -29,4 +34,5 @@ else
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
 }
+
 

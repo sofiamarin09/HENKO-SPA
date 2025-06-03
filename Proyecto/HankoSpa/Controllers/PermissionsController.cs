@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using HankoSpa.Services.Interfaces;
 using HankoSpa.DTOs;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace HankoSpa.Controllers
 {
@@ -32,6 +34,22 @@ namespace HankoSpa.Controllers
                 return View(new List<PermissionDTO>());
             }
             return View(response.Result);
+        }
+
+        [HttpGet]
+        [Authorize(Policy = "Permiso_Read")]
+        public async Task<IActionResult> Details(int id)
+        {
+            if (id == 0)
+                return NotFound();
+
+            var response = await _permissionService.GetByIdAsync(id);
+
+            if (!response.IsSuccess || response.Result == null)
+                return NotFound();
+
+            var dto = response.Result;
+            return View(dto);
         }
 
         [HttpGet]
@@ -101,6 +119,40 @@ namespace HankoSpa.Controllers
             _notifyService.Success(response.Message);
             return RedirectToAction(nameof(Index));
         }
+
+        // Acción para mostrar confirmación de eliminación
+        [HttpGet]
+        [Authorize(Policy = "PermisoCRUD")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            if (id == 0)
+                return NotFound();
+
+            var response = await _permissionService.GetByIdAsync(id);
+
+            if (!response.IsSuccess || response.Result == null)
+                return NotFound();
+
+            var dto = response.Result;
+            return View(dto);
+        }
+
+        // Acción para eliminar (POST)
+        [HttpPost, ActionName("Delete")]
+        [Authorize(Policy = "PermisoCRUD")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            var response = await _permissionService.DeleteAsync(id);
+
+            if (!response.IsSuccess)
+            {
+                _notifyService.Error(response.Message);
+                return RedirectToAction(nameof(Index));
+            }
+
+            _notifyService.Success("Permiso eliminado correctamente");
+            return RedirectToAction(nameof(Index));
+        }
     }
 }
-

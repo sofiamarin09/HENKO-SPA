@@ -40,6 +40,48 @@ namespace HankoSpa.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
+        public IActionResult Register()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Register(RegisterClientViewModel model)
+        {
+            if (!ModelState.IsValid)
+                return View(model);
+
+            // Crear el DTO de usuario para el servicio
+            var userDto = new UserDTO
+            {
+                FirstName = model.FirstName,
+                LastName = model.LastName,
+                Document = model.Document,
+                Email = model.Email,
+                PhoneNumber = model.PhoneNumber, // <-- Línea agregada para guardar el teléfono
+                // UserName = model.Email, // Elimina o comenta esta línea
+                CustomRolId = 3, // 3 = Cliente
+                Password = model.Password
+            };
+
+            var result = await _userService.CreateUserAsync(userDto, model.Password);
+
+            if (result.Succeeded)
+            {
+                // Puedes redirigir al login o mostrar mensaje de éxito
+                return RedirectToAction("Login", "Account");
+            }
+
+            foreach (var error in result.Errors)
+                ModelState.AddModelError(string.Empty, error.Description);
+
+            return View(model);
+        }
+
+        [HttpGet]
         [Route("/Errors/{statuscode:int}")]
         [AllowAnonymous]
         public IActionResult Error(int statuscode)
@@ -79,7 +121,8 @@ namespace HankoSpa.Controllers
         public async Task<IActionResult> Logout()
         {
             await _userService.LogoutAsync();
-            return RedirectToAction(nameof(Login));
+            return RedirectToAction("Index", "Home"); // Redirige a la página principal
         }
     }
 }
+

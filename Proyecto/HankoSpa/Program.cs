@@ -33,6 +33,12 @@ builder.Services.AddScoped<ICustomRolService, CustomRolService>();
 builder.Services.AddAutoMapper(typeof(AutoMapperProfile));
 builder.Services.AddScoped<ICombosHelper, CombosHelper>();
 
+// Registro del repositorio PermissionRepository
+builder.Services.AddScoped<IPermissionRepository, PermissionRepository>();
+
+// Registro del servicio PermissionService
+builder.Services.AddScoped<IPermissionService, PermissionService>();
+
 // Registro del servicio Notyf
 builder.Services.AddNotyf(config => {
     config.DurationInSeconds = 5;
@@ -84,6 +90,12 @@ builder.Services.AddAuthorization(options =>
     options.AddPolicy("RolCRUD", policy => policy.RequireClaim("CustomRolId", "1", "4", "5"));
     // Si tienes acciones que usan Rol_Read, puedes mantenerla para compatibilidad
     options.AddPolicy("Rol_Read", policy => policy.RequireClaim("CustomRolId", "1", "4", "5"));
+
+    // Política agregada para Permiso_Read
+    options.AddPolicy("Permiso_Read", policy => policy.RequireClaim("CustomRolId", "1", "4", "5"));
+
+    // Política agregada para PermisoCRUD (crear, editar, ver, eliminar permisos)
+    options.AddPolicy("PermisoCRUD", policy => policy.RequireClaim("CustomRolId", "1", "4", "5"));
 });
 
 var app = builder.Build();
@@ -128,3 +140,5 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();
+
+

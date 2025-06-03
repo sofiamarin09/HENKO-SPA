@@ -1,14 +1,15 @@
-﻿using Microsoft.AspNetCore.Authorization; // <-- Agrega esta línea
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using HankoSpa.Services.Interfaces;
 using HankoSpa.DTOs;
 using HankoSpa.Models;
+using System.Security.Claims;
 
 namespace HankoSpa.Controllers
 {
     [Route("Citas")]
-    [Authorize] // <--- Control de acceso: solo usuarios autenticados pueden acceder a cualquier acción de este controlador
+    [Authorize]
     public class CitasController : Controller
     {
         private readonly ICitaServices _citaService;
@@ -35,15 +36,40 @@ namespace HankoSpa.Controllers
                 return View(new List<Cita>());
             }
 
-            var citas = response.Result.Select(dto => new Cita
+            // Obtener el CustomRolId y el UserId del usuario autenticado
+            var customRolId = User.FindFirst("CustomRolId")?.Value;
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+            List<Cita> citas;
+
+            // Si es cliente (CustomRolId == 3), solo mostrar sus citas
+            if (customRolId == "3")
             {
-                CitaId = dto.CitaId,
-                FechaCita = dto.FechaCita,
-                HoraCita = dto.HoraCita,
-                EstadoCita = dto.EstadoCita,
-                UsuarioID = dto.UsuarioID,
-                ServicioId = dto.ServicioID
-            }).ToList();
+                citas = response.Result
+                    .Where(dto => dto.UsuarioID == userId)
+                    .Select(dto => new Cita
+                    {
+                        CitaId = dto.CitaId,
+                        FechaCita = dto.FechaCita,
+                        HoraCita = dto.HoraCita,
+                        EstadoCita = dto.EstadoCita,
+                        UsuarioID = dto.UsuarioID,
+                        ServicioId = dto.ServicioID
+                    }).ToList();
+            }
+            else
+            {
+                // Otros roles ven todas las citas
+                citas = response.Result.Select(dto => new Cita
+                {
+                    CitaId = dto.CitaId,
+                    FechaCita = dto.FechaCita,
+                    HoraCita = dto.HoraCita,
+                    EstadoCita = dto.EstadoCita,
+                    UsuarioID = dto.UsuarioID,
+                    ServicioId = dto.ServicioID
+                }).ToList();
+            }
 
             return View(citas);
         }
@@ -70,6 +96,15 @@ namespace HankoSpa.Controllers
                 return RedirectToAction("Index");
             }
 
+            // Obtener el documento del usuario
+            string documentoUsuario = "";
+            if (Guid.TryParse(response.Result.UsuarioID, out Guid usuarioGuid))
+            {
+                var usuario = await _userService.GetUserByIdAsync(usuarioGuid);
+                documentoUsuario = usuario?.Document ?? "";
+            }
+            ViewBag.DocumentoUsuario = documentoUsuario;
+
             return View(response.Result);
         }
 
@@ -93,6 +128,7 @@ namespace HankoSpa.Controllers
             }
 
             await CargarServiciosAsync(citaDTO.ServicioID);
+            await CargarUsersAsync(citaDTO.UsuarioID);
             return View(citaDTO);
         }
 
@@ -109,6 +145,7 @@ namespace HankoSpa.Controllers
             }
 
             await CargarServiciosAsync(response.Result.ServicioID);
+            await CargarUsersAsync(response.Result.UsuarioID);
             return View(response.Result);
         }
 
@@ -122,6 +159,10 @@ namespace HankoSpa.Controllers
 
             if (ModelState.IsValid)
             {
+                // Forzar el estado a "Agendada" al editar
+                citaDTO.EstadoCita = "Agendada";
+
+                // El UsuarioID ya viene del formulario, asegúrate de que el select esté en la vista
                 var response = await _citaService.EditAsync(citaDTO);
                 if (response.IsSuccess)
                 {
@@ -133,6 +174,7 @@ namespace HankoSpa.Controllers
             }
 
             await CargarServiciosAsync(citaDTO.ServicioID);
+            await CargarUsersAsync(citaDTO.UsuarioID); // Asegura que el select de usuario se rellene correctamente
             return View(citaDTO);
         }
 
@@ -180,10 +222,13 @@ namespace HankoSpa.Controllers
         }
 
         // Método auxiliar para cargar Users
-        private async Task CargarUsersAsync(int? seleccionado = null)
+        private async Task CargarUsersAsync(string? seleccionado = null)
         {
             var users = await _userService.GetAllUsersComboAsync();
             ViewBag.Users = new SelectList(users.Result, "Id", "FullName", seleccionado);
         }
     }
 }
+
+
+

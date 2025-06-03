@@ -12,6 +12,7 @@ using Microsoft.EntityFrameworkCore;
 using HankoSpa.Models;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace HankoSpa.Controllers
 {
@@ -53,63 +54,60 @@ namespace HankoSpa.Controllers
 
         [HttpGet]
         [Authorize(Policy = "RolCRUD")]
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-            var dto = new CustomRolDTO();
-            return View("~/Views/CustomRol/Create.cshtml", dto);
+            var permisos = await _context.Permissions.ToListAsync();
+            var model = new CreateRolViewModel
+            {
+                AllPermissions = permisos
+                    .Select(p => new SelectListItem
+                    {
+                        Value = p.PermisoId.ToString(),
+                        Text = p.NombrePermiso
+                    }).ToList()
+            };
+            return View("~/Views/CustomRol/Create.cshtml", model);
         }
 
         [HttpPost]
         [Authorize(Policy = "RolCRUD")]
-        public async Task<IActionResult> Create(CustomRolDTO dto)
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create(CreateRolViewModel model)
         {
             if (!ModelState.IsValid)
             {
+                // Recargar permisos si hay error
+                var permisos = await _context.Permissions.ToListAsync();
+                model.AllPermissions = permisos
+                    .Select(p => new SelectListItem
+                    {
+                        Value = p.PermisoId.ToString(),
+                        Text = p.NombrePermiso
+                    }).ToList();
                 _notifyService.Error("Debe ajustar los errores de validación");
-                return View("~/Views/CustomRol/Create.cshtml", dto);
+                return View("~/Views/CustomRol/Create.cshtml", model);
             }
 
-            var response = await _rolService.CreateAsync(dto);
+            // Crear el rol
+            var rol = new CustomRol { NombreRol = model.NombreRol };
+            _context.CustomRoles.Add(rol);
+            await _context.SaveChangesAsync();
 
-            if (!response.IsSuccess)
+            // Asignar permisos seleccionados
+            if (model.SelectedPermissionIds != null)
             {
-                _notifyService.Error(response.Message);
-                return View("~/Views/CustomRol/Create.cshtml", dto);
-            }
-
-            // Asignación automática de permisos según el nombre del rol
-            var rol = await _context.CustomRoles.FirstOrDefaultAsync(r => r.NombreRol == dto.NombreRol);
-            if (rol != null)
-            {
-                var allPerms = await _context.Permissions.ToListAsync();
-                if (rol.NombreRol == "SuperUser")
+                foreach (var permId in model.SelectedPermissionIds)
                 {
-                    foreach (var perm in allPerms)
+                    _context.RolPermissions.Add(new RolPermission
                     {
-                        if (!_context.RolPermissions.Any(rp => rp.CustomRolId == rol.CustomRolId && rp.PermissionId == perm.PermisoId))
-                            _context.RolPermissions.Add(new RolPermission { CustomRolId = rol.CustomRolId, PermissionId = perm.PermisoId });
-                    }
-                }
-                else if (rol.NombreRol == "Empleado")
-                {
-                    foreach (var perm in allPerms.Where(p => p.Module == "Servicios" || p.Module == "Citas"))
-                    {
-                        if (!_context.RolPermissions.Any(rp => rp.CustomRolId == rol.CustomRolId && rp.PermissionId == perm.PermisoId))
-                            _context.RolPermissions.Add(new RolPermission { CustomRolId = rol.CustomRolId, PermissionId = perm.PermisoId });
-                    }
-                }
-                else if (rol.NombreRol == "Cliente")
-                {
-                    foreach (var perm in allPerms.Where(p => p.Module == "Citas"))
-                    {
-                        if (!_context.RolPermissions.Any(rp => rp.CustomRolId == rol.CustomRolId && rp.PermissionId == perm.PermisoId))
-                            _context.RolPermissions.Add(new RolPermission { CustomRolId = rol.CustomRolId, PermissionId = perm.PermisoId });
-                    }
+                        CustomRolId = rol.CustomRolId,
+                        PermissionId = permId
+                    });
                 }
                 await _context.SaveChangesAsync();
             }
 
-            _notifyService.Success(response.Message);
+            _notifyService.Success("Rol creado y permisos asignados correctamente");
             return RedirectToAction(nameof(Index));
         }
 
@@ -120,34 +118,77 @@ namespace HankoSpa.Controllers
             if (id == 0)
                 return NotFound();
 
-            var response = await _rolService.GetByIdAsync(id);
+            // Cargar el rol y sus permisos asignados
+            var rol = await _context.CustomRoles
+                .Include(r => r.RolPermissions)
+                .FirstOrDefaultAsync(r => r.CustomRolId == id);
 
-            if (!response.IsSuccess || response.Result == null)
+            if (rol == null)
                 return NotFound();
 
-            var dto = response.Result;
-            return View("~/Views/CustomRol/Edit.cshtml", dto);
+            var permisos = await _context.Permissions.ToListAsync();
+
+            var model = new CreateRolViewModel
+            {
+                NombreRol = rol.NombreRol,
+                SelectedPermissionIds = rol.RolPermissions.Select(rp => rp.PermissionId).ToList(),
+                AllPermissions = permisos
+                    .Select(p => new SelectListItem
+                    {
+                        Value = p.PermisoId.ToString(),
+                        Text = p.NombrePermiso
+                    }).ToList()
+            };
+
+            ViewBag.CustomRolId = rol.CustomRolId;
+            return View("~/Views/CustomRol/Edit.cshtml", model);
         }
 
         [HttpPost]
         [Authorize(Policy = "RolCRUD")]
-        public async Task<IActionResult> Edit(CustomRolDTO dto)
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, CreateRolViewModel model)
         {
             if (!ModelState.IsValid)
             {
+                // Recargar permisos si hay error
+                var permisos = await _context.Permissions.ToListAsync();
+                model.AllPermissions = permisos
+                    .Select(p => new SelectListItem
+                    {
+                        Value = p.PermisoId.ToString(),
+                        Text = p.NombrePermiso
+                    }).ToList();
+                ViewBag.CustomRolId = id;
                 _notifyService.Error("Debe ajustar los errores de validación");
-                return View("~/Views/CustomRol/Edit.cshtml", dto);
+                return View("~/Views/CustomRol/Edit.cshtml", model);
             }
 
-            var response = await _rolService.UpdateAsync(dto);
+            var rol = await _context.CustomRoles
+                .Include(r => r.RolPermissions)
+                .FirstOrDefaultAsync(r => r.CustomRolId == id);
 
-            if (!response.IsSuccess)
+            if (rol == null)
+                return NotFound();
+
+            rol.NombreRol = model.NombreRol;
+
+            // Actualizar permisos asignados
+            var nuevosPermisos = model.SelectedPermissionIds ?? new List<int>();
+
+            // Eliminar permisos actuales de la base de datos
+            var permisosActuales = _context.RolPermissions.Where(rp => rp.CustomRolId == id).ToList();
+            _context.RolPermissions.RemoveRange(permisosActuales);
+
+            // Agregar los nuevos permisos seleccionados
+            foreach (var permisoId in nuevosPermisos)
             {
-                _notifyService.Error(response.Message);
-                return View("~/Views/CustomRol/Edit.cshtml", dto);
+                _context.RolPermissions.Add(new RolPermission { CustomRolId = id, PermissionId = permisoId });
             }
 
-            _notifyService.Success(response.Message);
+            await _context.SaveChangesAsync();
+
+            _notifyService.Success("Rol actualizado correctamente");
             return RedirectToAction(nameof(Index));
         }
 
