@@ -200,12 +200,29 @@ namespace HankoSpa.Controllers
             if (id == 0)
                 return NotFound();
 
-            var response = await _rolService.GetByIdAsync(id);
+            // Cargar el rol con sus permisos y los datos de cada permiso
+            var rol = await _context.CustomRoles
+                .Include(r => r.RolPermissions)
+                    .ThenInclude(rp => rp.Permission)
+                .FirstOrDefaultAsync(r => r.CustomRolId == id);
 
-            if (!response.IsSuccess || response.Result == null)
+            if (rol == null)
                 return NotFound();
 
-            var dto = response.Result;
+            // Mapeo explícito para asegurar que los permisos se incluyan en el DTO
+            var dto = new CustomRolDTO
+            {
+                CustomRolId = rol.CustomRolId,
+                NombreRol = rol.NombreRol,
+                RolPermissions = rol.RolPermissions
+                    .Select(rp => new RolPermission
+                    {
+                        CustomRolId = rp.CustomRolId,
+                        PermissionId = rp.PermissionId,
+                        Permission = rp.Permission
+                    }).ToList()
+            };
+
             return View("~/Views/CustomRol/Details.cshtml", dto);
         }
 
@@ -245,3 +262,5 @@ namespace HankoSpa.Controllers
         }
     }
 }
+
+
