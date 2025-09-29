@@ -1,0 +1,40 @@
+﻿@model HankoSpa.DTOs.CustomRolDTO
+
+@{
+    ViewBag.Title = "Eliminar Rol";
+    var customRolId = User.FindFirst("CustomRolId")?.Value;
+}
+
+<h2 class="mt-4 mb-3 text-danger">🗑️ Eliminar Rol</h2>
+
+@if (customRolId == "1" || customRolId == "4" || customRolId == "5")
+{
+    <h5>¿Estás seguro de que deseas eliminar el siguiente rol?</h5>
+
+    <div class="card shadow-sm mt-3">
+        <div class="card-body">
+            <dl class="row">
+                <dt class="col-sm-4">Nombre del Rol:</dt>
+                <dd class="col-sm-8">@Model.NombreRol</dd>
+            </dl>
+        </div>
+    </div>
+
+    @using (Html.BeginForm("Delete", "Rol", FormMethod.Post))
+
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.CustomRolId)
+
+        <div class="mt-4">
+            <button type="submit" class="btn btn-danger">Sí, eliminar</button>
+            <a href="@Url.Action("Index", "CustomRol")" class="btn btn-secondary ms-2">Cancelar</a>
+        </div>
+    }
+}
+else
+{
+    <div class="alert alert-danger mt-4">
+        No tienes permisos para eliminar roles.
+    </div>
+}
