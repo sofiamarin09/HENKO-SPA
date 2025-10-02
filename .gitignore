@@ -26,3 +26,9 @@ HankoSpa/obj/
 .vs/
 
 .fake
+.vs/
+bin/
+obj/
+*.user
+*.suo
+*.log

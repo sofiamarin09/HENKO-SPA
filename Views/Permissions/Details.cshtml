@@ -1,0 +1,15 @@
+﻿@model HankoSpa.DTOs.PermissionDTO
+@{
+    ViewData["Title"] = "Detalles del Permiso";
+}
+<h2>Detalles del Permiso</h2>
+<div class="form-group">
+    <label>Nombre del Permiso:</label>
+    <span>@Model.NombrePermiso</span>
+</div>
+<div class="form-group">
+    <label>Módulo:</label>
+    <span>@Model.Module</span>
+</div>
+<a asp-action="Edit" asp-route-id="@Model.PermisoId" class="btn btn-warning">Editar</a>
+<a asp-action="Index" class="btn btn-secondary">Volver</a>
