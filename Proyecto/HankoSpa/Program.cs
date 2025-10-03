@@ -10,7 +10,9 @@ using HankoSpa.Data.Seeder;
 using AspNetCoreHero.ToastNotification;
 using AspNetCoreHero.ToastNotification.Extensions;
 using AspNetCoreHero.ToastNotification.Notyf;
+using HankoSpa.C4; // 👈 NUEVO: Importamos la carpeta donde está C4Generator.
 using System;
+// NOTA: Se han eliminado 'using Structurizr;' y 'using Structurizr.Api;'
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -40,7 +42,8 @@ builder.Services.AddScoped<IPermissionRepository, PermissionRepository>();
 builder.Services.AddScoped<IPermissionService, PermissionService>();
 
 // Registro del servicio Notyf
-builder.Services.AddNotyf(config => {
+builder.Services.AddNotyf(config =>
+{
     config.DurationInSeconds = 5;
     config.IsDismissable = true;
     config.Position = NotyfPosition.TopRight;
@@ -58,16 +61,16 @@ builder.Services.AddIdentity<User, IdentityRole>(x =>
     .AddEntityFrameworkStores<AppDbContext>()
     .AddDefaultTokenProviders();
 
-// Configuraci�n de la ruta de acceso denegado
+// Configuración de la ruta de acceso denegado
 builder.Services.ConfigureApplicationCookie(options =>
 {
     options.AccessDeniedPath = "/Account/AccessDenied";
 });
 
-// Pol�ticas de autorizaci�n personalizadas
+// Políticas de autorización personalizadas
 builder.Services.AddAuthorization(options =>
 {
-    // Pol�ticas para Servicios, Citas y Usuarios (sin cambios)
+    // Políticas para Servicios, Citas y Usuarios (sin cambios)
     options.AddPolicy("Servicios_Create", policy => policy.RequireClaim("CustomRolId", "1", "4", "5"));
     options.AddPolicy("Servicios_Read", policy => policy.RequireClaim("CustomRolId", "1", "2", "3", "4", "5"));
     options.AddPolicy("Servicios_Update", policy => policy.RequireClaim("CustomRolId", "1", "4", "5"));
@@ -83,18 +86,17 @@ builder.Services.AddAuthorization(options =>
     options.AddPolicy("Usuarios_Update", policy => policy.RequireClaim("CustomRolId", "1", "4", "5"));
     options.AddPolicy("Usuarios_Delete", policy => policy.RequireClaim("CustomRolId", "1", "4", "5"));
 
-    // Pol�tica unificada para todas las acciones de Usuario
+    // Política unificada para todas las acciones de Usuario
     options.AddPolicy("UsuarioCRUD", policy => policy.RequireClaim("CustomRolId", "1", "4", "5"));
 
-    // Pol�tica unificada para todas las acciones de Rol
+    // Política unificada para todas las acciones de Rol
     options.AddPolicy("RolCRUD", policy => policy.RequireClaim("CustomRolId", "1", "4", "5"));
-    // Si tienes acciones que usan Rol_Read, puedes mantenerla para compatibilidad
     options.AddPolicy("Rol_Read", policy => policy.RequireClaim("CustomRolId", "1", "4", "5"));
 
-    // Pol�tica agregada para Permiso_Read
+    // Política agregada para Permiso_Read
     options.AddPolicy("Permiso_Read", policy => policy.RequireClaim("CustomRolId", "1", "4", "5"));
 
-    // Pol�tica agregada para PermisoCRUD (crear, editar, ver, eliminar permisos)
+    // Política agregada para PermisoCRUD (crear, editar, ver, eliminar permisos)
     options.AddPolicy("PermisoCRUD", policy => policy.RequireClaim("CustomRolId", "1", "4", "5"));
 });
 
@@ -108,21 +110,20 @@ using (var scope = app.Services.CreateScope())
     await AppDbContextSeed.SeedAsync(db);
 }
 
-// Despu�s crear usuarios y otros datos dependientes
-void SeedData(WebApplication app)
+// Lógica de siembra de datos asíncrona
+async Task SeedDataAsync(WebApplication app)
 {
     var scopedFactory = app.Services.GetService<IServiceScopeFactory>();
     using var scope = scopedFactory!.CreateScope();
     var service = scope.ServiceProvider.GetService<SeedDb>();
-    service!.SeedAsync().Wait();
+    await service!.SeedAsync();
 }
-SeedData(app);
+await SeedDataAsync(app);
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 
@@ -139,6 +140,11 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
+
+// ========== LLAMADA A LA GENERACIÓN DE DIAGRAMAS C4 ==========
+// Toda la lógica de Structurizr se ha movido al archivo C4Generator.cs
+// Línea 146
+HankoSpa.C4.C4Generator.GenerateAndUpload();
+// ============================================================
+
 app.Run();
-
-
